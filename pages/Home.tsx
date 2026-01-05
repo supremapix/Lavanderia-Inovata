@@ -7,7 +7,6 @@ import EnhancedSEO from '../components/EnhancedSEO';
 
 // High-quality images for the slider: Professional Machines, Ironing, and Clothes
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1517677208171-0bc12116d820?q=80&w=2070&auto=format&fit=crop", // Professional Laundromat Machines
   "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?q=80&w=2070&auto=format&fit=crop", // Professional Ironing/Steam
   "https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?q=80&w=2070&auto=format&fit=crop", // Stack of clean towels/clothes
   "https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?q=80&w=2070&auto=format&fit=crop", // Modern Washing Machine Detail

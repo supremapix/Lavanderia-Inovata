@@ -8,9 +8,7 @@ import EnhancedSEO from '../components/EnhancedSEO';
 // High-quality images for the slider: Professional Machines, Ironing, and Clothes
 const HERO_IMAGES = [
   "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?q=80&w=2070&auto=format&fit=crop", // Professional Ironing/Steam
-  "https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?q=80&w=2070&auto=format&fit=crop", // Stack of clean towels/clothes
   "https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?q=80&w=2070&auto=format&fit=crop", // Modern Washing Machine Detail
-  "https://images.unsplash.com/photo-1521656693072-a8333f629688?q=80&w=2070&auto=format&fit=crop"  // Professional Team/Care
 ];
 
 const Home: React.FC = () => {

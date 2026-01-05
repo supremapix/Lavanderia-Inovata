@@ -145,7 +145,7 @@ const Home: React.FC = () => {
 
             {/* Floating Badges */}
             <div className="hidden lg:flex absolute bottom-10 left-0 right-0 justify-center gap-8">
-               {['✅ Delivery Grátis acima de R$50', '👟 Especialista em Tênis', '🛋️ Higienização de Estofados', '🏆 Qualidade Premium'].map((badge, idx) => (
+               {['✅ Delivery Grátis acima de R$250', '👟 Especialista em Tênis', '🛋️ Higienização de Estofados', '🏆 Qualidade Premium'].map((badge, idx) => (
                  <div key={idx} className="bg-white/10 backdrop-blur-md px-6 py-2 rounded-full border border-white/20 text-sm font-medium animate-float" style={{ animationDelay: `${idx * 0.5}s` }}>
                    {badge}
                  </div>

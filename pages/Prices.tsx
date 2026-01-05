@@ -113,7 +113,7 @@ const Prices: React.FC = () => {
                   * Lavagem de Estofados (Sofás, Poltronas) é feita sob orçamento via foto no WhatsApp.
                 </p>
                 <p className="text-sm text-gray-600">
-                  * Frete grátis para coleta e entrega em pedidos acima de R$50,00 dentro do raio de atendimento (15km).
+                  * Frete grátis para coleta e entrega em pedidos acima de R$ 250,00. Abaixo deste valor, consulte a taxa para sua região.
                 </p>
               </div>
             </div>

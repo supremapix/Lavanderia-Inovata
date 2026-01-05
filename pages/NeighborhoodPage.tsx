@@ -258,9 +258,9 @@ const NeighborhoodPage: React.FC = () => {
                 <div className="relative z-10">
                   <h3 className="text-2xl font-bold mb-4">Delivery Gratuito no {neighborhood.name}*</h3>
                   <p className="text-blue-100 mb-6 max-w-lg">
-                    Para pedidos acima de R$ 50,00, a coleta e entrega são por nossa conta. Aproveite a comodidade de ter a melhor lavanderia da região na porta da sua casa.
+                    Para pedidos acima de R$ 250,00, a coleta e entrega são por nossa conta. Abaixo deste valor, consulte a taxa para sua região.
                   </p>
-                  <a href={`https://wa.me/5511921691307?text=Quero aproveitar o delivery grátis no ${neighborhood.name}`} className="inline-block bg-white text-primary-blue px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors btn-premium">
+                  <a href={`https://wa.me/5511921691307?text=Quero aproveitar o delivery grátis (acima de R$250) no ${neighborhood.name}`} className="inline-block bg-white text-primary-blue px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors btn-premium">
                     Solicitar Delivery Agora
                   </a>
                 </div>

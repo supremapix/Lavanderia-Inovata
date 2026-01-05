@@ -16,6 +16,50 @@ const Home: React.FC = () => {
   const location = useLocation();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [bubbles, setBubbles] = useState<Array<{ id: number; left: string; size: string; duration: string; sway: string; delay: string }>>([]);
+  
+  // Dynamic CTA State
+  const [ctaState, setCtaState] = useState({
+    primaryText: "💬 ORÇAMENTO RÁPIDO",
+    primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de um orçamento para lavanderia.`,
+    secondaryText: "📍 VER ÁREA DE ATENDIMENTO",
+    showPrices: false
+  });
+
+  // Check Time of Day for Dynamic CTA
+  useEffect(() => {
+    const updateCTA = () => {
+      const now = new Date();
+      const hour = now.getHours();
+      const day = now.getDay(); // 0 = Sunday, 6 = Saturday
+      
+      // Business Logic: Mon-Fri 8-18, Sat 9-13
+      const isWeekDay = day >= 1 && day <= 5;
+      const isSaturday = day === 6;
+      const isWorkingHours = (isWeekDay && hour >= 8 && hour < 18) || (isSaturday && hour >= 9 && hour < 13);
+
+      if (isWorkingHours) {
+        // High Urgency Mode
+        setCtaState({
+          primaryText: "⚡ ORÇAMENTO EM 2 MIN",
+          primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de um orçamento agora (Atendimento Online).`,
+          secondaryText: "📍 ATENDEMOS SEU BAIRRO?",
+          showPrices: false
+        });
+      } else {
+        // Retention/Research Mode (Night/Sunday)
+        setCtaState({
+          primaryText: "🌙 AGENDAR PARA AMANHÃ",
+          primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de deixar agendada uma coleta para o próximo horário disponível.`,
+          secondaryText: "💲 VER TABELA DE PREÇOS",
+          showPrices: true
+        });
+      }
+    };
+
+    updateCTA();
+    const interval = setInterval(updateCTA, 60000); // Update every minute
+    return () => clearInterval(interval);
+  }, []);
 
   // Initialize bubbles with random properties
   useEffect(() => {
@@ -211,21 +255,31 @@ const Home: React.FC = () => {
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-6">
               <a 
-                href="https://wa.me/5511921691307?text=Olá! Gostaria de um orçamento para lavanderia." 
+                href={ctaState.primaryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full md:w-auto bg-gradient-gold text-secondary-dark px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-primary-gold/50 transform hover:scale-105 transition-all duration-300 animate-pulse-glow btn-premium"
+                className="w-full md:w-auto bg-gradient-gold text-secondary-dark px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-primary-gold/50 transform hover:scale-105 transition-all duration-300 animate-pulse-glow btn-premium flex items-center justify-center gap-2"
               >
-                💬 ORÇAMENTO RÁPIDO
+                {ctaState.primaryText}
               </a>
-              <button
-                onClick={() => {
-                   document.getElementById('bairros')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-                className="w-full md:w-auto border-2 border-white/30 hover:border-white bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:bg-white/20"
-              >
-                📍 VER ÁREA DE ATENDIMENTO
-              </button>
+              
+              {ctaState.showPrices ? (
+                <Link
+                  to="/precos"
+                  className="w-full md:w-auto border-2 border-white/30 hover:border-white bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:bg-white/20 flex items-center justify-center gap-2"
+                >
+                  {ctaState.secondaryText}
+                </Link>
+              ) : (
+                <button
+                  onClick={() => {
+                     document.getElementById('bairros')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="w-full md:w-auto border-2 border-white/30 hover:border-white bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:bg-white/20 flex items-center justify-center gap-2"
+                >
+                  {ctaState.secondaryText}
+                </button>
+              )}
             </div>
 
             {/* Floating Badges */}

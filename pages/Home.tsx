@@ -15,17 +15,18 @@ const Home: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [bubbles, setBubbles] = useState<Array<{ id: number; left: string; size: string; duration: string; sway: string }>>([]);
+  const [bubbles, setBubbles] = useState<Array<{ id: number; left: string; size: string; duration: string; sway: string; delay: string }>>([]);
 
-  // Initialize bubbles
+  // Initialize bubbles with random properties
   useEffect(() => {
-    const bubbleCount = 15;
+    const bubbleCount = 18;
     const newBubbles = Array.from({ length: bubbleCount }).map((_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
-      size: `${Math.random() * 40 + 20}px`,
-      duration: `${Math.random() * 5 + 8}s`,
-      sway: `${Math.random() * 100 - 50}px`
+      size: `${Math.random() * 50 + 20}px`,
+      duration: `${Math.random() * 6 + 10}s`, // Slower, more floaty
+      sway: `${Math.random() * 150 - 75}px`,
+      delay: `${Math.random() * 10}s` // Random delay to stagger appearance
     }));
     setBubbles(newBubbles);
   }, []);
@@ -70,7 +71,7 @@ const Home: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Complete Local Business Schema
+  // Complete Local Business Schema with GeoCircle and Places
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService", // More specific than LaundryService
@@ -98,15 +99,27 @@ const Home: React.FC = () => {
       "latitude": -23.5329,
       "longitude": -46.7919
     },
-    "areaServed": NEIGHBORHOODS.map(n => ({
-        "@type": "Place",
-        "name": n.name,
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": n.city,
-            "addressRegion": "SP"
-        }
-    })),
+    // Combined AreaServed: 15km Radius AND specific neighborhoods
+    "areaServed": [
+      {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": -23.5329,
+          "longitude": -46.7919
+        },
+        "geoRadius": "15000"
+      },
+      ...NEIGHBORHOODS.map(n => ({
+          "@type": "Place",
+          "name": n.name,
+          "address": {
+              "@type": "PostalAddress",
+              "addressLocality": n.city,
+              "addressRegion": "SP"
+          }
+      }))
+    ],
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
@@ -122,7 +135,7 @@ const Home: React.FC = () => {
       }
     ],
     "paymentAccepted": ["Cash", "Credit Card", "Debit Card", "Pix"],
-    "hasMap": "https://www.google.com/maps?cid=4611686018429747200", // Example CID
+    "hasMap": "https://www.google.com/maps?cid=4611686018429747200", 
     "sameAs": [
       "https://www.instagram.com/lavanderiainovata",
       "https://www.facebook.com/lavanderiainovata"
@@ -176,6 +189,7 @@ const Home: React.FC = () => {
                   left: bubble.left,
                   width: bubble.size,
                   height: bubble.size,
+                  animationDelay: bubble.delay, // Use random delay for natural distribution
                   '--bubble-duration': bubble.duration,
                   '--sway': bubble.sway,
                 } as React.CSSProperties}

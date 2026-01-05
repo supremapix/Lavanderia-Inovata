@@ -129,18 +129,51 @@
         transform: translateY(0);
       }
 
-      /* SOAP BUBBLES ANIMATION */
+      /* SOAP BUBBLES ANIMATION - REFINED */
+      @keyframes wobble {
+        0%, 100% { border-radius: 50%; }
+        25% { border-radius: 55% 45% 50% 50% / 50% 55% 45% 50%; }
+        50% { border-radius: 50% 50% 55% 45% / 55% 45% 50% 50%; }
+        75% { border-radius: 45% 55% 45% 55% / 45% 50% 55% 45%; }
+      }
+
+      @keyframes rise-and-shine {
+        0% {
+          transform: translateY(110vh) scale(0.8) translateX(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.8;
+        }
+        50% {
+          transform: translateY(50vh) scale(1) translateX(var(--sway));
+          opacity: 1;
+        }
+        90% {
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateY(-20vh) scale(1.2) translateX(0);
+          opacity: 0;
+        }
+      }
+
       .soap-bubble {
         position: absolute;
         border-radius: 50%;
-        background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05) 60%, rgba(255, 255, 255, 0.2) 100%);
+        /* Realistic Iridescent Bubble Effect */
         box-shadow: 
-          inset 0 0 10px rgba(255, 255, 255, 0.3), 
-          0 0 10px rgba(255, 255, 255, 0.1);
+          inset 0 0 10px rgba(255, 255, 255, 0.6),
+          inset 2px 0 5px rgba(255, 200, 255, 0.3),
+          inset -2px 0 5px rgba(200, 255, 255, 0.3),
+          0 0 15px rgba(255, 255, 255, 0.2);
+        background: radial-gradient(130% 130% at 30% 30%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0.3) 100%);
         z-index: 10;
         opacity: 0;
-        animation: rise-and-shine var(--bubble-duration) ease-in infinite;
+        /* Combine rise animation with wobble for organic feel */
+        animation: rise-and-shine var(--bubble-duration) ease-in infinite, wobble 4s ease-in-out infinite alternate;
         pointer-events: none;
+        backdrop-filter: blur(1px); /* Subtle distortion of background through bubble */
       }
 
       .soap-bubble::after {
@@ -151,29 +184,9 @@
         width: 25%;
         height: 15%;
         border-radius: 50%;
-        background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+        background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
         transform: rotate(45deg);
-      }
-
-      @keyframes rise-and-shine {
-        0% {
-          transform: translateY(100vh) scale(0) translateX(0);
-          opacity: 0;
-        }
-        10% {
-          opacity: 0.6;
-        }
-        50% {
-          transform: translateY(50vh) scale(1) translateX(var(--sway));
-          opacity: 0.8;
-        }
-        90% {
-          opacity: 0.6;
-        }
-        100% {
-          transform: translateY(-10vh) scale(1.2) translateX(0);
-          opacity: 0;
-        }
+        filter: blur(1px);
       }
 
       /* Custom Scrollbar */

@@ -7,26 +7,25 @@ import WhatsAppButton from './components/WhatsAppButton';
 import Home from './pages/Home';
 import NeighborhoodPage from './pages/NeighborhoodPage';
 import Contact from './pages/Contact';
-
-// Simple placeholder for Services page if needed, normally would be separate file
-const ServicesPlaceholder = () => (
-  <div className="pt-32 pb-20 container mx-auto px-4 text-center">
-    <h1 className="text-4xl font-bold mb-4">Nossos Serviços</h1>
-    <p>Consulte a página inicial para detalhes completos.</p>
-  </div>
-);
+import Services from './pages/Services';
+import About from './pages/About';
+import Prices from './pages/Prices';
+import ScrollToTop from './components/ScrollToTop'; // We will create this small utility
 
 const App: React.FC = () => {
   return (
     <HelmetProvider>
       <Router>
+        <ScrollToTop />
         <div className="flex flex-col min-h-screen font-sans">
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/lavanderia-:slug" element={<NeighborhoodPage />} />
+            <Route path="/servicos" element={<Services />} />
+            <Route path="/precos" element={<Prices />} />
+            <Route path="/sobre" element={<About />} />
             <Route path="/contato" element={<Contact />} />
-            <Route path="/servicos" element={<ServicesPlaceholder />} />
+            <Route path="/lavanderia-:slug" element={<NeighborhoodPage />} />
           </Routes>
           <Footer />
           <WhatsAppButton />

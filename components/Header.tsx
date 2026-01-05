@@ -19,7 +19,9 @@ const Header: React.FC = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Serviços', path: '/servicos' },
-    { name: 'Bairros Atendidos', path: '/#bairros' }, // Using hash for SPA scroll
+    { name: 'Preços', path: '/precos' },
+    { name: 'Sobre', path: '/sobre' },
+    { name: 'Bairros', path: '/#bairros' },
     { name: 'Contato', path: '/contato' },
   ];
 
@@ -31,21 +33,21 @@ const Header: React.FC = () => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="flex flex-col items-start z-50">
-          <h1 className="text-2xl font-heading font-black text-white tracking-tighter">
+        <Link to="/" className="flex flex-col items-start z-50 group">
+          <h1 className="text-2xl font-heading font-black text-white tracking-tighter group-hover:scale-105 transition-transform">
             LAVANDERIA <span className="text-primary-gold">INOVATA</span>
           </h1>
           <span className="text-xs text-gray-300 tracking-widest uppercase">Premium & Delivery</span>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden lg:flex items-center space-x-6">
           {navLinks.map((link) => (
             <Link 
               key={link.name} 
               to={link.path}
-              className={`text-sm font-medium transition-colors duration-300 hover:text-primary-gold ${
-                location.pathname === link.path ? 'text-primary-gold' : 'text-white'
+              className={`text-sm font-medium transition-colors duration-300 hover:text-primary-gold uppercase tracking-wide ${
+                location.pathname === link.path ? 'text-primary-gold underline underline-offset-4 decoration-2' : 'text-white'
               }`}
             >
               {link.name}
@@ -62,14 +64,14 @@ const Header: React.FC = () => {
 
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden text-white z-50 focus:outline-none"
+          className="lg:hidden text-white z-50 focus:outline-none"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
 
         {/* Mobile Menu Overlay */}
-        <div className={`fixed inset-0 bg-secondary-dark transform transition-transform duration-300 ease-in-out md:hidden flex flex-col items-center justify-center space-y-8 z-40 ${
+        <div className={`fixed inset-0 bg-secondary-dark transform transition-transform duration-300 ease-in-out lg:hidden flex flex-col items-center justify-center space-y-8 z-40 ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}>
           {navLinks.map((link) => (

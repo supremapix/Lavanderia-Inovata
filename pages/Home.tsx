@@ -1,14 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Typewriter from '../components/Typewriter';
-import { NEIGHBORHOODS, SERVICES_DATA, HOME_TYPEWRITER_TEXTS } from '../constants';
-import { ArrowRight, CheckCircle, MapPin, Star } from 'lucide-react';
+import { NEIGHBORHOODS, SERVICES_DATA, HOME_TYPEWRITER_TEXTS, CONTACT } from '../constants';
+import { ArrowRight, CheckCircle, MapPin } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
 const Home: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Intersection Observer implementation for simple scroll animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -28,12 +27,58 @@ const Home: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "LaundryService",
+    "name": "Lavanderia Inovata",
+    "image": "https://images.unsplash.com/photo-1545173168-9f1947eebb8f",
+    "@id": "https://lavanderiainovata.vercel.app",
+    "url": "https://lavanderiainovata.vercel.app",
+    "telephone": CONTACT.phone,
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. César Abraão, 209",
+      "addressLocality": "Osasco",
+      "addressRegion": "SP",
+      "postalCode": "06268-010",
+      "addressCountry": "BR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -23.5329,
+      "longitude": -46.7919
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "09:00",
+        "closes": "13:00"
+      }
+    ],
+    "areaServed": NEIGHBORHOODS.map(n => n.name),
+    "sameAs": [
+      "https://www.instagram.com/lavanderiainovata",
+      "https://www.facebook.com/lavanderiainovata"
+    ]
+  };
+
   return (
     <>
       <Helmet>
         <title>Lavanderia em Osasco | Delivery Rápido 15km Raio | Lavanderia Inovata</title>
         <meta name="description" content="Lavanderia profissional em Osasco com delivery rápido. Lavar, passar, a seco e úmidos. Atendemos 15km: Alphaville, Lapa, Pirituba e região. Orçamento grátis!" />
-        <link rel="canonical" href="https://lavanderiainovata.com.br" />
+        <link rel="canonical" href="https://lavanderiainovata.vercel.app" />
+        <script type="application/ld+json">
+          {JSON.stringify(schemaData)}
+        </script>
       </Helmet>
 
       <main className="overflow-x-hidden">
@@ -41,7 +86,6 @@ const Home: React.FC = () => {
         <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
           {/* Background with overlay */}
           <div className="absolute inset-0 z-0">
-             {/* Using a high quality image as video fallback/replacement for speed */}
             <img 
               src="https://images.unsplash.com/photo-1545173168-9f1947eebb8f?q=80&w=2071&auto=format&fit=crop" 
               alt="Lavanderia Background" 
@@ -77,12 +121,15 @@ const Home: React.FC = () => {
               >
                 💬 ORÇAMENTO NO WHATSAPP
               </a>
-              <a 
-                href="#bairros"
+              <Link 
+                to="/#bairros"
+                onClick={() => {
+                   document.getElementById('bairros')?.scrollIntoView({ behavior: 'smooth' });
+                }}
                 className="w-full md:w-auto border-2 border-white/30 hover:border-white bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:bg-white/20"
               >
                 📍 VER BAIRROS ATENDIDOS
-              </a>
+              </Link>
             </div>
 
             {/* Floating Badges */}
@@ -104,7 +151,7 @@ const Home: React.FC = () => {
               <h3 className="text-3xl md:text-4xl font-heading font-bold text-white">Qualidade que você pode sentir</h3>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
               {SERVICES_DATA.map((service, idx) => (
                 <div 
                   key={service.id} 
@@ -128,6 +175,12 @@ const Home: React.FC = () => {
                   </a>
                 </div>
               ))}
+            </div>
+            
+            <div className="text-center">
+              <Link to="/servicos" className="inline-flex items-center gap-2 text-white hover:text-primary-gold font-bold transition-colors">
+                Ver todos os serviços e detalhes <ArrowRight size={20} />
+              </Link>
             </div>
           </div>
         </section>

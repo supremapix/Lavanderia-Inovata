@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { NEIGHBORHOODS, CONTACT } from '../constants';
 import Typewriter from '../components/Typewriter';
-import { MapPin, Check, Phone, ArrowLeft, Star, Shield, Clock, Truck, Sparkles } from 'lucide-react';
+import { MapPin, Check, Phone, ArrowLeft, Star, Shield, Clock, Truck, Sparkles, Footprints, Shirt, Armchair, Baby } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
 const NeighborhoodPage: React.FC = () => {
@@ -165,7 +165,7 @@ const NeighborhoodPage: React.FC = () => {
           </div>
         </section>
 
-        {/* Content SEO & Services */}
+        {/* Content SEO & Services Expanded */}
         <section className="py-16">
           <div className="container mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-12">
             
@@ -179,7 +179,7 @@ const NeighborhoodPage: React.FC = () => {
                 </h2>
                 <div className="prose text-gray-600 max-w-none text-lg leading-relaxed">
                   <p className="mb-4">
-                    A vida no <strong>{neighborhood.name}</strong> exige praticidade. Por isso, a Lavanderia Inovata desenvolveu um sistema de logística exclusivo para atender sua região com máxima eficiência.
+                    A vida no <strong>{neighborhood.name}</strong> exige praticidade e qualidade. Por isso, a Lavanderia Inovata desenvolveu um sistema de logística exclusivo para atender sua região com máxima eficiência.
                   </p>
                   <p>
                     Não somos apenas uma lavanderia comum. Somos um centro completo de higienização têxtil. Se você mora em {neighborhood.name}, pode confiar desde suas roupas do dia a dia até itens complexos como tapetes persas, cortinas de linho e vestidos de alta costura aos nossos cuidados.
@@ -187,62 +187,78 @@ const NeighborhoodPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Detailed Services List */}
-              <div>
-                <h3 className="text-2xl font-bold text-secondary-dark mb-8 text-center">O Que Lavamos para Você no {neighborhood.name}?</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Card Tênis */}
-                  <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:border-primary-blue transition-colors">
-                     <div className="flex items-center gap-3 mb-4">
-                        <div className="bg-orange-100 p-2 rounded-lg text-orange-600"><Sparkles size={24}/></div>
-                        <h4 className="text-xl font-bold text-gray-800">Tênis e Calçados</h4>
-                     </div>
-                     <p className="text-gray-600 mb-4 text-sm">Renovação total para seus sneakers, sapatos sociais e botas. Limpeza profunda de solados e tratamento anti-odor.</p>
-                     <ul className="text-sm space-y-1 text-gray-500">
-                        <li>• Camurça, Couro e Tecido</li>
-                        <li>• Higienização interna</li>
-                     </ul>
-                  </div>
-
-                  {/* Card Casa */}
-                  <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:border-primary-blue transition-colors">
-                     <div className="flex items-center gap-3 mb-4">
-                        <div className="bg-teal-100 p-2 rounded-lg text-teal-600"><Sparkles size={24}/></div>
-                        <h4 className="text-xl font-bold text-gray-800">Tapetes e Cortinas</h4>
-                     </div>
-                     <p className="text-gray-600 mb-4 text-sm">Retiramos e instalamos cortinas no {neighborhood.name}. Lavagem especializada para tapetes que elimina ácaros e recupera as cores.</p>
-                     <ul className="text-sm space-y-1 text-gray-500">
-                        <li>• Retirada e entrega inclusa</li>
-                        <li>• Secagem em estufa controlada</li>
-                     </ul>
-                  </div>
-
-                  {/* Card Estofados */}
-                  <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:border-primary-blue transition-colors">
-                     <div className="flex items-center gap-3 mb-4">
-                        <div className="bg-blue-100 p-2 rounded-lg text-blue-600"><Sparkles size={24}/></div>
-                        <h4 className="text-xl font-bold text-gray-800">Sofás e Estofados</h4>
-                     </div>
-                     <p className="text-gray-600 mb-4 text-sm">Atendimento em domicílio no {neighborhood.name}. Nossa equipe vai até sua casa com equipamentos extratores de alta potência.</p>
-                     <ul className="text-sm space-y-1 text-gray-500">
-                        <li>• Sofás, Poltronas e Cadeiras</li>
-                        <li>• Impermeabilização opcional</li>
-                     </ul>
-                  </div>
-
-                  {/* Card Baby */}
-                  <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:border-primary-blue transition-colors">
-                     <div className="flex items-center gap-3 mb-4">
-                        <div className="bg-pink-100 p-2 rounded-lg text-pink-600"><Sparkles size={24}/></div>
-                        <h4 className="text-xl font-bold text-gray-800">Linha Baby</h4>
-                     </div>
-                     <p className="text-gray-600 mb-4 text-sm">Segurança total para seu bebê. Higienização com produtos hipoalergênicos em carrinhos e bebê conforto.</p>
-                     <ul className="text-sm space-y-1 text-gray-500">
-                        <li>• Desmontagem completa</li>
-                        <li>• Remoção de manchas difíceis</li>
-                     </ul>
-                  </div>
+              {/* Expanded Detailed Services List for Neighborhood */}
+              <div className="space-y-12">
+                <h3 className="text-2xl font-bold text-secondary-dark border-b pb-4">O Que Lavamos para Você no {neighborhood.name}?</h3>
+                
+                {/* Tênis Detail */}
+                <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-100 flex flex-col md:flex-row gap-6">
+                   <div className="shrink-0 bg-orange-100 p-4 rounded-xl h-fit w-fit text-orange-600">
+                      <Footprints size={32} />
+                   </div>
+                   <div>
+                      <h4 className="text-xl font-bold text-gray-800 mb-3">Tênis, Sneakers e Calçados</h4>
+                      <p className="text-gray-600 mb-4">
+                         Moradores do {neighborhood.name} adoram nosso serviço de renovação de calçados. Lavamos tênis de corrida, sapatos sociais, botas e sneakers de coleção.
+                      </p>
+                      <ul className="space-y-2 text-sm text-gray-700">
+                         <li className="flex items-center gap-2"><Check size={16} className="text-green-500"/> <strong>Materiais:</strong> Camurça, Couro, Lona, Sintético e Tecido.</li>
+                         <li className="flex items-center gap-2"><Check size={16} className="text-green-500"/> <strong>Processo:</strong> Limpeza manual detalhada, higienização interna contra odores e clareamento de solados amarelados.</li>
+                      </ul>
+                   </div>
                 </div>
+
+                {/* Roupas Detail */}
+                <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-100 flex flex-col md:flex-row gap-6">
+                   <div className="shrink-0 bg-blue-100 p-4 rounded-xl h-fit w-fit text-primary-blue">
+                      <Shirt size={32} />
+                   </div>
+                   <div>
+                      <h4 className="text-xl font-bold text-gray-800 mb-3">Roupas e Peças Delicadas</h4>
+                      <p className="text-gray-600 mb-4">
+                         Recupere seu tempo livre. Cuidamos de toda sua roupa, desde peças do dia a dia até vestidos de festa e ternos que exigem lavagem a seco.
+                      </p>
+                      <ul className="space-y-2 text-sm text-gray-700">
+                         <li className="flex items-center gap-2"><Check size={16} className="text-green-500"/> <strong>Benefícios:</strong> Roupas mais macias, cores preservadas e passadoria impecável.</li>
+                         <li className="flex items-center gap-2"><Check size={16} className="text-green-500"/> <strong>Diferencial:</strong> Tratamento individual de manchas em colarinhos e punhos.</li>
+                      </ul>
+                   </div>
+                </div>
+
+                {/* Casa Detail */}
+                <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-100 flex flex-col md:flex-row gap-6">
+                   <div className="shrink-0 bg-teal-100 p-4 rounded-xl h-fit w-fit text-teal-600">
+                      <Armchair size={32} />
+                   </div>
+                   <div>
+                      <h4 className="text-xl font-bold text-gray-800 mb-3">Tapetes e Cortinas</h4>
+                      <p className="text-gray-600 mb-4">
+                         Renove o ar da sua casa no {neighborhood.name}. Removemos ácaros e poeira profunda de itens de decoração.
+                      </p>
+                      <ul className="space-y-2 text-sm text-gray-700">
+                         <li className="flex items-center gap-2"><Check size={16} className="text-green-500"/> <strong>Tapetes:</strong> Retirada e entrega inclusa. Secagem em estufa para evitar odores.</li>
+                         <li className="flex items-center gap-2"><Check size={16} className="text-green-500"/> <strong>Cortinas:</strong> Nós retiramos dos trilhos/varões e instalamos de volta para você.</li>
+                      </ul>
+                   </div>
+                </div>
+
+                {/* Baby Detail */}
+                <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-100 flex flex-col md:flex-row gap-6">
+                   <div className="shrink-0 bg-pink-100 p-4 rounded-xl h-fit w-fit text-pink-500">
+                      <Baby size={32} />
+                   </div>
+                   <div>
+                      <h4 className="text-xl font-bold text-gray-800 mb-3">Linha Baby e Infantil</h4>
+                      <p className="text-gray-600 mb-4">
+                         Segurança total para os pequenos. Higienização profunda de carrinhos de bebê, bebê conforto e pelúcias com produtos seguros.
+                      </p>
+                      <ul className="space-y-2 text-sm text-gray-700">
+                         <li className="flex items-center gap-2"><Check size={16} className="text-green-500"/> <strong>Hipoalergênico:</strong> Utilizamos produtos dermatologicamente testados e sem perfumes fortes.</li>
+                         <li className="flex items-center gap-2"><Check size={16} className="text-green-500"/> <strong>Carrinhos:</strong> Desmontagem completa para limpeza de todas as frestas e tecidos.</li>
+                      </ul>
+                   </div>
+                </div>
+
               </div>
 
               {/* Callout Delivery */}

@@ -89,9 +89,10 @@ const NeighborhoodPage: React.FC = () => {
         ]}
       />
 
-      <main className="bg-gray-50 min-h-screen pt-20">
-        {/* Breadcrumb */}
-        <div className="bg-secondary-dark text-white py-4 border-b border-gray-800">
+      {/* Main container without top padding on main to allow header overlay on breadcrumb */}
+      <main className="bg-gray-50 min-h-screen">
+        {/* Breadcrumb with padding top to account for fixed header */}
+        <div className="bg-secondary-dark text-white py-4 border-b border-gray-800 pt-28">
           <div className="container mx-auto px-4 text-sm flex items-center gap-2 overflow-x-auto whitespace-nowrap">
             <Link to="/" className="hover:text-primary-gold transition-colors">Home</Link>
             <span className="text-gray-600">/</span>

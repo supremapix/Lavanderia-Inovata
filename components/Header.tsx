@@ -25,10 +25,15 @@ const Header: React.FC = () => {
     { name: 'Contato', path: '/contato' },
   ];
 
+  // Logic: Header is transparent ONLY on Home page when at the top.
+  // On all other pages (or when scrolled), it uses the solid dark background.
+  const isHome = location.pathname === '/';
+  const isTransparent = isHome && !isScrolled;
+
   return (
     <header 
       className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
-        isScrolled ? 'bg-secondary-dark/95 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-5'
+        isTransparent ? 'bg-transparent py-5' : 'bg-secondary-dark/95 backdrop-blur-md shadow-lg py-3'
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">

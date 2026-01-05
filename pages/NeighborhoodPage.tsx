@@ -8,10 +8,6 @@ import { Helmet } from 'react-helmet-async';
 const NeighborhoodPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   
-  // Extract "lavanderia-" prefix if it exists in the route params logic, 
-  // but simpler to match slug directly from our constant list logic.
-  // The route is defined as /lavanderia-:slug, so the param `slug` is just the suffix.
-  
   const neighborhood = NEIGHBORHOODS.find(n => n.slug === slug);
 
   useEffect(() => {
@@ -30,7 +26,7 @@ const NeighborhoodPage: React.FC = () => {
     "@context": "https://schema.org",
     "@type": "LaundryService",
     "name": `Lavanderia Inovata - ${neighborhood.name}`,
-    "image": "https://lavanderiainovata.com.br/logo.png", // Conceptual URL
+    "image": "https://lavanderiainovata.vercel.app/logo.png",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": CONTACT.address,
@@ -55,8 +51,8 @@ const NeighborhoodPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Lavanderia em {neighborhood.name} | Delivery Rápido | Lavanderia Inovata</title>
-        <meta name="description" content={`Procurando lavanderia em ${neighborhood.name}? A Lavanderia Inovata oferece lavagem a seco, passar roupa e delivery rápido em ${neighborhood.name} e região.`} />
+        <title>Lavanderia em {neighborhood.name} | Tênis, Tapetes e Sofás</title>
+        <meta name="description" content={`Lavanderia em ${neighborhood.name}? Lavamos Roupas, Tênis, Tapetes, Cortinas, Estofados e Carrinhos de Bebê. Delivery Rápido em ${neighborhood.name}!`} />
         <script type="application/ld+json">
           {JSON.stringify(schemaData)}
         </script>
@@ -88,13 +84,13 @@ const NeighborhoodPage: React.FC = () => {
                   <Typewriter 
                     texts={[
                       `Lavanderia em ${neighborhood.name}`,
-                      `Delivery Rápido em ${neighborhood.name}`,
-                      `Melhor Lavanderia de ${neighborhood.name}`
+                      `Lave Tênis e Tapetes em ${neighborhood.name}`,
+                      `Limpeza de Sofá em ${neighborhood.name}`
                     ]} 
                   />
                 </h1>
                 <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-                  Serviço premium de lavagem e passadoria com coleta e entrega gratuita em {neighborhood.name} para pedidos acima de R$50.
+                  Delivery gratuito em {neighborhood.name} para roupas, tênis, edredons e tapetes (pedidos acima de R$50).
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <a href={`https://wa.me/5511921691307?text=Olá! Moro em ${neighborhood.name} e gostaria de agendar uma coleta.`} 
@@ -114,17 +110,17 @@ const NeighborhoodPage: React.FC = () => {
             <div className="lg:col-span-2 space-y-12">
               <div>
                 <h2 className="text-3xl font-heading font-bold text-secondary-dark mb-6">
-                  Por Que Escolher Nossa Lavanderia em {neighborhood.name}?
+                  Soluções Completas de Limpeza em {neighborhood.name}
                 </h2>
                 <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {[
-                      `Delivery em ${neighborhood.name}`,
-                      'Coleta e entrega em 24-48h',
-                      'Lavagem profissional a seco',
-                      'Passagem impecável',
-                      'Atendimento personalizado',
-                      'Preços justos e transparentes'
+                      'Lavagem de Tênis e Calçados',
+                      'Higienização de Sofás e Estofados',
+                      'Limpeza de Tapetes e Cortinas',
+                      'Lavagem de Carrinho de Bebê',
+                      'Roupas do Dia a Dia e Ternos',
+                      'Delivery em 24-48h'
                     ].map((item, i) => (
                       <li key={i} className="flex items-center gap-3 text-gray-700">
                         <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center shrink-0">
@@ -139,30 +135,27 @@ const NeighborhoodPage: React.FC = () => {
 
               <div>
                 <h2 className="text-2xl font-heading font-bold text-secondary-dark mb-6">
-                  Serviços de Lavanderia em {neighborhood.name}
+                  Nossos Serviços em {neighborhood.name}
                 </h2>
                 <div className="space-y-8">
                   <div className="bg-white p-6 rounded-xl border-l-4 border-primary-blue shadow-sm hover:shadow-md transition-shadow">
-                    <h3 className="text-xl font-bold mb-2 text-primary-blue">Lavagem e Passagem em {neighborhood.name}</h3>
+                    <h3 className="text-xl font-bold mb-2 text-primary-blue">Lavagem de Tênis e Tapetes</h3>
                     <p className="text-gray-600">
-                      Oferecemos serviço completo de lavagem e passagem para moradores de {neighborhood.name}. 
-                      Suas roupas do dia a dia tratadas com produtos de alta qualidade, devolvidas limpas, cheirosas e perfeitamente passadas.
+                      Seus tênis e tapetes acumulam sujeira e bactérias. Em {neighborhood.name}, nós buscamos, lavamos com produtos específicos e devolvemos tudo renovado e cheiroso.
                     </p>
                   </div>
                   
                   <div className="bg-white p-6 rounded-xl border-l-4 border-primary-gold shadow-sm hover:shadow-md transition-shadow">
-                    <h3 className="text-xl font-bold mb-2 text-primary-gold">Lavagem a Seco em {neighborhood.name}</h3>
+                    <h3 className="text-xl font-bold mb-2 text-primary-gold">Carrinhos de Bebê e Pelúcias</h3>
                     <p className="text-gray-600">
-                      Ternos, vestidos de festa, e roupas delicadas requerem cuidado especial. 
-                      Nossa lavanderia atende {neighborhood.name} com equipamentos modernos para lavagem a seco profissional.
+                      A saúde do seu bebê é prioridade. Realizamos a higienização completa de carrinhos de bebê, bebê conforto e ursinhos de pelúcia, eliminando ácaros e fungos.
                     </p>
                   </div>
 
                   <div className="bg-white p-6 rounded-xl border-l-4 border-secondary-dark shadow-sm hover:shadow-md transition-shadow">
-                    <h3 className="text-xl font-bold mb-2 text-secondary-dark">Delivery em {neighborhood.name}</h3>
+                    <h3 className="text-xl font-bold mb-2 text-secondary-dark">Roupas e Edredons</h3>
                     <p className="text-gray-600">
-                      Não perca tempo no trânsito. Coletamos e entregamos suas roupas diretamente em {neighborhood.name}. 
-                      Basta agendar pelo WhatsApp e nossa equipe vai até você.
+                      Desde camisas sociais até edredons king size. Nossa lavanderia atende {neighborhood.name} com qualidade premium e passadoria impecável.
                     </p>
                   </div>
                 </div>
@@ -181,12 +174,12 @@ const NeighborhoodPage: React.FC = () => {
                   <li className="mb-10 ml-6">
                     <span className="absolute flex items-center justify-center w-8 h-8 bg-blue-100 rounded-full -left-4 ring-8 ring-white text-primary-blue font-bold">2</span>
                     <h3 className="font-bold text-lg text-gray-900 mb-1">Coleta</h3>
-                    <p className="text-gray-600">Informe seu endereço em {neighborhood.name} e agendamos a busca.</p>
+                    <p className="text-gray-600">Buscamos suas roupas, tênis ou tapetes em {neighborhood.name}.</p>
                   </li>
                   <li className="ml-6">
                     <span className="absolute flex items-center justify-center w-8 h-8 bg-blue-100 rounded-full -left-4 ring-8 ring-white text-primary-blue font-bold">3</span>
                     <h3 className="font-bold text-lg text-gray-900 mb-1">Entrega</h3>
-                    <p className="text-gray-600">Receba tudo pronto em 24h a 48h.</p>
+                    <p className="text-gray-600">Receba tudo limpo em 24h a 48h.</p>
                   </li>
                 </ol>
               </div>

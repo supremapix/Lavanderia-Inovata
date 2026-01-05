@@ -7,7 +7,7 @@ const Prices: React.FC = () => {
   // Simple conceptual pricing structure
   const priceCategories = [
     {
-      title: "Dia a Dia (Lavar e Passar)",
+      title: "Roupas Dia a Dia (Lavar e Passar)",
       items: [
         { name: "Camisa Social", price: "R$ 18,00" },
         { name: "Camiseta / Polo", price: "R$ 12,00" },
@@ -26,13 +26,38 @@ const Prices: React.FC = () => {
       ]
     },
     {
+      title: "Tênis e Calçados",
+      items: [
+        { name: "Tênis Esportivo / Casual", price: "R$ 35,00" },
+        { name: "Tênis Branco / Tecido", price: "R$ 40,00" },
+        { name: "Sapatos Sociais", price: "R$ 30,00" },
+        { name: "Botas", price: "A partir de R$ 45,00" },
+      ]
+    },
+    {
+      title: "Infantil e Bebê",
+      items: [
+        { name: "Carrinho de Bebê (Simples)", price: "R$ 120,00" },
+        { name: "Carrinho de Bebê (Travel System)", price: "R$ 180,00" },
+        { name: "Bebê Conforto / Cadeirinha", price: "R$ 80,00" },
+        { name: "Ursinhos de Pelúcia (P/M)", price: "A partir de R$ 25,00" },
+      ]
+    },
+    {
+      title: "Tapetes e Cortinas",
+      items: [
+        { name: "Tapete (m²)", price: "R$ 35,00 / m²" },
+        { name: "Cortina Tecido Leve (m²)", price: "R$ 25,00 / m²" },
+        { name: "Cortina com Blackout (m²)", price: "R$ 35,00 / m²" },
+      ]
+    },
+    {
       title: "Peças Delicadas (Seco)",
       items: [
         { name: "Terno Completo", price: "R$ 60,00" },
         { name: "Paletó / Blazer", price: "R$ 35,00" },
-        { name: "Vestido Simples", price: "R$ 40,00" },
         { name: "Vestido de Festa", price: "Sob Consulta" },
-        { name: "Casaco de Lã 3/4", price: "R$ 50,00" },
+        { name: "Casaco de Lã / Sobretudo", price: "R$ 50,00" },
       ]
     }
   ];
@@ -41,7 +66,7 @@ const Prices: React.FC = () => {
     <>
       <Helmet>
         <title>Tabela de Preços | Lavanderia Inovata Osasco</title>
-        <meta name="description" content="Confira nossa tabela de preços para lavagem de roupas, edredons, ternos e tapetes. O melhor custo-benefício de Osasco." />
+        <meta name="description" content="Preços de lavanderia em Osasco: Lavar Roupas, Tênis, Tapetes, Sofás e Carrinhos de Bebê. Confira nossa tabela completa!" />
       </Helmet>
 
       <main className="pt-24 pb-20 bg-gray-50 min-h-screen">
@@ -49,7 +74,7 @@ const Prices: React.FC = () => {
           <div className="text-center mb-16">
             <h1 className="text-4xl font-heading font-black text-secondary-dark mb-4">Tabela de Preços</h1>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Preços transparentes e competitivos. Qualidade premium que cabe no seu bolso.
+              Valores transparentes para todos os nossos serviços. Qualidade premium que cabe no seu bolso.
             </p>
           </div>
 
@@ -78,7 +103,10 @@ const Prices: React.FC = () => {
               <div>
                 <h4 className="font-bold text-primary-blue mb-2">Observações Importantes</h4>
                 <p className="text-sm text-gray-600 mb-2">
-                  * Os preços podem variar dependendo do tecido, complexidade da mancha ou detalhes da peça (pedrarias, bordados).
+                  * Os preços podem variar dependendo do tecido, complexidade da mancha, tamanho exato ou detalhes da peça.
+                </p>
+                <p className="text-sm text-gray-600 mb-2">
+                  * Lavagem de Estofados (Sofás, Poltronas) é feita sob orçamento via foto no WhatsApp.
                 </p>
                 <p className="text-sm text-gray-600">
                   * Frete grátis para coleta e entrega em pedidos acima de R$50,00 dentro do raio de atendimento (15km).
@@ -88,7 +116,7 @@ const Prices: React.FC = () => {
 
             <div className="text-center mt-12">
               <a 
-                href={`https://wa.me/${CONTACT.whatsapp}?text=Olá, gostaria de um orçamento específico.`} 
+                href={`https://wa.me/${CONTACT.whatsapp}?text=Olá, gostaria de um orçamento para...`} 
                 className="inline-block bg-primary-gold text-secondary-dark px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:shadow-lg transition-all"
               >
                 Orçamento Personalizado no WhatsApp

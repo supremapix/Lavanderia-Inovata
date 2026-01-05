@@ -1,5 +1,5 @@
 import { ContactInfo, Neighborhood, Service } from './types';
-import { Shirt, Snowflake, Droplets, Truck } from 'lucide-react';
+import { Shirt, Snowflake, Droplets, Truck, Armchair, Sparkles } from 'lucide-react';
 import React from 'react';
 
 export const CONTACT: ContactInfo = {
@@ -54,37 +54,38 @@ export const NEIGHBORHOODS: Neighborhood[] = [
 
 export const SERVICES_DATA: any[] = [
   {
-    id: 'lavar-passar',
-    title: 'Lavar e Passar',
-    description: 'Cuidado completo para suas roupas do dia a dia.',
+    id: 'roupas',
+    title: 'Roupas e Têxteis',
+    description: 'Do dia a dia aos tecidos finos. Lavamos, passamos e renovamos suas roupas.',
     icon: <Shirt className="w-12 h-12 text-primary-gold" />,
-    features: ['Roupas do dia a dia', 'Cama, mesa e banho', 'Dobradas e embaladas']
+    features: ['Roupas do dia a dia', 'Ternos e Vestidos', 'Lavagem a Seco']
   },
   {
-    id: 'a-seco',
-    title: 'Lavagem a Seco',
-    description: 'Tecnologia avançada para tecidos delicados e finos.',
-    icon: <Snowflake className="w-12 h-12 text-primary-gold" />,
-    features: ['Ternos e Vestidos', 'Tecidos delicados', 'Sem encolhimento']
+    id: 'casa',
+    title: 'Casa e Decoração',
+    description: 'Higienização profunda para renovar o ambiente da sua casa.',
+    icon: <Armchair className="w-12 h-12 text-primary-gold" />,
+    features: ['Tapetes e Cortinas', 'Edredons e Cobertores', 'Estofados e Sofás']
   },
   {
-    id: 'umida',
-    title: 'Lavagem Úmida',
-    description: 'Processo Wet Cleaning ecológico e eficiente.',
-    icon: <Droplets className="w-12 h-12 text-primary-gold" />,
-    features: ['Ecológicamente correto', 'Remove manchas difíceis', 'Hipoalergênico']
+    id: 'especiais',
+    title: 'Especiais e Infantil',
+    description: 'Cuidado redobrado com itens delicados, tênis e artigos de bebê.',
+    icon: <Sparkles className="w-12 h-12 text-primary-gold" />,
+    features: ['Tênis e Calçados', 'Carrinhos de Bebê', 'Pelúcias e Malas']
   },
   {
     id: 'delivery',
     title: 'Delivery Rápido',
-    description: 'Buscamos e entregamos no conforto da sua casa.',
+    description: 'Conveniência total: buscamos e entregamos no seu endereço.',
     icon: <Truck className="w-12 h-12 text-primary-gold" />,
-    features: ['Raio de 15km', 'Coleta agendada', 'Entrega em 24-48h']
+    features: ['Raio de 15km', 'Coleta Agendada', 'Entrega 24-48h']
   }
 ];
 
 export const HOME_TYPEWRITER_TEXTS = [
-  "Lavanderia Profissional em Osasco",
-  "Delivery em Até 24 Horas",
-  "Atendemos 15km de Raio"
+  "Lavanderia Completa em Osasco",
+  "Lavamos Tênis, Tapetes e Sofás",
+  "Especialistas em Carrinhos de Bebê",
+  "Delivery em Até 24 Horas"
 ];

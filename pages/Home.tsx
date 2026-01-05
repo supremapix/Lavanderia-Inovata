@@ -73,8 +73,8 @@ const Home: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Lavanderia em Osasco | Delivery Rápido 15km Raio | Lavanderia Inovata</title>
-        <meta name="description" content="Lavanderia profissional em Osasco com delivery rápido. Lavar, passar, a seco e úmidos. Atendemos 15km: Alphaville, Lapa, Pirituba e região. Orçamento grátis!" />
+        <title>Lavanderia em Osasco | Tênis, Tapetes, Sofás e Roupas | Delivery Rápido</title>
+        <meta name="description" content="Lavanderia completa em Osasco: Roupas, Tênis, Tapetes, Cortinas, Estofados e Carrinhos de Bebê. Delivery rápido 15km. Qualidade Premium e preço justo!" />
         <link rel="canonical" href="https://lavanderiainovata.vercel.app" />
         <script type="application/ld+json">
           {JSON.stringify(schemaData)}
@@ -107,19 +107,19 @@ const Home: React.FC = () => {
             </h1>
             
             <div className="flex flex-wrap justify-center gap-4 text-sm md:text-lg mb-10 text-gray-200">
-              <span className="flex items-center gap-2"><span className="text-primary-gold">🧺</span> Lavar • Passar • A Seco</span>
+              <span className="flex items-center gap-2"><span className="text-primary-gold">🧺</span> Roupas • Tênis • Estofados</span>
               <span className="hidden md:inline">•</span>
-              <span className="flex items-center gap-2"><span className="text-primary-gold">⭐</span> Qualidade Premium</span>
+              <span className="flex items-center gap-2"><span className="text-primary-gold">⭐</span> Tapetes • Cortinas • Carrinhos de Bebê</span>
             </div>
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-6">
               <a 
-                href="https://wa.me/5511921691307" 
+                href="https://wa.me/5511921691307?text=Olá! Gostaria de um orçamento para lavanderia." 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full md:w-auto bg-gradient-gold text-secondary-dark px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-primary-gold/50 transform hover:scale-105 transition-all duration-300 animate-pulse-glow"
               >
-                💬 ORÇAMENTO NO WHATSAPP
+                💬 ORÇAMENTO RÁPIDO
               </a>
               <Link 
                 to="/#bairros"
@@ -128,13 +128,13 @@ const Home: React.FC = () => {
                 }}
                 className="w-full md:w-auto border-2 border-white/30 hover:border-white bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:bg-white/20"
               >
-                📍 VER BAIRROS ATENDIDOS
+                📍 VER ÁREA DE ATENDIMENTO
               </Link>
             </div>
 
             {/* Floating Badges */}
             <div className="hidden lg:flex absolute bottom-10 left-0 right-0 justify-center gap-8">
-               {['✅ Delivery Grátis acima de R$50', '⚡ Entrega em 24-48h', '🏆 +15 Anos de Experiência'].map((badge, idx) => (
+               {['✅ Delivery Grátis acima de R$50', '👟 Especialista em Tênis', '🛋️ Higienização de Estofados', '🏆 Qualidade Premium'].map((badge, idx) => (
                  <div key={idx} className="bg-white/10 backdrop-blur-md px-6 py-2 rounded-full border border-white/20 text-sm font-medium animate-float" style={{ animationDelay: `${idx * 0.5}s` }}>
                    {badge}
                  </div>
@@ -148,7 +148,10 @@ const Home: React.FC = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-16 animate-on-scroll opacity-0 translate-y-10 transition-all duration-1000">
               <h2 className="text-primary-gold text-lg font-bold uppercase tracking-wider mb-2">Nossos Serviços</h2>
-              <h3 className="text-3xl md:text-4xl font-heading font-bold text-white">Qualidade que você pode sentir</h3>
+              <h3 className="text-3xl md:text-4xl font-heading font-bold text-white">Muito Mais Que Só Roupas</h3>
+              <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+                Oferecemos soluções completas de limpeza e higienização. De tênis a estofados, cuidamos de tudo para você.
+              </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
@@ -199,9 +202,9 @@ const Home: React.FC = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
                 {[
-                  { step: 1, title: 'SOLICITE', desc: 'Ligue, chame no WhatsApp ou agende pelo site.', icon: '📱' },
-                  { step: 2, title: 'COLETAMOS', desc: 'Buscamos suas roupas em sua casa ou escritório.', icon: '🚚' },
-                  { step: 3, title: 'ENTREGAMOS', desc: 'Receba tudo limpo, passado e cheiroso em até 48h.', icon: '✨' },
+                  { step: 1, title: 'SOLICITE', desc: 'Agende a coleta de suas roupas, tênis, tapetes ou estofados.', icon: '📱' },
+                  { step: 2, title: 'COLETAMOS', desc: 'Buscamos em sua casa (ou realizamos o serviço in-loco para estofados).', icon: '🚚' },
+                  { step: 3, title: 'ENTREGAMOS', desc: 'Receba tudo limpo e higienizado em até 48h.', icon: '✨' },
                 ].map((item, idx) => (
                    <div key={item.step} className="text-center animate-on-scroll opacity-0 translate-y-10 transition-all duration-1000" style={{ transitionDelay: `${idx * 200}ms` }}>
                       <div className="w-24 h-24 mx-auto bg-gradient-primary rounded-full flex items-center justify-center text-4xl shadow-xl mb-6 relative group">
@@ -251,17 +254,17 @@ const Home: React.FC = () => {
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
           <div className="container mx-auto px-4 relative z-10 text-center">
             <h2 className="text-3xl md:text-5xl font-heading font-black text-white mb-8">
-              Suas roupas merecem o melhor cuidado
+              Deixe o trabalho pesado com a gente!
             </h2>
             <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
-              Experimente a conveniência do nosso serviço delivery. A primeira coleta tem condição especial!
+              Seus tênis, tapetes, cortinas e roupas em boas mãos. Aproveite nosso delivery grátis* e ganhe tempo livre.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
               <a 
-                href="https://wa.me/5511921691307" 
+                href="https://wa.me/5511921691307?text=Quero lavar meus tênis e roupas!" 
                 className="bg-white text-primary-blue px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-gray-100 transition-colors flex items-center justify-center gap-2"
               >
-                Solicitar Agora
+                Solicitar Coleta Agora
                 <ArrowRight size={20} />
               </a>
                <a 

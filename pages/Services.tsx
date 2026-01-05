@@ -27,6 +27,17 @@ const Services: React.FC = () => {
         "longitude": -46.7919
       },
       "geoRadius": "15000"
+    },
+    "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Serviços Inovata",
+        "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lavagem de Tênis" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lavagem de Roupas Sociais" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Higienização de Estofados" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Limpeza de Tapetes" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Higienização de Carrinho de Bebê" } }
+        ]
     }
   };
 

@@ -10,7 +10,14 @@ const Contact: React.FC = () => {
     "mainEntity": {
       "@type": "LocalBusiness",
       "name": "Lavanderia Inovata",
-      "address": CONTACT.address,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. César Abraão, 209",
+        "addressLocality": "Osasco",
+        "addressRegion": "SP",
+        "postalCode": "06268-010",
+        "addressCountry": "BR"
+      },
       "telephone": CONTACT.phone,
       "email": CONTACT.email,
       "openingHoursSpecification": [
@@ -25,6 +32,21 @@ const Contact: React.FC = () => {
           "dayOfWeek": "Saturday",
           "opens": "09:00",
           "closes": "13:00"
+        }
+      ],
+      "contactPoint": [
+        {
+            "@type": "ContactPoint",
+            "telephone": CONTACT.phone,
+            "contactType": "customer service",
+            "areaServed": "BR",
+            "availableLanguage": "Portuguese"
+        },
+        {
+            "@type": "ContactPoint",
+            "telephone": CONTACT.whatsapp,
+            "contactType": "sales",
+            "contactOption": "HearingImpairedSupported"
         }
       ]
     }

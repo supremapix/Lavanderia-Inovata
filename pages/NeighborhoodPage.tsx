@@ -38,24 +38,33 @@ const NeighborhoodPage: React.FC = () => {
 
   const schemaData = {
     "@context": "https://schema.org",
-    "@type": "LaundryService",
-    "name": `Lavanderia Inovata - ${neighborhood.name}`,
+    "@type": "ProfessionalService",
+    "additionalType": "https://schema.org/LaundryService",
+    "name": `Lavanderia Inovata - Atendimento ${neighborhood.name}`,
     "image": "https://lavanderiainovata.vercel.app/logo.png",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": CONTACT.address,
       "addressLocality": "Osasco",
       "addressRegion": "SP",
-      "postalCode": "06268-010"
+      "postalCode": "06268-010",
+      "addressCountry": "BR"
     },
+    // Main headquarters location
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -23.5329,
+      "longitude": -46.7919
+    },
+    // Specific service area for this page
     "areaServed": {
-      "@type": "GeoCircle",
-      "geoMidpoint": {
-        "@type": "GeoCoordinates",
-        "latitude": -23.5329,
-        "longitude": -46.7919
-      },
-      "geoRadius": "15000"
+      "@type": "Place",
+      "name": neighborhood.name,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": neighborhood.city,
+        "addressRegion": "SP"
+      }
     },
     "url": window.location.href,
     "telephone": "+551136831307",
@@ -73,7 +82,34 @@ const NeighborhoodPage: React.FC = () => {
           "opens": "09:00",
           "closes": "13:00"
         }
-    ]
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Serviços de Lavanderia",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": `Lavanderia Delivery em ${neighborhood.name}`
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": `Lavagem de Tênis em ${neighborhood.name}`
+          }
+        },
+        {
+           "@type": "Offer",
+           "itemOffered": {
+             "@type": "Service",
+             "name": `Limpeza de Sofás e Tapetes em ${neighborhood.name}`
+           }
+         }
+      ]
+    }
   };
 
   return (

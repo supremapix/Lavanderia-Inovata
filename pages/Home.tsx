@@ -5,7 +5,7 @@ import { NEIGHBORHOODS, SERVICES_DATA, HOME_TYPEWRITER_TEXTS, CONTACT } from '..
 import { ArrowRight, CheckCircle, MapPin } from 'lucide-react';
 import EnhancedSEO from '../components/EnhancedSEO';
 
-// High-quality images for the slider: Professional Machines, Ironing, and Clothes
+// High-quality images for the slider
 const HERO_IMAGES = [
   "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?q=80&w=2070&auto=format&fit=crop", // Professional Ironing/Steam
   "https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?q=80&w=2070&auto=format&fit=crop", // Modern Washing Machine Detail
@@ -15,6 +15,20 @@ const Home: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [bubbles, setBubbles] = useState<Array<{ id: number; left: string; size: string; duration: string; sway: string }>>([]);
+
+  // Initialize bubbles
+  useEffect(() => {
+    const bubbleCount = 15;
+    const newBubbles = Array.from({ length: bubbleCount }).map((_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      size: `${Math.random() * 40 + 20}px`,
+      duration: `${Math.random() * 5 + 8}s`,
+      sway: `${Math.random() * 100 - 50}px`
+    }));
+    setBubbles(newBubbles);
+  }, []);
 
   // Background Slider Logic
   useEffect(() => {
@@ -56,14 +70,20 @@ const Home: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Complete Local Business Schema
   const schemaData = {
     "@context": "https://schema.org",
-    "@type": "LaundryService",
+    "@type": "ProfessionalService", // More specific than LaundryService
+    "additionalType": "https://schema.org/LaundryService",
     "name": "Lavanderia Inovata",
-    "image": HERO_IMAGES[0],
+    "image": [
+      "https://lavanderiainovata.vercel.app/logo.png",
+      ...HERO_IMAGES
+    ],
     "@id": "https://lavanderiainovata.vercel.app",
     "url": "https://lavanderiainovata.vercel.app",
     "telephone": CONTACT.phone,
+    "email": CONTACT.email,
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
@@ -78,6 +98,15 @@ const Home: React.FC = () => {
       "latitude": -23.5329,
       "longitude": -46.7919
     },
+    "areaServed": NEIGHBORHOODS.map(n => ({
+        "@type": "Place",
+        "name": n.name,
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": n.city,
+            "addressRegion": "SP"
+        }
+    })),
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
@@ -92,7 +121,8 @@ const Home: React.FC = () => {
         "closes": "13:00"
       }
     ],
-    "areaServed": NEIGHBORHOODS.map(n => n.name),
+    "paymentAccepted": ["Cash", "Credit Card", "Debit Card", "Pix"],
+    "hasMap": "https://www.google.com/maps?cid=4611686018429747200", // Example CID
     "sameAs": [
       "https://www.instagram.com/lavanderiainovata",
       "https://www.facebook.com/lavanderiainovata"
@@ -109,7 +139,7 @@ const Home: React.FC = () => {
       />
 
       <main className="overflow-x-hidden">
-        {/* HERO SECTION WITH PREMIUM SLIDER */}
+        {/* HERO SECTION WITH PREMIUM SLIDER & BUBBLES */}
         <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
           
           {/* Background Slider */}
@@ -127,21 +157,30 @@ const Home: React.FC = () => {
                   className="w-full h-full object-cover transform scale-105 animate-pulse-slow" 
                   style={{ animationDuration: '10s' }}
                   onError={(e) => {
-                    // Fallback if image fails (Emular imagem quebrada protection)
                     (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1521656693072-a8333f629688?q=80&w=2070&auto=format&fit=crop";
                   }}
                 />
               </div>
             ))}
-            {/* Gradient Overlay for Text Readability */}
+            {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-hero z-10"></div>
           </div>
           
-          {/* Particles */}
-          <div className="absolute inset-0 z-10 pointer-events-none">
-             <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-blue-400 rounded-full opacity-30 animate-float" style={{ animationDelay: '0s' }}></div>
-             <div className="absolute top-1/3 right-1/4 w-6 h-6 bg-white rounded-full opacity-20 animate-float" style={{ animationDelay: '1s' }}></div>
-             <div className="absolute bottom-1/4 left-1/3 w-3 h-3 bg-primary-gold rounded-full opacity-30 animate-float" style={{ animationDelay: '2s' }}></div>
+          {/* REALISTIC SOAP BUBBLES */}
+          <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
+            {bubbles.map((bubble) => (
+              <div
+                key={bubble.id}
+                className="soap-bubble"
+                style={{
+                  left: bubble.left,
+                  width: bubble.size,
+                  height: bubble.size,
+                  '--bubble-duration': bubble.duration,
+                  '--sway': bubble.sway,
+                } as React.CSSProperties}
+              />
+            ))}
           </div>
 
           <div className="container mx-auto px-4 z-20 text-center text-white mt-16 fade-up">

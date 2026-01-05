@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, WashingMachine } from 'lucide-react';
 import { CONTACT } from '../constants';
 
 const Header: React.FC = () => {
@@ -51,11 +51,25 @@ const Header: React.FC = () => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="flex flex-col items-start z-50 group">
-          <h1 className="text-2xl font-heading font-black text-white tracking-tighter group-hover:scale-105 transition-transform">
-            LAVANDERIA <span className="text-primary-gold">INOVATA</span>
-          </h1>
-          <span className="text-xs text-gray-300 tracking-widest uppercase">Premium & Delivery</span>
+        <Link to="/" className="flex items-center gap-3 z-50 group select-none">
+          <div className="relative">
+            {/* Glow Effect */}
+            <div className="absolute inset-0 bg-primary-gold/30 blur-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            {/* Icon */}
+            <WashingMachine 
+              size={42} 
+              className="text-white group-hover:text-primary-gold transition-all duration-500 animate-wash group-active:scale-90 relative z-10" 
+              strokeWidth={1.5}
+            />
+          </div>
+          <div className="flex flex-col items-start transition-transform duration-300 group-hover:translate-x-1">
+            <h1 className="text-2xl font-heading font-black text-white tracking-tighter leading-none">
+              LAVANDERIA <span className="text-primary-gold transition-colors duration-300 group-hover:text-white">INOVATA</span>
+            </h1>
+            <span className="text-[10px] text-gray-300 tracking-[0.2em] uppercase font-medium group-hover:text-primary-gold transition-colors duration-300">
+              Premium & Delivery
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}

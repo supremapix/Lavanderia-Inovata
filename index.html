@@ -68,6 +68,19 @@
         animation: rotate360 0.6s ease;
       }
 
+      /* Premium Wash Cycle Animation for Logo */
+      @keyframes wash-cycle {
+        0% { transform: rotate(0deg); }
+        25% { transform: rotate(-15deg); }
+        50% { transform: rotate(10deg); }
+        75% { transform: rotate(-5deg); }
+        100% { transform: rotate(0deg); }
+      }
+      
+      .group:hover .animate-wash {
+        animation: wash-cycle 0.8s ease-in-out forwards;
+      }
+
       /* Premium Shimmer Effect for Buttons */
       @keyframes shimmer-slide {
         0% { transform: translateX(-150%) skewX(-20deg); }

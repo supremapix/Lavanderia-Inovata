@@ -3,7 +3,7 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { NEIGHBORHOODS, CONTACT } from '../constants';
 import Typewriter from '../components/Typewriter';
 import { MapPin, Check, Phone, ArrowLeft, Star, Shield, Clock, Truck, Sparkles, Footprints, Shirt, Armchair, Baby } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
+import EnhancedSEO from '../components/EnhancedSEO';
 
 const NeighborhoodPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -78,14 +78,16 @@ const NeighborhoodPage: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Lavanderia em {neighborhood.name} | Delivery Premium | Inovata</title>
-        <meta name="description" content={`Procurando Lavanderia em ${neighborhood.name}? Especialistas em Roupas, Tênis, Tapetes e Estofados. Delivery Rápido e Grátis* em ${neighborhood.name}. Confira!`} />
-        <link rel="canonical" href={`https://lavanderiainovata.vercel.app/#/lavanderia-${neighborhood.slug}`} />
-        <script type="application/ld+json">
-          {JSON.stringify(schemaData)}
-        </script>
-      </Helmet>
+      <EnhancedSEO 
+        title={`Lavanderia em ${neighborhood.name} | Delivery Premium | Inovata`}
+        description={`Procurando Lavanderia em ${neighborhood.name}? Especialistas em Roupas, Tênis, Tapetes e Estofados. Delivery Rápido e Grátis* em ${neighborhood.name}. Confira!`}
+        structuredData={schemaData}
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Bairros', item: '/#bairros' },
+          { name: neighborhood.name, item: `/lavanderia-${neighborhood.slug}` }
+        ]}
+      />
 
       <main className="bg-gray-50 min-h-screen pt-20">
         {/* Breadcrumb */}

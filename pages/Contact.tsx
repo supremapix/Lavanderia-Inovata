@@ -1,7 +1,7 @@
 import React from 'react';
 import { CONTACT } from '../constants';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
+import EnhancedSEO from '../components/EnhancedSEO';
 
 const Contact: React.FC = () => {
   const schemaData = {
@@ -32,13 +32,15 @@ const Contact: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Contato | Lavanderia Inovata Osasco</title>
-        <meta name="description" content="Entre em contato com a Lavanderia Inovata. Telefone, WhatsApp e endereço na Av. César Abraão, 209 - Osasco." />
-        <script type="application/ld+json">
-          {JSON.stringify(schemaData)}
-        </script>
-      </Helmet>
+      <EnhancedSEO 
+        title="Contato | Lavanderia Inovata Osasco"
+        description="Entre em contato com a Lavanderia Inovata. Telefone, WhatsApp e endereço na Av. César Abraão, 209 - Osasco."
+        structuredData={schemaData}
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Contato', item: '/contato' }
+        ]}
+      />
       
       <main className="pt-24 pb-20 bg-gray-50 min-h-screen">
         <div className="container mx-auto px-4">

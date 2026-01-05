@@ -1,7 +1,7 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Star, Users, Award, ShieldCheck } from 'lucide-react';
 import { CONTACT } from '../constants';
+import EnhancedSEO from '../components/EnhancedSEO';
 
 const About: React.FC = () => {
   const schemaData = {
@@ -18,13 +18,15 @@ const About: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Sobre Nós | Lavanderia Inovata - Tradição e Qualidade em Osasco</title>
-        <meta name="description" content="Conheça a história da Lavanderia Inovata. Mais de 15 anos cuidando das roupas de Osasco com carinho, tecnologia e responsabilidade ambiental." />
-        <script type="application/ld+json">
-          {JSON.stringify(schemaData)}
-        </script>
-      </Helmet>
+      <EnhancedSEO 
+        title="Sobre Nós | Lavanderia Inovata - Tradição e Qualidade em Osasco"
+        description="Conheça a história da Lavanderia Inovata. Mais de 15 anos cuidando das roupas de Osasco com carinho, tecnologia e responsabilidade ambiental."
+        structuredData={schemaData}
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Sobre Nós', item: '/sobre' }
+        ]}
+      />
 
       <main className="pt-24 pb-20 bg-white min-h-screen">
         {/* Hero About */}

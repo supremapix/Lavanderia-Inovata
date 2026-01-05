@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Core Pages -->
+  <url>
+    <loc>https://lavanderiainovata.vercel.app/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://lavanderiainovata.vercel.app/#/servicos</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lavanderiainovata.vercel.app/#/precos</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://lavanderiainovata.vercel.app/#/sobre</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://lavanderiainovata.vercel.app/#/contato</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Neighborhood Pages (Osasco) -->
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-osasco-centro</loc><priority>0.9</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-osasco-bonfim</loc><priority>0.9</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-osasco-presidente-altino</loc><priority>0.9</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-osasco-rochdale</loc><priority>0.9</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-osasco-jardim-piratininga</loc><priority>0.9</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-osasco-vila-yara</loc><priority>0.9</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-osasco-km-18</loc><priority>0.9</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-osasco-quitauna</loc><priority>0.9</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-osasco-jardim-das-flores</loc><priority>0.9</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-osasco-city-bussocaba</loc><priority>0.9</priority></url>
+
+  <!-- Neighborhood Pages (SP) -->
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-sao-paulo-lapa</loc><priority>0.8</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-sao-paulo-pirituba</loc><priority>0.8</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-sao-paulo-jaragua</loc><priority>0.8</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-sao-paulo-vila-leopoldina</loc><priority>0.8</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-sao-paulo-jaguare</loc><priority>0.8</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-sao-paulo-butanta</loc><priority>0.8</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-sao-paulo-rio-pequeno</loc><priority>0.8</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-sao-paulo-raposo-tavares</loc><priority>0.8</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-sao-paulo-vila-sonia</loc><priority>0.8</priority></url>
+
+  <!-- Neighborhood Pages (Carapicuíba) -->
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-carapicuiba-centro</loc><priority>0.8</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-carapicuiba-cohab</loc><priority>0.8</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-carapicuiba-vila-dirce</loc><priority>0.8</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-carapicuiba-fazendinha</loc><priority>0.8</priority></url>
+
+  <!-- Neighborhood Pages (Barueri) -->
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-barueri-alphaville</loc><priority>0.9</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-barueri-tambore</loc><priority>0.9</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-barueri-jardim-silveira</loc><priority>0.8</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-barueri-centro</loc><priority>0.8</priority></url>
+
+  <!-- Neighborhood Pages (Jandira) -->
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-jandira-centro</loc><priority>0.7</priority></url>
+  <url><loc>https://lavanderiainovata.vercel.app/#/lavanderia-jandira-jardim-alvorada</loc><priority>0.7</priority></url>
+</urlset>

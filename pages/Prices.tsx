@@ -1,7 +1,7 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { DollarSign, Info } from 'lucide-react';
 import { CONTACT } from '../constants';
+import EnhancedSEO from '../components/EnhancedSEO';
 
 const Prices: React.FC = () => {
   // Simple conceptual pricing structure
@@ -64,10 +64,14 @@ const Prices: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Tabela de Preços | Lavanderia Inovata Osasco</title>
-        <meta name="description" content="Preços de lavanderia em Osasco: Lavar Roupas, Tênis, Tapetes, Sofás e Carrinhos de Bebê. Confira nossa tabela completa!" />
-      </Helmet>
+      <EnhancedSEO 
+        title="Tabela de Preços | Lavanderia Inovata Osasco"
+        description="Preços de lavanderia em Osasco: Lavar Roupas, Tênis, Tapetes, Sofás e Carrinhos de Bebê. Confira nossa tabela completa!"
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Preços', item: '/precos' }
+        ]}
+      />
 
       <main className="pt-24 pb-20 bg-gray-50 min-h-screen">
         <div className="container mx-auto px-4">

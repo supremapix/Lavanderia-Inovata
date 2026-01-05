@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Typewriter from '../components/Typewriter';
 import { NEIGHBORHOODS, SERVICES_DATA, HOME_TYPEWRITER_TEXTS, CONTACT } from '../constants';
 import { ArrowRight, CheckCircle, MapPin } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
+import EnhancedSEO from '../components/EnhancedSEO';
 
 const Home: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -72,14 +72,12 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Lavanderia em Osasco | Tênis, Tapetes, Sofás e Roupas | Delivery Rápido</title>
-        <meta name="description" content="Lavanderia completa em Osasco: Roupas, Tênis, Tapetes, Cortinas, Estofados e Carrinhos de Bebê. Delivery rápido 15km. Qualidade Premium e preço justo!" />
-        <link rel="canonical" href="https://lavanderiainovata.vercel.app" />
-        <script type="application/ld+json">
-          {JSON.stringify(schemaData)}
-        </script>
-      </Helmet>
+      <EnhancedSEO 
+        title="Lavanderia em Osasco | Tênis, Tapetes, Sofás e Roupas | Delivery Rápido"
+        description="Lavanderia completa em Osasco: Roupas, Tênis, Tapetes, Cortinas, Estofados e Carrinhos de Bebê. Delivery rápido 15km. Qualidade Premium e preço justo!"
+        structuredData={schemaData}
+        type="business.business"
+      />
 
       <main className="overflow-x-hidden">
         {/* HERO SECTION */}

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Shirt, Snowflake, Droplets, Truck, CheckCircle, HelpCircle, Footprints, Armchair, Baby, Sparkles, ShieldCheck, Clock, Sun } from 'lucide-react';
 import { CONTACT } from '../constants';
+import EnhancedSEO from '../components/EnhancedSEO';
 
 const Services: React.FC = () => {
   const schemaData = {
@@ -32,13 +32,15 @@ const Services: React.FC = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Serviços Premium de Lavanderia | Tênis, Roupas, Tapetes e Baby | Inovata</title>
-        <meta name="description" content="Conheça nossos processos detalhados de lavagem. Especialistas em clareamento de tênis, higienização de carrinhos de bebê, tapetes persas e roupas finas." />
-        <script type="application/ld+json">
-          {JSON.stringify(schemaData)}
-        </script>
-      </Helmet>
+      <EnhancedSEO 
+        title="Serviços Premium de Lavanderia | Tênis, Roupas, Tapetes e Baby | Inovata"
+        description="Conheça nossos processos detalhados de lavagem. Especialistas em clareamento de tênis, higienização de carrinhos de bebê, tapetes persas e roupas finas."
+        structuredData={schemaData}
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Serviços', item: '/servicos' }
+        ]}
+      />
 
       <main className="pt-24 pb-20 bg-gray-50 min-h-screen">
         <div className="container mx-auto px-4">
@@ -189,15 +191,27 @@ const Services: React.FC = () => {
 
                    <div className="space-y-8">
                       <div>
-                        <h3 className="text-2xl font-bold text-primary-gold mb-4">Tapetes</h3>
+                        <h3 className="text-2xl font-bold text-primary-gold mb-4">Tapetes (Processo 5 Etapas)</h3>
                         <ul className="space-y-3 text-gray-300">
                           <li className="flex items-start gap-3">
                             <span className="bg-white/10 p-1 rounded mt-1"><CheckCircle size={14}/></span>
-                            <span><strong>Remoção de Poeira:</strong> Processo de batimento mecânico para remover sujeira sólida profunda antes da lavagem.</span>
+                            <span><strong>1. Remoção de Poeira (Batimento Mecânico):</strong> Antes de molhar, utilizamos equipamento de vibração mecânica para remover terra e poeira profunda que a aspiração comum não alcança.</span>
                           </li>
                           <li className="flex items-start gap-3">
                             <span className="bg-white/10 p-1 rounded mt-1"><CheckCircle size={14}/></span>
-                            <span><strong>Secagem em Estufa:</strong> Controle total de temperatura para evitar "cheiro de cachorro molhado" e garantir secagem 100%.</span>
+                            <span><strong>2. Lavagem Bactericida:</strong> Imersão e escovação rotativa com produtos que eliminam ácaros, odores de urina e bactérias.</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="bg-white/10 p-1 rounded mt-1"><CheckCircle size={14}/></span>
+                            <span><strong>3. Centrifugação:</strong> Retirada de 90% da água para acelerar o processo.</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="bg-white/10 p-1 rounded mt-1"><CheckCircle size={14}/></span>
+                            <span><strong>4. Secagem em Estufa Controlada:</strong> Secagem final em ambiente climatizado para garantir a evaporação total da umidade, prevenindo odores ("cheiro de cachorro molhado") e preservando a integridade das fibras.</span>
+                          </li>
+                          <li className="flex items-start gap-3">
+                            <span className="bg-white/10 p-1 rounded mt-1"><CheckCircle size={14}/></span>
+                            <span><strong>5. Acabamento:</strong> Penteamento de franjas e embalagem protetora.</span>
                           </li>
                         </ul>
                       </div>
@@ -220,7 +234,7 @@ const Services: React.FC = () => {
                 <div className="relative h-64 lg:h-auto">
                    <img 
                     src="https://images.unsplash.com/photo-1596425979809-5b5832049d5c?q=80&w=1000&auto=format&fit=crop" 
-                    alt="Tapete limpo" 
+                    alt="Tapete sendo limpo com equipamento profissional" 
                     className="absolute inset-0 w-full h-full object-cover opacity-80"
                    />
                 </div>

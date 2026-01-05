@@ -80,7 +80,7 @@ const About: React.FC = () => {
             <div className="md:w-1/2">
                <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                  <img 
-                   src="https://images.unsplash.com/photo-1517677208171-0bc67429de01?q=80&w=1000&auto=format&fit=crop" 
+                   src="https://images.unsplash.com/photo-1521656693072-a8333f629688?q=80&w=1000&auto=format&fit=crop" 
                    alt="Equipe Lavanderia" 
                    className="w-full h-full object-cover"
                  />

@@ -31,7 +31,7 @@ const Home: React.FC = () => {
     "@context": "https://schema.org",
     "@type": "LaundryService",
     "name": "Lavanderia Inovata",
-    "image": "https://images.unsplash.com/photo-1545173168-9f1947eebb8f",
+    "image": "https://images.unsplash.com/photo-1521656693072-a8333f629688",
     "@id": "https://lavanderiainovata.vercel.app",
     "url": "https://lavanderiainovata.vercel.app",
     "telephone": CONTACT.phone,
@@ -85,7 +85,7 @@ const Home: React.FC = () => {
           {/* Background with overlay */}
           <div className="absolute inset-0 z-0">
             <img 
-              src="https://images.unsplash.com/photo-1545173168-9f1947eebb8f?q=80&w=2071&auto=format&fit=crop" 
+              src="https://images.unsplash.com/photo-1521656693072-a8333f629688?q=80&w=2070&auto=format&fit=crop" 
               alt="Lavanderia Background" 
               className="w-full h-full object-cover animate-pulse-slow" 
             />

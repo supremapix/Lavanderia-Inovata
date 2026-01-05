@@ -105,7 +105,7 @@ const Services: React.FC = () => {
               </div>
               <div className="relative h-64 lg:h-auto bg-gray-100">
                 <img 
-                  src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=1000&auto=format&fit=crop" 
+                  src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=1000&auto=format&fit=crop" 
                   alt="Limpeza de Tênis Profissional" 
                   className="absolute inset-0 w-full h-full object-cover"
                 />
@@ -121,7 +121,7 @@ const Services: React.FC = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                <div className="order-2 lg:order-1 relative rounded-3xl overflow-hidden shadow-2xl h-[500px]">
                  <img 
-                   src="https://images.unsplash.com/photo-1582735689369-4fe8d7499698?q=80&w=1000&auto=format&fit=crop" 
+                   src="https://images.unsplash.com/photo-1489274495757-95c7c8370a31?q=80&w=1000&auto=format&fit=crop" 
                    alt="Roupas bem passadas" 
                    className="absolute inset-0 w-full h-full object-cover"
                  />
@@ -233,7 +233,7 @@ const Services: React.FC = () => {
                 </div>
                 <div className="relative h-64 lg:h-auto">
                    <img 
-                    src="https://images.unsplash.com/photo-1596425979809-5b5832049d5c?q=80&w=1000&auto=format&fit=crop" 
+                    src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1000&auto=format&fit=crop" 
                     alt="Tapete sendo limpo com equipamento profissional" 
                     className="absolute inset-0 w-full h-full object-cover opacity-80"
                    />
@@ -275,8 +275,8 @@ const Services: React.FC = () => {
 
                   <div className="md:w-1/2 flex flex-col justify-center">
                      <div className="grid grid-cols-2 gap-4">
-                        <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=500&auto=format&fit=crop" className="rounded-2xl shadow-md hover:scale-105 transition-transform duration-500" alt="Bebê Conforto Limpo"/>
-                        <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?q=80&w=500&auto=format&fit=crop" className="rounded-2xl shadow-md hover:scale-105 transition-transform duration-500 translate-y-8" alt="Ursinho de Pelúcia"/>
+                        <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?q=80&w=500&auto=format&fit=crop" className="rounded-2xl shadow-md hover:scale-105 transition-transform duration-500" alt="Bebê Conforto Limpo"/>
+                        <img src="https://images.unsplash.com/photo-1559454403-b8fb87521bc5?q=80&w=500&auto=format&fit=crop" className="rounded-2xl shadow-md hover:scale-105 transition-transform duration-500 translate-y-8" alt="Ursinho de Pelúcia"/>
                      </div>
                      <div className="mt-12 text-center">
                         <p className="font-heading font-bold text-2xl text-pink-400">"Cuidado de mãe,<br/>profissionalismo Inovata."</p>

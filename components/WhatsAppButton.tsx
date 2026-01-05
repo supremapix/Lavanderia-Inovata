@@ -1,9 +1,17 @@
 import React from 'react';
 import { CONTACT } from '../constants';
+import { useLocation } from 'react-router-dom';
 
 const WhatsAppButton: React.FC = () => {
+  const location = useLocation();
   const message = "Olá! Gostaria de um orçamento de lavanderia.";
   const link = `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(message)}`;
+
+  // Disable floating button on neighborhood pages (/lavanderia/...) 
+  // because they have a specific sticky footer CTA on mobile.
+  if (location.pathname.includes('/lavanderia/')) {
+    return null;
+  }
 
   return (
     <a

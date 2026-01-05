@@ -5,13 +5,13 @@ import { NEIGHBORHOODS, SERVICES_DATA, HOME_TYPEWRITER_TEXTS, CONTACT } from '..
 import { ArrowRight, CheckCircle, MapPin } from 'lucide-react';
 import EnhancedSEO from '../components/EnhancedSEO';
 
-// High-quality images for the slider representing different services
+// High-quality images for the slider: Professional Machines, Ironing, and Clothes
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1545173168-9f1947eebb8f?q=80&w=2071&auto=format&fit=crop", // Laundry/Clothes
-  "https://images.unsplash.com/photo-1605622325376-78809e3cc26a?q=80&w=2070&auto=format&fit=crop", // Sneakers (clean aesthetic)
-  "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?q=80&w=2070&auto=format&fit=crop", // Sofa/Upholstery
-  "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=2070&auto=format&fit=crop", // Stroller/Baby
-  "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?q=80&w=2070&auto=format&fit=crop"  // Rugs/Curtains/Home
+  "https://images.unsplash.com/photo-1517677208171-0bc12116d820?q=80&w=2070&auto=format&fit=crop", // Professional Laundromat Machines
+  "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?q=80&w=2070&auto=format&fit=crop", // Professional Ironing/Steam
+  "https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?q=80&w=2070&auto=format&fit=crop", // Stack of clean towels/clothes
+  "https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?q=80&w=2070&auto=format&fit=crop", // Modern Washing Machine Detail
+  "https://images.unsplash.com/photo-1521656693072-a8333f629688?q=80&w=2070&auto=format&fit=crop"  // Professional Team/Care
 ];
 
 const Home: React.FC = () => {
@@ -63,7 +63,7 @@ const Home: React.FC = () => {
     "@context": "https://schema.org",
     "@type": "LaundryService",
     "name": "Lavanderia Inovata",
-    "image": "https://images.unsplash.com/photo-1545173168-9f1947eebb8f?q=80&w=2071&auto=format&fit=crop",
+    "image": HERO_IMAGES[0],
     "@id": "https://lavanderiainovata.vercel.app",
     "url": "https://lavanderiainovata.vercel.app",
     "telephone": CONTACT.phone,
@@ -116,7 +116,7 @@ const Home: React.FC = () => {
         <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
           
           {/* Background Slider */}
-          <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 z-0 bg-secondary-dark">
             {HERO_IMAGES.map((img, index) => (
               <div 
                 key={index}
@@ -126,9 +126,13 @@ const Home: React.FC = () => {
               >
                 <img 
                   src={img} 
-                  alt={`Lavanderia Inovata - Serviço Premium ${index + 1}`} 
+                  alt={`Lavanderia Inovata - Serviço Profissional ${index + 1}`} 
                   className="w-full h-full object-cover transform scale-105 animate-pulse-slow" 
                   style={{ animationDuration: '10s' }}
+                  onError={(e) => {
+                    // Fallback if image fails (Emular imagem quebrada protection)
+                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1521656693072-a8333f629688?q=80&w=2070&auto=format&fit=crop";
+                  }}
                 />
               </div>
             ))}

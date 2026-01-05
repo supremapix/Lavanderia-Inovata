@@ -226,22 +226,23 @@ const Home: React.FC = () => {
              <div className="text-center mb-16 animate-on-scroll opacity-0 translate-y-10 transition-all duration-1000">
               <h2 className="text-primary-blue text-lg font-bold uppercase tracking-wider mb-2">Área de Atendimento</h2>
               <h3 className="text-3xl md:text-4xl font-heading font-bold text-secondary-dark">Atendemos Osasco e Região (Raio 15km)</h3>
-              <p className="mt-4 text-gray-500">Selecione seu bairro para ver detalhes de atendimento</p>
+              <p className="mt-4 text-gray-500">Confira se atendemos sua região na lista abaixo:</p>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {NEIGHBORHOODS.map((hood) => (
-                <Link 
+                <div 
                   key={hood.id} 
-                  to={`/lavanderia-${hood.slug}`}
-                  className="group flex items-center gap-2 p-3 rounded-lg border border-gray-100 hover:border-primary-blue/30 hover:bg-blue-50 transition-all duration-300"
+                  className="group flex items-center gap-3 p-3 rounded-xl border border-gray-100 bg-white hover:border-primary-blue hover:shadow-lg hover:-translate-y-1 hover:scale-105 transition-all duration-300 cursor-default"
                 >
-                  <MapPin size={16} className="text-primary-blue group-hover:scale-125 transition-transform" />
+                  <div className="p-2 rounded-full bg-blue-50 group-hover:bg-primary-blue transition-colors duration-300">
+                    <MapPin size={18} className="text-primary-blue group-hover:text-white transition-colors duration-300" />
+                  </div>
                   <div className="flex flex-col">
-                    <span className="text-sm font-semibold text-gray-700 group-hover:text-primary-blue">{hood.name}</span>
+                    <span className="text-sm font-bold text-gray-700 group-hover:text-primary-blue transition-colors">{hood.name}</span>
                     <span className="text-[10px] uppercase text-gray-400 font-bold">{hood.city}</span>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
           </div>

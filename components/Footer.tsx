@@ -82,18 +82,17 @@ const Footer: React.FC = () => {
             © {new Date().getFullYear()} Lavanderia Inovata - CNPJ: {CONTACT.cnpj} | Todos os direitos reservados
           </p>
           
-          <p className="flex items-center gap-1 developer-credit">
+          <p className="flex items-center gap-1 developer-credit group/credit cursor-default">
             Desenvolvido com 
-            <span className="text-[#E50914] animate-heartbeat inline-block">❤️</span> 
+            <span className="text-[#E50914] inline-block animate-heartbeat transition-all duration-300 group-hover/credit:scale-150 group-hover/credit:drop-shadow-[0_0_8px_rgba(229,9,20,0.8)]">❤️</span> 
             por 
             <a 
               href="https://supremasite.com.br" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-primary-gold font-semibold relative group transition-colors hover:text-[#F59E0B]"
+              className="font-semibold relative group transition-colors animate-text-shimmer"
             >
               Suprema Sites Express
-              <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#F59E0B] transition-all duration-300 group-hover:w-full"></span>
             </a>
           </p>
         </div>

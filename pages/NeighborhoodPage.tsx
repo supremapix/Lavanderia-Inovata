@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { NEIGHBORHOODS, CONTACT } from '../constants';
 import Typewriter from '../components/Typewriter';
-import { MapPin, Check, Phone, ArrowLeft, Star, Shield, Clock, Truck, Sparkles, Footprints, Shirt, Armchair, Baby } from 'lucide-react';
+import { MapPin, Check, Phone, ArrowLeft, Star, Shield, Clock, Truck, Sparkles, Footprints, Shirt, Armchair, Baby, ArrowRight } from 'lucide-react';
 import EnhancedSEO from '../components/EnhancedSEO';
 
 const NeighborhoodPage: React.FC = () => {
@@ -20,9 +20,9 @@ const NeighborhoodPage: React.FC = () => {
 
   const nearbyHoods = NEIGHBORHOODS
     .filter(n => n.city === neighborhood.city && n.id !== neighborhood.id)
-    .slice(0, 10); // Show more nearby hoods
+    .slice(0, 10); 
 
-  // Dynamic Intro Text based on City to feel more local/premium
+  // Dynamic Intro Text
   const getIntroText = () => {
     switch (neighborhood.city) {
       case 'Osasco':
@@ -89,16 +89,15 @@ const NeighborhoodPage: React.FC = () => {
         ]}
       />
 
-      {/* Main container without top padding on main to allow header overlay on breadcrumb */}
       <main className="bg-gray-50 min-h-screen">
-        {/* Breadcrumb with padding top to account for fixed header */}
+        {/* Breadcrumb */}
         <div className="bg-secondary-dark text-white py-4 border-b border-gray-800 pt-28">
           <div className="container mx-auto px-4 text-sm flex items-center gap-2 overflow-x-auto whitespace-nowrap">
             <Link to="/" className="hover:text-primary-gold transition-colors">Home</Link>
             <span className="text-gray-600">/</span>
             <Link to="/#bairros" className="hover:text-primary-gold transition-colors">Bairros Atendidos</Link>
             <span className="text-gray-600">/</span>
-            <Link to={`/#bairros`} className="hover:text-primary-gold transition-colors">{neighborhood.city}</Link>
+            <span className="text-gray-400">{neighborhood.city}</span>
             <span className="text-gray-600">/</span>
             <span className="text-primary-gold font-semibold">{neighborhood.name}</span>
           </div>
@@ -106,13 +105,20 @@ const NeighborhoodPage: React.FC = () => {
 
         {/* Local Hero Premium */}
         <section className="relative bg-secondary-dark py-20 lg:py-28 overflow-hidden">
-           {/* Abstract Background Elements */}
-           <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary-blue/20 to-transparent pointer-events-none"></div>
-           <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary-gold/10 rounded-full blur-3xl pointer-events-none"></div>
-           
+           {/* Background Image with Overlay */}
+           <div className="absolute inset-0 z-0 opacity-40">
+             {/* Use a generic city/delivery or laundry image that fits well behind text */}
+             <img 
+               src="https://images.unsplash.com/photo-1449824913929-2b3a3e3690c0?q=80&w=2070&auto=format&fit=crop" 
+               alt={`Vista aérea ou representativa de ${neighborhood.city}`} 
+               className="w-full h-full object-cover"
+             />
+           </div>
+           <div className="absolute inset-0 bg-gradient-to-r from-secondary-dark via-secondary-dark/95 to-secondary-dark/70 z-0"></div>
+
            <div className="container mx-auto px-4 relative z-10">
               <div className="max-w-4xl mx-auto text-center">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-primary-gold text-sm font-bold mb-6 border border-white/10 backdrop-blur-sm">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-primary-gold text-sm font-bold mb-6 border border-white/10 backdrop-blur-sm animate-pulse-glow">
                   <Truck size={16} /> ATENDIMENTO VIP EM {neighborhood.name.toUpperCase()}
                 </div>
                 
@@ -134,12 +140,9 @@ const NeighborhoodPage: React.FC = () => {
 
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
                   <a href={`https://wa.me/5511921691307?text=Olá! Moro em ${neighborhood.name} e gostaria de agendar uma coleta.`} 
-                     className="flex items-center justify-center gap-3 bg-gradient-gold text-secondary-dark px-8 py-4 rounded-full font-bold text-lg shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] hover:-translate-y-1 transition-all">
+                     className="flex items-center justify-center gap-3 bg-gradient-gold text-secondary-dark px-8 py-4 rounded-full font-bold text-lg shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] hover:-translate-y-1 transition-all btn-premium">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" className="w-6 h-6" />
                     Agendar Coleta no {neighborhood.name}
-                  </a>
-                  <a href="tel:1136831307" className="flex items-center justify-center gap-3 bg-white/5 border border-white/20 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-all">
-                    <Phone size={20} /> (11) 3683-1307
                   </a>
                 </div>
               </div>
@@ -206,7 +209,7 @@ const NeighborhoodPage: React.FC = () => {
                       </p>
                       <ul className="space-y-2 text-sm text-gray-700">
                          <li className="flex items-center gap-2"><Check size={16} className="text-green-500"/> <strong>Materiais:</strong> Camurça, Couro, Lona, Sintético e Tecido.</li>
-                         <li className="flex items-center gap-2"><Check size={16} className="text-green-500"/> <strong>Processo:</strong> Limpeza manual detalhada, higienização interna contra odores e clareamento de solados amarelados.</li>
+                         <li className="flex items-center gap-2"><Check size={16} className="text-green-500"/> <strong>Processo:</strong> Limpeza manual detalhada, higienização interna contra odores.</li>
                       </ul>
                    </div>
                 </div>
@@ -239,25 +242,8 @@ const NeighborhoodPage: React.FC = () => {
                          Renove o ar da sua casa no {neighborhood.name}. Removemos ácaros e poeira profunda de itens de decoração.
                       </p>
                       <ul className="space-y-2 text-sm text-gray-700">
-                         <li className="flex items-center gap-2"><Check size={16} className="text-green-500"/> <strong>Tapetes:</strong> Retirada e entrega inclusa. Secagem em estufa para evitar odores.</li>
-                         <li className="flex items-center gap-2"><Check size={16} className="text-green-500"/> <strong>Cortinas:</strong> Nós retiramos dos trilhos/varões e instalamos de volta para você.</li>
-                      </ul>
-                   </div>
-                </div>
-
-                {/* Baby Detail */}
-                <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-100 flex flex-col md:flex-row gap-6">
-                   <div className="shrink-0 bg-pink-100 p-4 rounded-xl h-fit w-fit text-pink-500">
-                      <Baby size={32} />
-                   </div>
-                   <div>
-                      <h4 className="text-xl font-bold text-gray-800 mb-3">Linha Baby e Infantil</h4>
-                      <p className="text-gray-600 mb-4">
-                         Segurança total para os pequenos. Higienização profunda de carrinhos de bebê, bebê conforto e pelúcias com produtos seguros.
-                      </p>
-                      <ul className="space-y-2 text-sm text-gray-700">
-                         <li className="flex items-center gap-2"><Check size={16} className="text-green-500"/> <strong>Hipoalergênico:</strong> Utilizamos produtos dermatologicamente testados e sem perfumes fortes.</li>
-                         <li className="flex items-center gap-2"><Check size={16} className="text-green-500"/> <strong>Carrinhos:</strong> Desmontagem completa para limpeza de todas as frestas e tecidos.</li>
+                         <li className="flex items-center gap-2"><Check size={16} className="text-green-500"/> <strong>Tapetes:</strong> Retirada e entrega inclusa. Secagem em estufa.</li>
+                         <li className="flex items-center gap-2"><Check size={16} className="text-green-500"/> <strong>Cortinas:</strong> Nós retiramos dos trilhos/varões e instalamos de volta.</li>
                       </ul>
                    </div>
                 </div>
@@ -274,7 +260,7 @@ const NeighborhoodPage: React.FC = () => {
                   <p className="text-blue-100 mb-6 max-w-lg">
                     Para pedidos acima de R$ 50,00, a coleta e entrega são por nossa conta. Aproveite a comodidade de ter a melhor lavanderia da região na porta da sua casa.
                   </p>
-                  <a href={`https://wa.me/5511921691307?text=Quero aproveitar o delivery grátis no ${neighborhood.name}`} className="inline-block bg-white text-primary-blue px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">
+                  <a href={`https://wa.me/5511921691307?text=Quero aproveitar o delivery grátis no ${neighborhood.name}`} className="inline-block bg-white text-primary-blue px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors btn-premium">
                     Solicitar Delivery Agora
                   </a>
                 </div>
@@ -302,12 +288,9 @@ const NeighborhoodPage: React.FC = () => {
                    </div>
                 </div>
 
-                <a href={`https://wa.me/5511921691307`} className="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white py-4 rounded-xl font-bold mb-4 shadow-lg hover:brightness-105 transition-all transform hover:scale-105">
+                <a href={`https://wa.me/5511921691307`} className="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white py-4 rounded-xl font-bold mb-4 shadow-lg hover:brightness-105 transition-all transform hover:scale-105 btn-premium">
                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" className="w-5 h-5" />
                    Chamar no WhatsApp
-                </a>
-                <a href="tel:1136831307" className="flex items-center justify-center gap-2 w-full bg-secondary-dark text-white py-4 rounded-xl font-bold hover:bg-gray-800 transition-all">
-                   <Phone size={18} /> Ligar Agora
                 </a>
               </div>
 
@@ -333,41 +316,17 @@ const NeighborhoodPage: React.FC = () => {
           </div>
         </section>
 
-        {/* FAQ Section specific */}
-        <section className="bg-white py-16 border-t border-gray-100">
-           <div className="container mx-auto px-4 max-w-4xl">
-              <h2 className="text-2xl font-bold text-center mb-10">Dúvidas Comuns de clientes do {neighborhood.name}</h2>
-              <div className="grid gap-4">
-                 <details className="group bg-gray-50 p-4 rounded-xl cursor-pointer">
-                    <summary className="font-bold text-gray-800 list-none flex justify-between items-center">
-                       Vocês buscam e entregam no {neighborhood.name}?
-                       <span className="text-primary-blue group-open:rotate-180 transition-transform">▼</span>
-                    </summary>
-                    <p className="text-gray-600 mt-2 text-sm leading-relaxed">
-                       Sim! O {neighborhood.name} faz parte da nossa rota diária prioritária. Realizamos a coleta e entrega diretamente na sua portaria ou residência.
-                    </p>
-                 </details>
-                 <details className="group bg-gray-50 p-4 rounded-xl cursor-pointer">
-                    <summary className="font-bold text-gray-800 list-none flex justify-between items-center">
-                       Qual o prazo de entrega para o {neighborhood.name}?
-                       <span className="text-primary-blue group-open:rotate-180 transition-transform">▼</span>
-                    </summary>
-                    <p className="text-gray-600 mt-2 text-sm leading-relaxed">
-                       Para serviços de lavanderia do dia a dia (lavar e passar), o prazo padrão é de 24 a 48 horas. Itens especiais como tapetes e cortinas podem levar de 5 a 7 dias para uma secagem perfeita.
-                    </p>
-                 </details>
-                 <details className="group bg-gray-50 p-4 rounded-xl cursor-pointer">
-                    <summary className="font-bold text-gray-800 list-none flex justify-between items-center">
-                       Atendem condomínios no {neighborhood.name}?
-                       <span className="text-primary-blue group-open:rotate-180 transition-transform">▼</span>
-                    </summary>
-                    <p className="text-gray-600 mt-2 text-sm leading-relaxed">
-                       Com certeza. Temos cadastro na maioria dos condomínios da região, facilitando a entrada e saída para retiradas na portaria, mesmo que você não esteja em casa.
-                    </p>
-                 </details>
-              </div>
-           </div>
-        </section>
+        {/* Floating/Sticky Bottom CTA Mobile for conversion */}
+        <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 md:hidden z-30 shadow-[0_-5px_20px_rgba(0,0,0,0.1)] flex justify-between items-center gap-4">
+            <div className="flex flex-col">
+                <span className="text-xs text-gray-500 uppercase font-bold">Atendimento em</span>
+                <span className="text-secondary-dark font-bold leading-tight">{neighborhood.name}</span>
+            </div>
+            <a href="https://wa.me/5511921691307" className="bg-green-500 text-white px-6 py-3 rounded-full font-bold shadow-lg flex items-center gap-2 animate-pulse-glow">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="" className="w-5 h-5" />
+                Chamar
+            </a>
+        </div>
       </main>
     </>
   );

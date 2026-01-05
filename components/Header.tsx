@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Phone } from 'lucide-react';
 import { CONTACT } from '../constants';
 
@@ -7,6 +7,7 @@ const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,17 +17,29 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Function to handle navigation to the Bairros section
+  const handleBairrosClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname === '/') {
+      // If already on home, just scroll
+      document.getElementById('bairros')?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // If on another page, navigate to home with hash
+      navigate('/#bairros');
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Serviços', path: '/servicos' },
     { name: 'Preços', path: '/precos' },
     { name: 'Sobre', path: '/sobre' },
-    { name: 'Bairros', path: '/#bairros' },
+    // Special case for Bairros
+    { name: 'Bairros', path: '/#bairros', isHash: true },
     { name: 'Contato', path: '/contato' },
   ];
 
-  // Logic: Header is transparent ONLY on Home page when at the top.
-  // On all other pages (or when scrolled), it uses the solid dark background.
   const isHome = location.pathname === '/';
   const isTransparent = isHome && !isScrolled;
 
@@ -48,19 +61,30 @@ const Header: React.FC = () => {
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center space-x-6">
           {navLinks.map((link) => (
-            <Link 
-              key={link.name} 
-              to={link.path}
-              className={`text-sm font-medium transition-colors duration-300 hover:text-primary-gold uppercase tracking-wide ${
-                location.pathname === link.path ? 'text-primary-gold underline underline-offset-4 decoration-2' : 'text-white'
-              }`}
-            >
-              {link.name}
-            </Link>
+            link.isHash ? (
+              <a 
+                key={link.name}
+                href="/#bairros"
+                onClick={handleBairrosClick}
+                className="text-sm font-medium text-white transition-colors duration-300 hover:text-primary-gold uppercase tracking-wide cursor-pointer"
+              >
+                {link.name}
+              </a>
+            ) : (
+              <Link 
+                key={link.name} 
+                to={link.path}
+                className={`text-sm font-medium transition-colors duration-300 hover:text-primary-gold uppercase tracking-wide ${
+                  location.pathname === link.path ? 'text-primary-gold underline underline-offset-4 decoration-2' : 'text-white'
+                }`}
+              >
+                {link.name}
+              </Link>
+            )
           ))}
           <a 
             href={`tel:${CONTACT.phone.replace(/\D/g, '')}`}
-            className="flex items-center gap-2 bg-primary-gold text-secondary-dark px-4 py-2 rounded-full font-bold text-sm hover:bg-white transition-colors duration-300"
+            className="flex items-center gap-2 bg-primary-gold text-secondary-dark px-4 py-2 rounded-full font-bold text-sm hover:bg-white transition-colors duration-300 btn-premium"
           >
             <Phone size={16} />
             {CONTACT.phone}
@@ -80,18 +104,29 @@ const Header: React.FC = () => {
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}>
           {navLinks.map((link) => (
-            <Link 
-              key={link.name} 
-              to={link.path}
-              className="text-2xl font-bold text-white hover:text-primary-gold transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              {link.name}
-            </Link>
+             link.isHash ? (
+              <a
+                key={link.name}
+                href="/#bairros"
+                onClick={handleBairrosClick}
+                className="text-2xl font-bold text-white hover:text-primary-gold transition-colors"
+              >
+                {link.name}
+              </a>
+             ) : (
+              <Link 
+                key={link.name} 
+                to={link.path}
+                className="text-2xl font-bold text-white hover:text-primary-gold transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
+             )
           ))}
           <a 
             href={`https://wa.me/${CONTACT.whatsapp}`}
-            className="mt-8 bg-primary-gold text-secondary-dark px-8 py-3 rounded-full font-bold text-lg"
+            className="mt-8 bg-primary-gold text-secondary-dark px-8 py-3 rounded-full font-bold text-lg btn-premium"
           >
             Pedir Orçamento
           </a>

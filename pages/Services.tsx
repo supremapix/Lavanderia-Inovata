@@ -53,7 +53,7 @@ const Services: React.FC = () => {
             </p>
           </div>
 
-          {/* SECTION 1: TÊNIS E CALÇADOS (Expanded) */}
+          {/* SECTION 1: TÊNIS E CALÇADOS */}
           <section className="mb-24 bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
             <div className="grid grid-cols-1 lg:grid-cols-2">
               <div className="p-8 md:p-12 flex flex-col justify-center">
@@ -92,21 +92,21 @@ const Services: React.FC = () => {
                           <span className="text-gray-600 text-sm">Remoção da oxidação (amarelado) das bordas de borracha.</span>
                         </div>
                       </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle className="text-green-500 mt-1 shrink-0" size={20} />
-                        <div>
-                          <strong className="block text-gray-800">Sanitização Interna:</strong>
-                          <span className="text-gray-600 text-sm">Tratamento com ozônio ou bactericidas para eliminar fungos e odores (chulé).</span>
-                        </div>
-                      </li>
                     </ul>
+                  </div>
+                  
+                  <div className="mt-6">
+                    <a href={`https://wa.me/${CONTACT.whatsapp}?text=Quero lavar meus tênis!`} className="inline-block bg-orange-500 text-white px-8 py-3 rounded-full font-bold hover:bg-orange-600 transition-colors btn-premium shadow-lg">
+                       Renovar Meus Tênis Agora
+                    </a>
                   </div>
                 </div>
               </div>
-              <div className="relative h-64 lg:h-auto bg-gray-100">
+              <div className="relative h-96 lg:h-auto bg-gray-100">
+                {/* Image: Close up of sneakers being cleaned or clean sneakers */}
                 <img 
-                  src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=1000&auto=format&fit=crop" 
-                  alt="Limpeza de Tênis Profissional" 
+                  src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=1974&auto=format&fit=crop" 
+                  alt="Tênis limpos e renovados - Lavanderia de Tênis" 
                   className="absolute inset-0 w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent flex items-end p-8">
@@ -116,13 +116,14 @@ const Services: React.FC = () => {
             </div>
           </section>
 
-          {/* SECTION 2: ROUPAS E TÊXTEIS (Expanded) */}
+          {/* SECTION 2: ROUPAS E TÊXTEIS */}
           <section className="mb-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                <div className="order-2 lg:order-1 relative rounded-3xl overflow-hidden shadow-2xl h-[500px]">
+                 {/* Image: Ironing or stack of folded shirts */}
                  <img 
-                   src="https://images.unsplash.com/photo-1489274495757-95c7c8370a31?q=80&w=1000&auto=format&fit=crop" 
-                   alt="Roupas bem passadas" 
+                   src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?q=80&w=2070&auto=format&fit=crop" 
+                   alt="Roupas sendo passadas a ferro com perfeição" 
                    className="absolute inset-0 w-full h-full object-cover"
                  />
                  <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-lg max-w-xs">
@@ -154,29 +155,20 @@ const Services: React.FC = () => {
                      <h4 className="font-bold text-secondary-dark mb-2 flex items-center gap-2">
                        <Sparkles size={18} className="text-yellow-500"/> Tira-Manchas
                      </h4>
-                     <p className="text-sm text-gray-600">Pré-tratamento artesanal de colarinhos, punhos e manchas específicas (vinho, gordura, etc).</p>
+                     <p className="text-sm text-gray-600">Pré-tratamento artesanal de colarinhos, punhos e manchas específicas.</p>
                    </div>
                  </div>
 
-                 <div className="bg-gray-100 p-6 rounded-2xl">
-                   <h3 className="font-bold text-lg mb-4">Por que escolher a Inovata?</h3>
-                   <ul className="space-y-3">
-                     <li className="flex items-center gap-2 text-gray-700">
-                       <CheckCircle size={16} className="text-primary-blue"/> Passadoria impecável (alisamento das fibras).
-                     </li>
-                     <li className="flex items-center gap-2 text-gray-700">
-                       <CheckCircle size={16} className="text-primary-blue"/> Embalagem individual para proteção no transporte.
-                     </li>
-                     <li className="flex items-center gap-2 text-gray-700">
-                       <CheckCircle size={16} className="text-primary-blue"/> Produtos biodegradáveis de alta performance.
-                     </li>
-                   </ul>
-                 </div>
+                 <div className="mt-8">
+                     <a href={`https://wa.me/${CONTACT.whatsapp}?text=Preciso lavar e passar minhas roupas.`} className="inline-block bg-primary-blue text-white px-8 py-3 rounded-full font-bold hover:bg-blue-800 transition-colors btn-premium shadow-lg">
+                        Agendar Coleta de Roupas
+                     </a>
+                  </div>
                </div>
             </div>
           </section>
 
-          {/* SECTION 3: TAPETES E CORTINAS (Expanded) */}
+          {/* SECTION 3: TAPETES E CORTINAS */}
           <section className="mb-24 bg-secondary-dark rounded-3xl overflow-hidden text-white relative">
              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
              <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -195,53 +187,37 @@ const Services: React.FC = () => {
                         <ul className="space-y-3 text-gray-300">
                           <li className="flex items-start gap-3">
                             <span className="bg-white/10 p-1 rounded mt-1"><CheckCircle size={14}/></span>
-                            <span><strong>1. Remoção de Poeira (Batimento Mecânico):</strong> Antes de molhar, utilizamos equipamento de vibração mecânica para remover terra e poeira profunda que a aspiração comum não alcança.</span>
+                            <span><strong>1. Remoção de Poeira:</strong> Batimento mecânico para remover terra profunda.</span>
                           </li>
                           <li className="flex items-start gap-3">
                             <span className="bg-white/10 p-1 rounded mt-1"><CheckCircle size={14}/></span>
-                            <span><strong>2. Lavagem Bactericida:</strong> Imersão e escovação rotativa com produtos que eliminam ácaros, odores de urina e bactérias.</span>
+                            <span><strong>2. Lavagem Bactericida:</strong> Imersão e escovação rotativa.</span>
                           </li>
                           <li className="flex items-start gap-3">
                             <span className="bg-white/10 p-1 rounded mt-1"><CheckCircle size={14}/></span>
-                            <span><strong>3. Centrifugação:</strong> Retirada de 90% da água para acelerar o processo.</span>
-                          </li>
-                          <li className="flex items-start gap-3">
-                            <span className="bg-white/10 p-1 rounded mt-1"><CheckCircle size={14}/></span>
-                            <span><strong>4. Secagem em Estufa Controlada:</strong> Secagem final em ambiente climatizado para garantir a evaporação total da umidade, prevenindo odores ("cheiro de cachorro molhado") e preservando a integridade das fibras.</span>
-                          </li>
-                          <li className="flex items-start gap-3">
-                            <span className="bg-white/10 p-1 rounded mt-1"><CheckCircle size={14}/></span>
-                            <span><strong>5. Acabamento:</strong> Penteamento de franjas e embalagem protetora.</span>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div>
-                        <h3 className="text-2xl font-bold text-primary-gold mb-4">Cortinas</h3>
-                        <ul className="space-y-3 text-gray-300">
-                          <li className="flex items-start gap-3">
-                            <span className="bg-white/10 p-1 rounded mt-1"><CheckCircle size={14}/></span>
-                            <span><strong>Serviço Completo:</strong> Nós retiramos as cortinas nos trilhos/varões e reinstalamos após a limpeza.</span>
-                          </li>
-                          <li className="flex items-start gap-3">
-                            <span className="bg-white/10 p-1 rounded mt-1"><CheckCircle size={14}/></span>
-                            <span><strong>Cuidado com o Tecido:</strong> Tratamento para linho, seda, voil e blackouts emborrachados sem danificar.</span>
+                            <span><strong>3. Secagem em Estufa:</strong> Previne odores e preserva as fibras.</span>
                           </li>
                         </ul>
                       </div>
                    </div>
+                   <div className="mt-8">
+                     <a href={`https://wa.me/${CONTACT.whatsapp}?text=Orçamento para tapetes e cortinas`} className="inline-block bg-teal-600 text-white px-8 py-3 rounded-full font-bold hover:bg-teal-700 transition-colors btn-premium shadow-lg">
+                        Limpar Meus Tapetes
+                     </a>
+                  </div>
                 </div>
-                <div className="relative h-64 lg:h-auto">
+                <div className="relative h-96 lg:h-auto">
+                   {/* Image: Living room with clean rug or curtain */}
                    <img 
-                    src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1000&auto=format&fit=crop" 
-                    alt="Tapete sendo limpo com equipamento profissional" 
-                    className="absolute inset-0 w-full h-full object-cover opacity-80"
+                    src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?q=80&w=2070&auto=format&fit=crop" 
+                    alt="Sala de estar limpa com tapete higienizado" 
+                    className="absolute inset-0 w-full h-full object-cover opacity-90"
                    />
                 </div>
              </div>
           </section>
 
-          {/* SECTION 4: BABY E INFANTIL (Expanded) */}
+          {/* SECTION 4: BABY E INFANTIL */}
           <section className="mb-20">
             <div className="bg-gradient-to-br from-pink-50 to-white rounded-3xl p-8 md:p-12 border border-pink-100 shadow-lg">
                <div className="flex flex-col md:flex-row gap-12">
@@ -259,24 +235,29 @@ const Services: React.FC = () => {
                       <p className="text-gray-600 text-sm mb-4">
                         Desmontamos todas as partes removíveis para higienização completa. Realizamos lavagem por extração no estofado fixo para remover restos de leite, comida e sujeira.
                       </p>
-                      <div className="flex items-center gap-4 text-sm font-medium text-gray-500">
-                        <span className="flex items-center gap-1"><Clock size={16}/> Prazo: 3 a 5 dias</span>
-                        <span className="flex items-center gap-1"><ShieldCheck size={16}/> Higienização 100%</span>
-                      </div>
                     </div>
-
-                    <div className="bg-white p-6 rounded-2xl shadow-sm">
-                      <h3 className="font-bold text-lg text-pink-600 mb-3">Pelúcias e Enxoval</h3>
-                      <p className="text-gray-600 text-sm">
-                        Lavagem técnica de ursinhos de pelúcia para eliminar ácaros sem deformar o enchimento. Tratamento especial para mantas e roupinhas delicadas.
-                      </p>
+                    
+                    <div>
+                        <a href={`https://wa.me/${CONTACT.whatsapp}?text=Preciso higienizar o carrinho do bebê.`} className="inline-block bg-pink-500 text-white px-8 py-3 rounded-full font-bold hover:bg-pink-600 transition-colors btn-premium shadow-lg">
+                           Higienizar Carrinho de Bebê
+                        </a>
                     </div>
                   </div>
 
-                  <div className="md:w-1/2 flex flex-col justify-center">
-                     <div className="grid grid-cols-2 gap-4">
-                        <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?q=80&w=500&auto=format&fit=crop" className="rounded-2xl shadow-md hover:scale-105 transition-transform duration-500" alt="Bebê Conforto Limpo"/>
-                        <img src="https://images.unsplash.com/photo-1559454403-b8fb87521bc5?q=80&w=500&auto=format&fit=crop" className="rounded-2xl shadow-md hover:scale-105 transition-transform duration-500 translate-y-8" alt="Ursinho de Pelúcia"/>
+                  <div className="md:w-1/2 flex flex-col justify-center items-center">
+                     <div className="grid grid-cols-2 gap-4 w-full">
+                        {/* Image: Baby Stroller */}
+                        <img 
+                           src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=1770&auto=format&fit=crop" 
+                           className="rounded-2xl shadow-md hover:scale-105 transition-transform duration-500 w-full h-48 object-cover" 
+                           alt="Carrinho de Bebê Higienizado"
+                        />
+                        {/* Image: Plush Toy */}
+                        <img 
+                           src="https://images.unsplash.com/photo-1559454403-b8fb87521bc5?q=80&w=500&auto=format&fit=crop" 
+                           className="rounded-2xl shadow-md hover:scale-105 transition-transform duration-500 translate-y-8 w-full h-48 object-cover" 
+                           alt="Ursinho de Pelúcia Limpo"
+                        />
                      </div>
                      <div className="mt-12 text-center">
                         <p className="font-heading font-bold text-2xl text-pink-400">"Cuidado de mãe,<br/>profissionalismo Inovata."</p>
@@ -290,7 +271,7 @@ const Services: React.FC = () => {
           <div className="text-center mt-12">
             <a 
               href={`https://wa.me/${CONTACT.whatsapp}?text=Gostaria de saber mais sobre os serviços de lavanderia.`} 
-              className="inline-block bg-primary-gold text-secondary-dark px-10 py-5 rounded-full font-bold text-xl shadow-xl hover:bg-secondary-dark hover:text-primary-gold transition-all transform hover:-translate-y-1"
+              className="inline-block bg-primary-gold text-secondary-dark px-10 py-5 rounded-full font-bold text-xl shadow-xl hover:bg-secondary-dark hover:text-primary-gold transition-all transform hover:-translate-y-1 btn-premium"
             >
               Solicitar Orçamento Agora
             </a>

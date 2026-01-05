@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Typewriter from '../components/Typewriter';
 import { NEIGHBORHOODS, SERVICES_DATA, HOME_TYPEWRITER_TEXTS, CONTACT } from '../constants';
 import { ArrowRight, CheckCircle, MapPin } from 'lucide-react';
@@ -7,21 +7,34 @@ import EnhancedSEO from '../components/EnhancedSEO';
 
 const Home: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    // Handle scrolling to hash if present in URL
+    if (location.hash === '#bairros') {
+       setTimeout(() => {
+         document.getElementById('bairros')?.scrollIntoView({ behavior: 'smooth' });
+       }, 100);
+    }
+  }, [location]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('opacity-100', 'translate-y-0');
-            entry.target.classList.remove('opacity-0', 'translate-y-10');
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.1 }
+      { 
+        threshold: 0.1,
+        rootMargin: '50px'
+      }
     );
 
-    const elements = document.querySelectorAll('.animate-on-scroll');
+    const elements = document.querySelectorAll('.fade-up');
     elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
@@ -31,7 +44,7 @@ const Home: React.FC = () => {
     "@context": "https://schema.org",
     "@type": "LaundryService",
     "name": "Lavanderia Inovata",
-    "image": "https://images.unsplash.com/photo-1521656693072-a8333f629688",
+    "image": "https://images.unsplash.com/photo-1545173168-9f1947eebb8f?q=80&w=2071&auto=format&fit=crop",
     "@id": "https://lavanderiainovata.vercel.app",
     "url": "https://lavanderiainovata.vercel.app",
     "telephone": CONTACT.phone,
@@ -84,9 +97,10 @@ const Home: React.FC = () => {
         <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
           {/* Background with overlay */}
           <div className="absolute inset-0 z-0">
+            {/* Image: Professional Laundry/Clean Clothes Stack */}
             <img 
-              src="https://images.unsplash.com/photo-1521656693072-a8333f629688?q=80&w=2070&auto=format&fit=crop" 
-              alt="Lavanderia Background" 
+              src="https://images.unsplash.com/photo-1545173168-9f1947eebb8f?q=80&w=2071&auto=format&fit=crop" 
+              alt="Pilha de roupas limpas e passadas - Lavanderia Profissional" 
               className="w-full h-full object-cover animate-pulse-slow" 
             />
             <div className="absolute inset-0 bg-gradient-hero"></div>
@@ -99,7 +113,7 @@ const Home: React.FC = () => {
              <div className="absolute bottom-1/4 left-1/3 w-3 h-3 bg-primary-gold rounded-full opacity-30 animate-float" style={{ animationDelay: '2s' }}></div>
           </div>
 
-          <div className="container mx-auto px-4 z-10 text-center text-white mt-16">
+          <div className="container mx-auto px-4 z-10 text-center text-white mt-16 fade-up">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-heading font-black mb-6 leading-tight min-h-[120px] md:min-h-[160px]">
               <Typewriter texts={HOME_TYPEWRITER_TEXTS} />
             </h1>
@@ -115,19 +129,18 @@ const Home: React.FC = () => {
                 href="https://wa.me/5511921691307?text=Olá! Gostaria de um orçamento para lavanderia." 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full md:w-auto bg-gradient-gold text-secondary-dark px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-primary-gold/50 transform hover:scale-105 transition-all duration-300 animate-pulse-glow"
+                className="w-full md:w-auto bg-gradient-gold text-secondary-dark px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-primary-gold/50 transform hover:scale-105 transition-all duration-300 animate-pulse-glow btn-premium"
               >
                 💬 ORÇAMENTO RÁPIDO
               </a>
-              <Link 
-                to="/#bairros"
+              <button
                 onClick={() => {
                    document.getElementById('bairros')?.scrollIntoView({ behavior: 'smooth' });
                 }}
                 className="w-full md:w-auto border-2 border-white/30 hover:border-white bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:bg-white/20"
               >
                 📍 VER ÁREA DE ATENDIMENTO
-              </Link>
+              </button>
             </div>
 
             {/* Floating Badges */}
@@ -144,7 +157,7 @@ const Home: React.FC = () => {
         {/* SERVICES SECTION */}
         <section id="servicos" className="py-20 bg-secondary-dark relative">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16 animate-on-scroll opacity-0 translate-y-10 transition-all duration-1000">
+            <div className="text-center mb-16 fade-up">
               <h2 className="text-primary-gold text-lg font-bold uppercase tracking-wider mb-2">Nossos Serviços</h2>
               <h3 className="text-3xl md:text-4xl font-heading font-bold text-white">Muito Mais Que Só Roupas</h3>
               <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
@@ -156,8 +169,8 @@ const Home: React.FC = () => {
               {SERVICES_DATA.map((service, idx) => (
                 <div 
                   key={service.id} 
-                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500 hover:-translate-y-3 group animate-on-scroll opacity-0 translate-y-10"
-                  style={{ transitionDelay: `${idx * 100}ms` }}
+                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500 hover:-translate-y-3 group fade-up"
+                  style={{ transitionDelay: `${idx * 150}ms` }}
                 >
                   <div className="mb-6 transform group-hover:rotate-[360deg] transition-transform duration-700 ease-in-out inline-block">
                     {service.icon}
@@ -178,7 +191,7 @@ const Home: React.FC = () => {
               ))}
             </div>
             
-            <div className="text-center">
+            <div className="text-center fade-up" style={{ transitionDelay: '600ms' }}>
               <Link to="/servicos" className="inline-flex items-center gap-2 text-white hover:text-primary-gold font-bold transition-colors">
                 Ver todos os serviços e detalhes <ArrowRight size={20} />
               </Link>
@@ -189,14 +202,14 @@ const Home: React.FC = () => {
         {/* HOW IT WORKS */}
         <section className="py-20 bg-gray-50 overflow-hidden">
           <div className="container mx-auto px-4">
-             <div className="text-center mb-16 animate-on-scroll opacity-0 translate-y-10 transition-all duration-1000">
+             <div className="text-center mb-16 fade-up">
               <h2 className="text-primary-blue text-lg font-bold uppercase tracking-wider mb-2">Como Funciona</h2>
               <h3 className="text-3xl md:text-4xl font-heading font-bold text-secondary-dark">Lavanderia sem sair de casa</h3>
             </div>
 
             <div className="relative">
               {/* Line Connector (Desktop) */}
-              <div className="hidden md:block absolute top-12 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-gold to-transparent opacity-30"></div>
+              <div className="hidden md:block absolute top-12 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-gold to-transparent opacity-30 fade-up"></div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
                 {[
@@ -204,7 +217,7 @@ const Home: React.FC = () => {
                   { step: 2, title: 'COLETAMOS', desc: 'Buscamos em sua casa (ou realizamos o serviço in-loco para estofados).', icon: '🚚' },
                   { step: 3, title: 'ENTREGAMOS', desc: 'Receba tudo limpo e higienizado em até 48h.', icon: '✨' },
                 ].map((item, idx) => (
-                   <div key={item.step} className="text-center animate-on-scroll opacity-0 translate-y-10 transition-all duration-1000" style={{ transitionDelay: `${idx * 200}ms` }}>
+                   <div key={item.step} className="text-center fade-up" style={{ transitionDelay: `${idx * 250}ms` }}>
                       <div className="w-24 h-24 mx-auto bg-gradient-primary rounded-full flex items-center justify-center text-4xl shadow-xl mb-6 relative group">
                         <span className="group-hover:scale-110 transition-transform duration-300 block">{item.icon}</span>
                         <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary-gold rounded-full flex items-center justify-center text-secondary-dark font-bold text-sm">
@@ -223,17 +236,19 @@ const Home: React.FC = () => {
         {/* NEIGHBORHOODS */}
         <section id="bairros" className="py-20 bg-white" ref={scrollRef}>
           <div className="container mx-auto px-4">
-             <div className="text-center mb-16 animate-on-scroll opacity-0 translate-y-10 transition-all duration-1000">
+             <div className="text-center mb-16 fade-up">
               <h2 className="text-primary-blue text-lg font-bold uppercase tracking-wider mb-2">Área de Atendimento</h2>
               <h3 className="text-3xl md:text-4xl font-heading font-bold text-secondary-dark">Atendemos Osasco e Região (Raio 15km)</h3>
               <p className="mt-4 text-gray-500">Confira se atendemos sua região na lista abaixo:</p>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-              {NEIGHBORHOODS.map((hood) => (
-                <div 
+              {NEIGHBORHOODS.map((hood, idx) => (
+                <Link 
+                  to={`/lavanderia-${hood.slug}`}
                   key={hood.id} 
-                  className="group flex items-center gap-3 p-3 rounded-xl border border-gray-100 bg-white hover:border-primary-blue hover:shadow-lg hover:-translate-y-1 hover:scale-105 transition-all duration-300 cursor-default"
+                  className="group flex items-center gap-3 p-3 rounded-xl border border-gray-100 bg-white hover:border-primary-blue hover:shadow-lg hover:-translate-y-1 hover:scale-105 transition-all duration-300 cursor-pointer fade-up"
+                  style={{ transitionDelay: `${(idx % 10) * 50}ms` }}
                 >
                   <div className="p-2 rounded-full bg-blue-50 group-hover:bg-primary-blue transition-colors duration-300">
                     <MapPin size={18} className="text-primary-blue group-hover:text-white transition-colors duration-300" />
@@ -242,7 +257,7 @@ const Home: React.FC = () => {
                     <span className="text-sm font-bold text-gray-700 group-hover:text-primary-blue transition-colors">{hood.name}</span>
                     <span className="text-[10px] uppercase text-gray-400 font-bold">{hood.city}</span>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -251,7 +266,7 @@ const Home: React.FC = () => {
         {/* CTA FINAL */}
         <section className="py-24 bg-gradient-primary relative overflow-hidden">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-          <div className="container mx-auto px-4 relative z-10 text-center">
+          <div className="container mx-auto px-4 relative z-10 text-center fade-up">
             <h2 className="text-3xl md:text-5xl font-heading font-black text-white mb-8">
               Deixe o trabalho pesado com a gente!
             </h2>
@@ -261,7 +276,7 @@ const Home: React.FC = () => {
             <div className="flex flex-col sm:flex-row justify-center gap-6">
               <a 
                 href="https://wa.me/5511921691307?text=Quero lavar meus tênis e roupas!" 
-                className="bg-white text-primary-blue px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-gray-100 transition-colors flex items-center justify-center gap-2"
+                className="bg-white text-primary-blue px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-gray-100 transition-colors flex items-center justify-center gap-2 btn-premium"
               >
                 Solicitar Coleta Agora
                 <ArrowRight size={20} />

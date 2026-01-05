@@ -85,7 +85,18 @@ export const SERVICES_DATA: any[] = [
 
 export const HOME_TYPEWRITER_TEXTS = [
   "Lavanderia Completa em Osasco",
-  "Lavamos Tênis, Tapetes e Sofás",
-  "Especialistas em Carrinhos de Bebê",
-  "Delivery em Até 24 Horas"
+  "Delivery Grátis acima de R$250",
+  "Seus Tênis Novos de Novo",
+  "Higienização de Sofás e Estofados",
+  "Limpeza Profunda de Tapetes",
+  "Cortinas Limpas e Sem Ácaros",
+  "Cuidado Especial com Roupas Finas",
+  "Higienização de Carrinhos de Bebê",
+  "Lavagem de Ursinhos de Pelúcia",
+  "Edredons e Cobertores Cheirosos",
+  "Ternos e Vestidos de Festa",
+  "Remoção de Manchas Difíceis",
+  "Secagem e Passadoria Impecável",
+  "Buscamos e Entregamos na Sua Casa",
+  "Qualidade Premium que Você Merece"
 ];

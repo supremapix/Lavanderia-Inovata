@@ -1,13 +1,32 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Typewriter from '../components/Typewriter';
 import { NEIGHBORHOODS, SERVICES_DATA, HOME_TYPEWRITER_TEXTS, CONTACT } from '../constants';
 import { ArrowRight, CheckCircle, MapPin } from 'lucide-react';
 import EnhancedSEO from '../components/EnhancedSEO';
 
+// High-quality images for the slider representing different services
+const HERO_IMAGES = [
+  "https://images.unsplash.com/photo-1545173168-9f1947eebb8f?q=80&w=2071&auto=format&fit=crop", // Laundry/Clothes
+  "https://images.unsplash.com/photo-1605622325376-78809e3cc26a?q=80&w=2070&auto=format&fit=crop", // Sneakers (clean aesthetic)
+  "https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?q=80&w=2070&auto=format&fit=crop", // Sofa/Upholstery
+  "https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=2070&auto=format&fit=crop", // Stroller/Baby
+  "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?q=80&w=2070&auto=format&fit=crop"  // Rugs/Curtains/Home
+];
+
 const Home: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Background Slider Logic
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % HERO_IMAGES.length);
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     // Handle scrolling to hash if present in URL
@@ -93,35 +112,47 @@ const Home: React.FC = () => {
       />
 
       <main className="overflow-x-hidden">
-        {/* HERO SECTION */}
+        {/* HERO SECTION WITH PREMIUM SLIDER */}
         <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-          {/* Background with overlay */}
+          
+          {/* Background Slider */}
           <div className="absolute inset-0 z-0">
-            {/* Image: Professional Laundry/Clean Clothes Stack */}
-            <img 
-              src="https://images.unsplash.com/photo-1545173168-9f1947eebb8f?q=80&w=2071&auto=format&fit=crop" 
-              alt="Pilha de roupas limpas e passadas - Lavanderia Profissional" 
-              className="w-full h-full object-cover animate-pulse-slow" 
-            />
-            <div className="absolute inset-0 bg-gradient-hero"></div>
+            {HERO_IMAGES.map((img, index) => (
+              <div 
+                key={index}
+                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                  index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <img 
+                  src={img} 
+                  alt={`Lavanderia Inovata - Serviço Premium ${index + 1}`} 
+                  className="w-full h-full object-cover transform scale-105 animate-pulse-slow" 
+                  style={{ animationDuration: '10s' }}
+                />
+              </div>
+            ))}
+            {/* Gradient Overlay for Text Readability */}
+            <div className="absolute inset-0 bg-gradient-hero z-10"></div>
           </div>
           
           {/* Particles */}
-          <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0 z-10 pointer-events-none">
              <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-blue-400 rounded-full opacity-30 animate-float" style={{ animationDelay: '0s' }}></div>
              <div className="absolute top-1/3 right-1/4 w-6 h-6 bg-white rounded-full opacity-20 animate-float" style={{ animationDelay: '1s' }}></div>
              <div className="absolute bottom-1/4 left-1/3 w-3 h-3 bg-primary-gold rounded-full opacity-30 animate-float" style={{ animationDelay: '2s' }}></div>
           </div>
 
-          <div className="container mx-auto px-4 z-10 text-center text-white mt-16 fade-up">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-heading font-black mb-6 leading-tight min-h-[120px] md:min-h-[160px]">
+          <div className="container mx-auto px-4 z-20 text-center text-white mt-16 fade-up">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-heading font-black mb-6 leading-tight min-h-[120px] md:min-h-[160px] drop-shadow-lg">
               <Typewriter texts={HOME_TYPEWRITER_TEXTS} />
             </h1>
             
-            <div className="flex flex-wrap justify-center gap-4 text-sm md:text-lg mb-10 text-gray-200">
-              <span className="flex items-center gap-2"><span className="text-primary-gold">🧺</span> Roupas • Tênis • Estofados</span>
-              <span className="hidden md:inline">•</span>
-              <span className="flex items-center gap-2"><span className="text-primary-gold">⭐</span> Tapetes • Cortinas • Carrinhos de Bebê</span>
+            <div className="flex flex-wrap justify-center gap-4 text-sm md:text-lg mb-10 text-gray-100 font-medium drop-shadow-md">
+              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20"><span className="text-primary-gold">🧺</span> Roupas & Tênis</span>
+              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20"><span className="text-primary-gold">🛋️</span> Sofás & Estofados</span>
+              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20"><span className="text-primary-gold">⭐</span> Tapetes & Cortinas</span>
+              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20"><span className="text-primary-gold">👶</span> Carrinhos & Ursinhos</span>
             </div>
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-6">
@@ -146,7 +177,7 @@ const Home: React.FC = () => {
             {/* Floating Badges */}
             <div className="hidden lg:flex absolute bottom-10 left-0 right-0 justify-center gap-8">
                {['✅ Delivery Grátis acima de R$250', '👟 Especialista em Tênis', '🛋️ Higienização de Estofados', '🏆 Qualidade Premium'].map((badge, idx) => (
-                 <div key={idx} className="bg-white/10 backdrop-blur-md px-6 py-2 rounded-full border border-white/20 text-sm font-medium animate-float" style={{ animationDelay: `${idx * 0.5}s` }}>
+                 <div key={idx} className="bg-white/10 backdrop-blur-md px-6 py-2 rounded-full border border-white/20 text-sm font-medium animate-float shadow-lg" style={{ animationDelay: `${idx * 0.5}s` }}>
                    {badge}
                  </div>
                ))}

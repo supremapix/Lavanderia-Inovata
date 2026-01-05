@@ -245,7 +245,7 @@ const Home: React.FC = () => {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {NEIGHBORHOODS.map((hood, idx) => (
                 <Link 
-                  to={`/lavanderia-${hood.slug}`}
+                  to={`/lavanderia/${hood.slug}`}
                   key={hood.id} 
                   className="group flex items-center gap-3 p-3 rounded-xl border border-gray-100 bg-white hover:border-primary-blue hover:shadow-lg hover:-translate-y-1 hover:scale-105 transition-all duration-300 cursor-pointer fade-up"
                   style={{ transitionDelay: `${(idx % 10) * 50}ms` }}

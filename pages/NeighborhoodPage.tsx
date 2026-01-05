@@ -85,7 +85,7 @@ const NeighborhoodPage: React.FC = () => {
         breadcrumbs={[
           { name: 'Home', item: '/' },
           { name: 'Bairros', item: '/#bairros' },
-          { name: neighborhood.name, item: `/lavanderia-${neighborhood.slug}` }
+          { name: neighborhood.name, item: `/lavanderia/${neighborhood.slug}` }
         ]}
       />
 
@@ -303,7 +303,7 @@ const NeighborhoodPage: React.FC = () => {
                 <ul className="space-y-3">
                   {nearbyHoods.map(hood => (
                     <li key={hood.id}>
-                      <Link to={`/lavanderia-${hood.slug}`} className="group flex items-center justify-between text-gray-600 hover:text-primary-blue text-sm transition-colors p-2 rounded-lg hover:bg-white">
+                      <Link to={`/lavanderia/${hood.slug}`} className="group flex items-center justify-between text-gray-600 hover:text-primary-blue text-sm transition-colors p-2 rounded-lg hover:bg-white">
                         <span>{hood.name}</span>
                         <ArrowLeft size={14} className="rotate-180 opacity-0 group-hover:opacity-100 transition-opacity" />
                       </Link>

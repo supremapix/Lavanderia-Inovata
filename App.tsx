@@ -25,7 +25,8 @@ const App: React.FC = () => {
             <Route path="/precos" element={<Prices />} />
             <Route path="/sobre" element={<About />} />
             <Route path="/contato" element={<Contact />} />
-            <Route path="/lavanderia-:slug" element={<NeighborhoodPage />} />
+            {/* Updated route path to standard segment parameter to ensure matching */}
+            <Route path="/lavanderia/:slug" element={<NeighborhoodPage />} />
           </Routes>
           <Footer />
           <WhatsAppButton />

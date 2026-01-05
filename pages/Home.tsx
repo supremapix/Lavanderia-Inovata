@@ -298,9 +298,24 @@ const Home: React.FC = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
                 {[
-                  { step: 1, title: 'SOLICITE', desc: 'Agende a coleta de suas roupas, tênis, tapetes ou estofados.', icon: '📱' },
-                  { step: 2, title: 'COLETAMOS', desc: 'Buscamos em sua casa (ou realizamos o serviço in-loco para estofados).', icon: '🚚' },
-                  { step: 3, title: 'ENTREGAMOS', desc: 'Receba tudo limpo e higienizado em até 48h.', icon: '✨' },
+                  { 
+                    step: 1, 
+                    title: 'SOLICITE', 
+                    desc: 'Entre em contato pelo nosso WhatsApp ou telefone. Nossa equipe fará um orçamento personalizado na hora e agendará a retirada no melhor horário para sua rotina.', 
+                    icon: '📱' 
+                  },
+                  { 
+                    step: 2, 
+                    title: 'COLETAMOS', 
+                    desc: 'Buscamos suas peças em casa com total segurança. Fazemos o check-in detalhado dos itens e, para estofados, nossa equipe especializada vai até você com equipamentos de ponta.', 
+                    icon: '🚚' 
+                  },
+                  { 
+                    step: 3, 
+                    title: 'ENTREGAMOS', 
+                    desc: 'Receba tudo limpo, passado e embalado em até 48 horas*. Suas roupas voltam macias, cheirosas e prontas para uso, com a qualidade que só a Inovata oferece.', 
+                    icon: '✨' 
+                  },
                 ].map((item, idx) => (
                    <div key={item.step} className="text-center fade-up" style={{ transitionDelay: `${idx * 250}ms` }}>
                       <div className="w-24 h-24 mx-auto bg-gradient-primary rounded-full flex items-center justify-center text-4xl shadow-xl mb-6 relative group">
@@ -310,7 +325,7 @@ const Home: React.FC = () => {
                         </div>
                       </div>
                       <h4 className="text-xl font-bold text-secondary-dark mb-2 font-heading">{item.title}</h4>
-                      <p className="text-gray-600 max-w-xs mx-auto">{item.desc}</p>
+                      <p className="text-gray-600 max-w-sm mx-auto leading-relaxed">{item.desc}</p>
                    </div>
                 ))}
               </div>

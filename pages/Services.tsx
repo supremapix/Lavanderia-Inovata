@@ -263,9 +263,9 @@ const Services: React.FC = () => {
                            className="rounded-2xl shadow-md hover:scale-105 transition-transform duration-500 w-full h-48 object-cover" 
                            alt="Carrinho de Bebê Higienizado"
                         />
-                        {/* Image: Plush Toy */}
+                        {/* Image: Plush Toy - Fixed Broken Link */}
                         <img 
-                           src="https://images.unsplash.com/photo-1559454403-b8fb87521bc5?q=80&w=500&auto=format&fit=crop" 
+                           src="https://images.unsplash.com/photo-1555445054-d98c281e57c8?q=80&w=500&auto=format&fit=crop" 
                            className="rounded-2xl shadow-md hover:scale-105 transition-transform duration-500 translate-y-8 w-full h-48 object-cover" 
                            alt="Ursinho de Pelúcia Limpo"
                         />

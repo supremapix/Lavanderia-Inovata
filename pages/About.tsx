@@ -86,8 +86,8 @@ const About: React.FC = () => {
                {/* Image Container */}
                <div className="relative z-10 rounded-[2rem] overflow-hidden shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] border-8 border-white transform transition-all duration-700 hover:rotate-1 hover:scale-[1.01]">
                  <img 
-                   src="/fachada-inovata.jpg" 
-                   alt="Fachada Moderna da Lavanderia Inovata em Osasco" 
+                   src="/fachada-loja.jpg" 
+                   alt="Fachada Moderna da Lavanderia Inovata em Osasco com Veículo de Entrega" 
                    className="w-full h-full object-cover min-h-[400px] transform transition-transform duration-1000 group-hover:scale-110"
                    onError={(e) => {
                      // Fallback image if user hasn't placed the specific file yet

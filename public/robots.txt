@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.lavanderiainovata.com.br/sitemap.xml

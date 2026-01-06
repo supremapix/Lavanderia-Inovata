@@ -18,12 +18,13 @@ function getRoutesFromSitemap() {
   }
 
   const sitemapContent = fs.readFileSync(sitemapPath, 'utf-8');
-  const regex = /<loc>(.*?)<\/loc>/g;
+  // Updated regex to handle multi-line tags and whitespace
+  const regex = /<loc>([\s\S]*?)<\/loc>/g;
   const routes = [];
   let match;
 
   while ((match = regex.exec(sitemapContent)) !== null) {
-    const fullUrl = match[1];
+    const fullUrl = match[1].trim();
     try {
       const urlObj = new URL(fullUrl);
       if (!urlObj.hash) {

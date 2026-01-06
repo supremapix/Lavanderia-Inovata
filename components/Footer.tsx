@@ -79,7 +79,7 @@ const Footer: React.FC = () => {
         {/* Divider */}
         <div className="border-t border-gray-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
           <p className="mb-4 md:mb-0">
-            © {new Date().getFullYear()} Lavanderia Inovata - CNPJ: {CONTACT.cnpj} | Todos os direitos reservados
+            © <span suppressHydrationWarning>{new Date().getFullYear()}</span> Lavanderia Inovata - CNPJ: {CONTACT.cnpj} | Todos os direitos reservados
           </p>
           
           <p className="flex items-center gap-1 developer-credit group/credit cursor-default">

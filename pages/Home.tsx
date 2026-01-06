@@ -251,6 +251,7 @@ const Home: React.FC = () => {
                   alt={`Lavanderia Inovata - Serviço Profissional ${index + 1}`} 
                   className="w-full h-full object-cover transform scale-105 animate-pulse-slow" 
                   style={{ animationDuration: '10s' }}
+                  suppressHydrationWarning={true}
                   onError={isPrerender ? undefined : (e) => {
                     (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1521656693072-a8333f629688?q=80&w=2070&auto=format&fit=crop";
                   }}

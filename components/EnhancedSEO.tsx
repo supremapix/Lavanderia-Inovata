@@ -47,6 +47,9 @@ const EnhancedSEO: React.FC<EnhancedSEOProps> = ({
 
   return (
     <Helmet>
+      {/* Google Site Verification */}
+      <meta name="google-site-verification" content="SrpI35v8t6X4DPizTXl20wgLcomCIbf4ObMKVVTcoPY" />
+
       {/* Basic Meta Tags */}
       <title>{title}</title>
       <meta name="description" content={description} />

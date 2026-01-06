@@ -16,15 +16,19 @@ const DOMAIN = 'https://www.lavanderiainovata.com.br';
 const EnhancedSEO: React.FC<EnhancedSEOProps> = ({
   title,
   description,
-  image = `${DOMAIN}/og-image.jpg`, // Default image on production domain
+  image = `${DOMAIN}/og-image.jpg`,
   type = 'website',
   structuredData,
   breadcrumbs
 }) => {
   const location = useLocation();
   
-  // Ensure canonical URL is strictly the production domain + path, no hash
-  const canonicalUrl = `${DOMAIN}${location.pathname === '/' ? '' : location.pathname}`;
+  // Clean pathname to avoid trailing slash inconsistencies
+  const cleanPath = location.pathname.endsWith('/') && location.pathname !== '/' 
+    ? location.pathname.slice(0, -1) 
+    : location.pathname;
+
+  const canonicalUrl = `${DOMAIN}${cleanPath}`;
 
   // Generate Breadcrumb Schema if provided
   const breadcrumbSchema = breadcrumbs ? {
@@ -34,7 +38,6 @@ const EnhancedSEO: React.FC<EnhancedSEOProps> = ({
       "@type": "ListItem",
       "position": index + 1,
       "name": crumb.name,
-      // Remove hash from breadcrumb items and ensure absolute URL
       "item": `${DOMAIN}${crumb.item.replace('/#', '').replace(DOMAIN, '')}`
     }))
   } : null;

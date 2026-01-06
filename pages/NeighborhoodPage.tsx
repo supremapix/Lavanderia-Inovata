@@ -115,8 +115,8 @@ const NeighborhoodPage: React.FC = () => {
   return (
     <>
       <EnhancedSEO 
-        title={`Lavanderia no ${neighborhood.name} | Lavar Tênis, Tapetes e Roupas | Inovata`}
-        description={`Procurando Lavanderia no ${neighborhood.name} (${neighborhood.city})? A Inovata busca e entrega! Especialistas em Tênis, Edredons, Cortinas e Ternos. Delivery Grátis* no ${neighborhood.name}.`}
+        title={`Lavanderia no ${neighborhood.name} | Tênis, Tapetes e Delivery | Inovata`}
+        description={`Morador do ${neighborhood.name}? A Lavanderia Inovata busca e entrega suas roupas, tênis e tapetes com frete grátis*. Qualidade Premium em ${neighborhood.city}.`}
         structuredData={schemaData}
         breadcrumbs={[
           { name: 'Home', item: '/' },
@@ -143,7 +143,6 @@ const NeighborhoodPage: React.FC = () => {
         <section className="relative bg-secondary-dark py-20 lg:py-28 overflow-hidden">
            {/* Background Image with Overlay */}
            <div className="absolute inset-0 z-0 opacity-40">
-             {/* Use a generic city/delivery or laundry image that fits well behind text */}
              <img 
                src="https://images.unsplash.com/photo-1449824913929-2b3a3e3690c0?q=80&w=2070&auto=format&fit=crop" 
                alt={`Vista aérea ou representativa de ${neighborhood.city}`} 

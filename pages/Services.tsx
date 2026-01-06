@@ -4,6 +4,12 @@ import { CONTACT } from '../constants';
 import EnhancedSEO from '../components/EnhancedSEO';
 
 const Services: React.FC = () => {
+  // Centralized Prerender Check
+  const isPrerender = typeof window !== 'undefined' && (
+    (window as any).__PRERENDER__ === true || 
+    /HeadlessChrome/.test(navigator.userAgent)
+  );
+
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -119,7 +125,7 @@ const Services: React.FC = () => {
                   src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=1974&auto=format&fit=crop" 
                   alt="Tênis limpos e renovados - Lavanderia de Tênis" 
                   className="absolute inset-0 w-full h-full object-cover"
-                  onError={(e) => {
+                  onError={isPrerender ? undefined : (e) => {
                      e.currentTarget.src = "https://placehold.co/800x600/orange/white?text=Tênis+Limpos";
                   }}
                 />
@@ -139,7 +145,7 @@ const Services: React.FC = () => {
                    src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?q=80&w=2070&auto=format&fit=crop" 
                    alt="Roupas sendo passadas a ferro com perfeição" 
                    className="absolute inset-0 w-full h-full object-cover"
-                   onError={(e) => {
+                   onError={isPrerender ? undefined : (e) => {
                      e.currentTarget.src = "https://placehold.co/800x600/1E3A8A/white?text=Passadoria";
                    }}
                  />
@@ -229,7 +235,7 @@ const Services: React.FC = () => {
                     src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?q=80&w=2070&auto=format&fit=crop" 
                     alt="Sala de estar limpa com tapete higienizado" 
                     className="absolute inset-0 w-full h-full object-cover opacity-90"
-                    onError={(e) => {
+                    onError={isPrerender ? undefined : (e) => {
                       e.currentTarget.src = "https://placehold.co/800x600/teal/white?text=Tapetes";
                     }}
                    />
@@ -271,7 +277,7 @@ const Services: React.FC = () => {
                            src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=1770&auto=format&fit=crop" 
                            className="rounded-2xl shadow-md hover:scale-105 transition-transform duration-500 w-full h-48 object-cover" 
                            alt="Carrinho de Bebê Higienizado"
-                           onError={(e) => {
+                           onError={isPrerender ? undefined : (e) => {
                              e.currentTarget.src = "https://placehold.co/600x400/pink/white?text=Carrinho";
                            }}
                         />
@@ -280,7 +286,7 @@ const Services: React.FC = () => {
                            src="https://images.unsplash.com/photo-1559454403-b8fb9a187a6d?q=80&w=800&auto=format&fit=crop" 
                            className="rounded-2xl shadow-md hover:scale-105 transition-transform duration-500 translate-y-8 w-full h-48 object-cover" 
                            alt="Ursinho de Pelúcia Limpo"
-                           onError={(e) => {
+                           onError={isPrerender ? undefined : (e) => {
                              e.currentTarget.src = "https://placehold.co/600x400/pink/white?text=Ursinho";
                            }}
                         />

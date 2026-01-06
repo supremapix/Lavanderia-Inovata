@@ -41,7 +41,7 @@ const NeighborhoodPage: React.FC = () => {
     "@type": "ProfessionalService",
     "additionalType": "https://schema.org/LaundryService",
     "name": `Lavanderia Inovata - Atendimento ${neighborhood.name}`,
-    "image": "https://lavanderiainovata.vercel.app/logo.png",
+    "image": "https://www.lavanderiainovata.com.br/logo.png",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": CONTACT.address,
@@ -66,7 +66,7 @@ const NeighborhoodPage: React.FC = () => {
         "addressRegion": "SP"
       }
     },
-    "url": window.location.href,
+    "url": `https://www.lavanderiainovata.com.br/lavanderia/${slug}`,
     "telephone": "+551136831307",
     "priceRange": "$$",
     "openingHoursSpecification": [
@@ -91,21 +91,21 @@ const NeighborhoodPage: React.FC = () => {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": `Lavanderia Delivery em ${neighborhood.name}`
+            "name": `Lavanderia Delivery no ${neighborhood.name}`
           }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": `Lavagem de Tênis em ${neighborhood.name}`
+            "name": `Lavagem de Tênis no ${neighborhood.name}`
           }
         },
         {
            "@type": "Offer",
            "itemOffered": {
              "@type": "Service",
-             "name": `Limpeza de Sofás e Tapetes em ${neighborhood.name}`
+             "name": `Limpeza de Tapetes e Cortinas no ${neighborhood.name}`
            }
          }
       ]
@@ -115,8 +115,8 @@ const NeighborhoodPage: React.FC = () => {
   return (
     <>
       <EnhancedSEO 
-        title={`Lavanderia em ${neighborhood.name} | Delivery Premium | Inovata`}
-        description={`Procurando Lavanderia em ${neighborhood.name}? Especialistas em Roupas, Tênis, Tapetes e Estofados. Delivery Rápido e Grátis* em ${neighborhood.name}. Confira!`}
+        title={`Lavanderia no ${neighborhood.name} | Lavar Tênis, Tapetes e Roupas | Inovata`}
+        description={`Procurando Lavanderia no ${neighborhood.name} (${neighborhood.city})? A Inovata busca e entrega! Especialistas em Tênis, Edredons, Cortinas e Ternos. Delivery Grátis* no ${neighborhood.name}.`}
         structuredData={schemaData}
         breadcrumbs={[
           { name: 'Home', item: '/' },

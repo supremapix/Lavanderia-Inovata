@@ -5,6 +5,9 @@ const BackToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Prevent hydration mismatch if prerender scrolls
+    if (typeof window !== 'undefined' && ((window as any).__PRERENDER__ === true || /HeadlessChrome/.test(navigator.userAgent))) return;
+
     const toggleVisibility = () => {
       if (window.scrollY > 300) {
         setIsVisible(true);

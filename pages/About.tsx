@@ -4,6 +4,12 @@ import { CONTACT } from '../constants';
 import EnhancedSEO from '../components/EnhancedSEO';
 
 const About: React.FC = () => {
+  // Centralized Prerender Check
+  const isPrerender = typeof window !== 'undefined' && (
+    (window as any).__PRERENDER__ === true || 
+    /HeadlessChrome/.test(navigator.userAgent)
+  );
+
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
@@ -89,7 +95,7 @@ const About: React.FC = () => {
                    src="/fachada-loja.jpg" 
                    alt="Fachada Moderna da Lavanderia Inovata em Osasco com Veículo de Entrega" 
                    className="w-full h-full object-cover min-h-[400px] transform transition-transform duration-1000 group-hover:scale-110"
-                   onError={(e) => {
+                   onError={isPrerender ? undefined : (e) => {
                      // Fallback image if user hasn't placed the specific file yet
                      e.currentTarget.src = "https://images.unsplash.com/photo-1545167622-3a6ac156bb0f?q=80&w=2070&auto=format&fit=crop";
                    }}

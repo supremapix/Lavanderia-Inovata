@@ -11,17 +11,20 @@ interface EnhancedSEOProps {
   breadcrumbs?: Array<{ name: string; item: string }>;
 }
 
+const DOMAIN = 'https://www.lavanderiainovata.com.br';
+
 const EnhancedSEO: React.FC<EnhancedSEOProps> = ({
   title,
   description,
-  image = 'https://lavanderiainovata.vercel.app/og-image.jpg', // Replace with actual default OG image
+  image = `${DOMAIN}/og-image.jpg`, // Default image on production domain
   type = 'website',
   structuredData,
   breadcrumbs
 }) => {
   const location = useLocation();
-  // Fixed: Remove hash from canonical URL for standard routing
-  const canonicalUrl = `https://lavanderiainovata.vercel.app${location.pathname}`;
+  
+  // Ensure canonical URL is strictly the production domain + path, no hash
+  const canonicalUrl = `${DOMAIN}${location.pathname === '/' ? '' : location.pathname}`;
 
   // Generate Breadcrumb Schema if provided
   const breadcrumbSchema = breadcrumbs ? {
@@ -31,10 +34,13 @@ const EnhancedSEO: React.FC<EnhancedSEOProps> = ({
       "@type": "ListItem",
       "position": index + 1,
       "name": crumb.name,
-      // Fixed: Remove hash from breadcrumb items
-      "item": `https://lavanderiainovata.vercel.app${crumb.item.replace('/#', '')}`
+      // Remove hash from breadcrumb items and ensure absolute URL
+      "item": `${DOMAIN}${crumb.item.replace('/#', '').replace(DOMAIN, '')}`
     }))
   } : null;
+
+  // Handle relative image paths for Open Graph
+  const ogImage = image.startsWith('http') ? image : `${DOMAIN}${image}`;
 
   return (
     <Helmet>
@@ -48,7 +54,7 @@ const EnhancedSEO: React.FC<EnhancedSEOProps> = ({
       <meta property="og:type" content={type} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
+      <meta property="og:image" content={ogImage} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:site_name" content="Lavanderia Inovata" />
       <meta property="og:locale" content="pt_BR" />
@@ -57,7 +63,7 @@ const EnhancedSEO: React.FC<EnhancedSEOProps> = ({
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
+      <meta name="twitter:image" content={ogImage} />
 
       {/* Resource Hints */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />

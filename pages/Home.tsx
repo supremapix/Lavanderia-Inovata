@@ -26,14 +26,19 @@ const Home: React.FC = () => {
     showPrices: false
   });
 
+  // Centralized Prerender Check
+  const isPrerender = typeof window !== 'undefined' && (
+    (window as any).__PRERENDER__ === true || 
+    /HeadlessChrome/.test(navigator.userAgent)
+  );
+
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
   // Check Time of Day for Dynamic CTA
   useEffect(() => {
-    // Prevent time-based updates during prerender to match initial state
-    if (typeof navigator !== 'undefined' && /HeadlessChrome/.test(navigator.userAgent)) return;
+    if (isPrerender) return;
 
     const updateCTA = () => {
       const now = new Date();
@@ -67,13 +72,13 @@ const Home: React.FC = () => {
     updateCTA();
     const interval = setInterval(updateCTA, 60000); // Update every minute
     return () => clearInterval(interval);
-  }, []);
+  }, [isPrerender]);
 
   // Initialize bubbles with random properties
   useEffect(() => {
-    // Prevent random bubble generation during prerender to avoid hydration mismatch
-    // (Client initial state is [], Prerender state was [bubbles]. Mismatch.)
-    if (typeof navigator !== 'undefined' && /HeadlessChrome/.test(navigator.userAgent)) return;
+    // CRITICAL: Prevent random bubble generation during prerender.
+    // This ensures the server HTML matches the client's initial empty state.
+    if (isPrerender) return;
 
     const bubbleCount = 18;
     const newBubbles = Array.from({ length: bubbleCount }).map((_, i) => ({
@@ -85,19 +90,18 @@ const Home: React.FC = () => {
       delay: `${Math.random() * 10}s` // Random delay to stagger appearance
     }));
     setBubbles(newBubbles);
-  }, []);
+  }, [isPrerender]);
 
   // Background Slider Logic
   useEffect(() => {
-    // Prevent slider updates in prerender
-    if (typeof navigator !== 'undefined' && /HeadlessChrome/.test(navigator.userAgent)) return;
+    if (isPrerender) return;
 
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % HERO_IMAGES.length);
     }, 5000); // Change image every 5 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isPrerender]);
 
   useEffect(() => {
     // Handle scrolling to hash if present in URL
@@ -109,9 +113,8 @@ const Home: React.FC = () => {
   }, [location]);
 
   useEffect(() => {
-    // CRITICAL FIX: Prevent IntersectionObserver from modifying DOM during prerender.
-    // Puppeteer would add 'in-view' class, but Client initial render wouldn't have it, causing Hydration Error #525.
-    if (typeof navigator !== 'undefined' && /HeadlessChrome/.test(navigator.userAgent)) return;
+    // CRITICAL: Prevent IntersectionObserver from modifying DOM during prerender.
+    if (isPrerender) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -132,20 +135,20 @@ const Home: React.FC = () => {
     elements.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, []);
+  }, [isPrerender]);
 
   // Optimized LocalBusiness Schema for Laundry Service
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "LaundryService",
-    "@id": "https://lavanderiainovata.vercel.app",
+    "@id": "https://www.lavanderiainovata.com.br",
     "name": "Lavanderia Inovata",
     "image": [
-      "https://lavanderiainovata.vercel.app/logo.png",
+      "https://www.lavanderiainovata.com.br/logo.png",
       ...HERO_IMAGES
     ],
-    "logo": "https://lavanderiainovata.vercel.app/logo.png",
-    "url": "https://lavanderiainovata.vercel.app",
+    "logo": "https://www.lavanderiainovata.com.br/logo.png",
+    "url": "https://www.lavanderiainovata.com.br",
     "telephone": CONTACT.phone,
     "email": CONTACT.email,
     "priceRange": "$$",
@@ -248,7 +251,7 @@ const Home: React.FC = () => {
                   alt={`Lavanderia Inovata - Serviço Profissional ${index + 1}`} 
                   className="w-full h-full object-cover transform scale-105 animate-pulse-slow" 
                   style={{ animationDuration: '10s' }}
-                  onError={(e) => {
+                  onError={isPrerender ? undefined : (e) => {
                     (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1521656693072-a8333f629688?q=80&w=2070&auto=format&fit=crop";
                   }}
                 />

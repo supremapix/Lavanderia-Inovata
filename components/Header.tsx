@@ -11,7 +11,7 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     // Prevent hydration mismatch if prerender scrolls
-    if (typeof navigator !== 'undefined' && /HeadlessChrome/.test(navigator.userAgent)) return;
+    if (typeof window !== 'undefined' && ((window as any).__PRERENDER__ === true || /HeadlessChrome/.test(navigator.userAgent))) return;
 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);

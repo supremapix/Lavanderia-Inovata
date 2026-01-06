@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Typewriter from '../components/Typewriter';
-import { NEIGHBORHOODS, SERVICES_DATA, HOME_TYPEWRITER_TEXTS, CONTACT } from '../constants';
-import { ArrowRight, CheckCircle, MapPin } from 'lucide-react';
+import { NEIGHBORHOODS, SERVICES_DATA, HOME_TYPEWRITER_TEXTS, CONTACT, HOME_FAQ } from '../constants';
+import { ArrowRight, CheckCircle, MapPin, ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 import EnhancedSEO from '../components/EnhancedSEO';
 
 // High-quality images for the slider
@@ -16,14 +16,19 @@ const Home: React.FC = () => {
   const location = useLocation();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [bubbles, setBubbles] = useState<Array<{ id: number; left: string; size: string; duration: string; sway: string; delay: string }>>([]);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   
   // Dynamic CTA State
   const [ctaState, setCtaState] = useState({
     primaryText: "💬 ORÇAMENTO RÁPIDO",
-    primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de um orçamento para lavanderia.`,
+    primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de um orçamento para lavanderia. (Origem: Home Hero)`,
     secondaryText: "📍 VER ÁREA DE ATENDIMENTO",
     showPrices: false
   });
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
 
   // Check Time of Day for Dynamic CTA
   useEffect(() => {
@@ -41,7 +46,7 @@ const Home: React.FC = () => {
         // High Urgency Mode
         setCtaState({
           primaryText: "⚡ ORÇAMENTO EM 2 MIN",
-          primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de um orçamento agora (Atendimento Online).`,
+          primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de um orçamento agora (Atendimento Online). (Origem: Home Hero - Horário Comercial)`,
           secondaryText: "📍 ATENDEMOS SEU BAIRRO?",
           showPrices: false
         });
@@ -49,7 +54,7 @@ const Home: React.FC = () => {
         // Retention/Research Mode (Night/Sunday)
         setCtaState({
           primaryText: "🌙 AGENDAR PARA AMANHÃ",
-          primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de deixar agendada uma coleta para o próximo horário disponível.`,
+          primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de deixar agendada uma coleta para o próximo horário disponível. (Origem: Home Hero - Fora de Horário)`,
           secondaryText: "💲 VER TABELA DE PREÇOS",
           showPrices: true
         });
@@ -339,7 +344,7 @@ const Home: React.FC = () => {
                       </li>
                     ))}
                   </ul>
-                  <a href="https://wa.me/5511921691307" className="inline-block w-full text-center py-3 border border-primary-gold/30 text-primary-gold rounded-xl font-semibold hover:bg-primary-gold hover:text-secondary-dark transition-colors duration-300">
+                  <a href={`https://wa.me/5511921691307?text=Olá, tenho interesse no serviço de ${service.title}. (Origem: Cards de Serviço Home)`} className="inline-block w-full text-center py-3 border border-primary-gold/30 text-primary-gold rounded-xl font-semibold hover:bg-primary-gold hover:text-secondary-dark transition-colors duration-300">
                     Solicitar
                   </a>
                 </div>
@@ -403,8 +408,50 @@ const Home: React.FC = () => {
           </div>
         </section>
 
+        {/* FAQ SECTION (NEW) */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-4xl">
+            <div className="text-center mb-12 fade-up">
+              <div className="inline-flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-full shadow-sm text-primary-blue mb-4">
+                <HelpCircle size={20} />
+                <span className="font-bold text-sm uppercase">Dúvidas Frequentes</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-secondary-dark">Tudo sobre a Lavanderia Inovata</h2>
+            </div>
+
+            <div className="space-y-4 fade-up">
+              {HOME_FAQ.map((faq, index) => (
+                <div key={index} className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+                  <button
+                    onClick={() => toggleFaq(index)}
+                    className="w-full flex justify-between items-center p-6 text-left focus:outline-none bg-white hover:bg-gray-50 transition-colors group"
+                  >
+                    <span className="font-bold text-lg text-gray-800 group-hover:text-primary-blue transition-colors">{faq.question}</span>
+                    <div className={`p-2 rounded-full transition-colors ${openFaqIndex === index ? 'bg-primary-gold text-white' : 'bg-gray-100 text-gray-500'}`}>
+                      {openFaqIndex === index ? (
+                        <ChevronUp size={20} />
+                      ) : (
+                        <ChevronDown size={20} />
+                      )}
+                    </div>
+                  </button>
+                  <div 
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      openFaqIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                    }`}
+                  >
+                    <div className="p-6 pt-0 text-gray-600 leading-relaxed border-t border-gray-100 bg-gray-50/50">
+                      {faq.answer}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* NEIGHBORHOODS */}
-        <section id="bairros" className="py-20 bg-white" ref={scrollRef}>
+        <section id="bairros" className="py-20 bg-gray-50" ref={scrollRef}>
           <div className="container mx-auto px-4">
              <div className="text-center mb-16 fade-up">
               <h2 className="text-primary-blue text-lg font-bold uppercase tracking-wider mb-2">Área de Atendimento</h2>
@@ -417,7 +464,7 @@ const Home: React.FC = () => {
                 <Link 
                   to={`/lavanderia/${hood.slug}`}
                   key={hood.id} 
-                  className="group flex items-center gap-3 p-3 rounded-xl border border-gray-100 bg-white hover:border-primary-blue hover:shadow-lg hover:-translate-y-1 hover:scale-105 transition-all duration-300 cursor-pointer fade-up"
+                  className="group flex items-center gap-3 p-3 rounded-xl border border-gray-200 bg-white hover:border-primary-blue hover:shadow-lg hover:-translate-y-1 hover:scale-105 transition-all duration-300 cursor-pointer fade-up"
                   style={{ transitionDelay: `${(idx % 10) * 50}ms` }}
                 >
                   <div className="p-2 rounded-full bg-blue-50 group-hover:bg-primary-blue transition-colors duration-300">
@@ -445,7 +492,7 @@ const Home: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
               <a 
-                href="https://wa.me/5511921691307?text=Quero lavar meus tênis e roupas!" 
+                href="https://wa.me/5511921691307?text=Quero lavar meus tênis e roupas! (Origem: CTA Final Home)" 
                 className="bg-white text-primary-blue px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-gray-100 transition-colors flex items-center justify-center gap-2 btn-premium"
               >
                 Solicitar Coleta Agora

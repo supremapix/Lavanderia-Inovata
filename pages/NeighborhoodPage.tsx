@@ -175,7 +175,7 @@ const NeighborhoodPage: React.FC = () => {
                 </p>
 
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
-                  <a href={`https://wa.me/5511921691307?text=Olá! Moro em ${neighborhood.name} e gostaria de agendar uma coleta.`} 
+                  <a href={`https://wa.me/5511921691307?text=Olá! Moro em ${neighborhood.name} e gostaria de agendar uma coleta. (Origem: Página ${neighborhood.name})`} 
                      className="flex items-center justify-center gap-3 bg-gradient-gold text-secondary-dark px-8 py-4 rounded-full font-bold text-lg shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] hover:-translate-y-1 transition-all btn-premium">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" className="w-6 h-6" />
                     Agendar Coleta no {neighborhood.name}
@@ -296,7 +296,7 @@ const NeighborhoodPage: React.FC = () => {
                   <p className="text-blue-100 mb-6 max-w-lg">
                     Para pedidos acima de R$ 250,00, a coleta e entrega são por nossa conta. Abaixo deste valor, consulte a taxa para sua região.
                   </p>
-                  <a href={`https://wa.me/5511921691307?text=Quero aproveitar o delivery grátis (acima de R$250) no ${neighborhood.name}`} className="inline-block bg-white text-primary-blue px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors btn-premium">
+                  <a href={`https://wa.me/5511921691307?text=Quero aproveitar o delivery grátis (acima de R$250) no ${neighborhood.name}. (Origem: Card Delivery Página ${neighborhood.name})`} className="inline-block bg-white text-primary-blue px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors btn-premium">
                     Solicitar Delivery Agora
                   </a>
                 </div>
@@ -324,7 +324,7 @@ const NeighborhoodPage: React.FC = () => {
                    </div>
                 </div>
 
-                <a href={`https://wa.me/5511921691307`} className="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white py-4 rounded-xl font-bold mb-4 shadow-lg hover:brightness-105 transition-all transform hover:scale-105 btn-premium">
+                <a href={`https://wa.me/5511921691307?text=Olá, vi o site e moro no ${neighborhood.name}. (Origem: Sidebar Página ${neighborhood.name})`} className="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white py-4 rounded-xl font-bold mb-4 shadow-lg hover:brightness-105 transition-all transform hover:scale-105 btn-premium">
                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" className="w-5 h-5" />
                    Chamar no WhatsApp
                 </a>
@@ -358,7 +358,7 @@ const NeighborhoodPage: React.FC = () => {
                 <span className="text-xs text-gray-500 uppercase font-bold">Atendimento em</span>
                 <span className="text-secondary-dark font-bold leading-tight">{neighborhood.name}</span>
             </div>
-            <a href="https://wa.me/5511921691307" className="bg-green-500 text-white px-6 py-3 rounded-full font-bold shadow-lg flex items-center gap-2 animate-pulse-glow">
+            <a href={`https://wa.me/5511921691307?text=Gostaria de agendar no ${neighborhood.name}. (Origem: Mobile Sticky Página ${neighborhood.name})`} className="bg-green-500 text-white px-6 py-3 rounded-full font-bold shadow-lg flex items-center gap-2 animate-pulse-glow">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="" className="w-5 h-5" />
                 Chamar
             </a>

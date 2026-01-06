@@ -96,3 +96,26 @@ export const HOME_TYPEWRITER_TEXTS = [
   "Remoção de Manchas Difíceis",
   "Qualidade Inovata"
 ];
+
+export const HOME_FAQ = [
+  {
+    question: "Quais bairros de Osasco vocês atendem com Delivery?",
+    answer: "Atendemos toda a região de Osasco, incluindo Centro, Vila Yara, Campesina, Parque Continental, Jaguaré, Presidente Altino, Km 18, Bela Vista, entre outros num raio de 15km da nossa loja na Av. César Abraão."
+  },
+  {
+    question: "Quanto custa para lavar um edredom ou cobertor?",
+    answer: "Nossos valores são a partir de R$ 45,00 para edredons de solteiro. Utilizamos produtos bactericidas e secagem em estufa que garantem a eliminação de ácaros e fungos, devolvendo sua peça cheirosa e macia."
+  },
+  {
+    question: "Vocês buscam e entregam (Leva e Traz)?",
+    answer: "Sim! Temos serviço de coleta e entrega (Delivery). Para pedidos acima de R$ 250,00, o frete é totalmente GRÁTIS em nossa área de cobertura. Para valores menores, consulte a taxa para seu bairro no WhatsApp."
+  },
+  {
+    question: "Quanto tempo demora para ficar pronto?",
+    answer: "Para roupas do dia a dia (cestos), o prazo médio é de 24 a 48 horas. Itens especiais como tapetes, cortinas e carrinhos de bebê levam cerca de 5 a 7 dias úteis para garantir uma secagem e higienização perfeitas."
+  },
+  {
+    question: "Vocês lavam tênis e sapatos?",
+    answer: "Sim, somos especialistas em 'Spa de Calçados'. Lavamos tênis esportivos, casuais, camurça e sapatos sociais, com limpeza detalhada da sola, palmilhas e cadarços a partir de R$ 35,00."
+  }
+];

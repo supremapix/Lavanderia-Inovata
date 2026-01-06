@@ -107,7 +107,7 @@ const Services: React.FC = () => {
                   </div>
                   
                   <div className="mt-6">
-                    <a href={`https://wa.me/${CONTACT.whatsapp}?text=Quero lavar meus tênis!`} className="inline-block bg-orange-500 text-white px-8 py-3 rounded-full font-bold hover:bg-orange-600 transition-colors btn-premium shadow-lg">
+                    <a href={`https://wa.me/${CONTACT.whatsapp}?text=Quero lavar meus tênis! (Origem: Página Serviços - Tênis)`} className="inline-block bg-orange-500 text-white px-8 py-3 rounded-full font-bold hover:bg-orange-600 transition-colors btn-premium shadow-lg">
                        Renovar Meus Tênis Agora
                     </a>
                   </div>
@@ -171,7 +171,7 @@ const Services: React.FC = () => {
                  </div>
 
                  <div className="mt-8">
-                     <a href={`https://wa.me/${CONTACT.whatsapp}?text=Preciso lavar e passar minhas roupas.`} className="inline-block bg-primary-blue text-white px-8 py-3 rounded-full font-bold hover:bg-blue-800 transition-colors btn-premium shadow-lg">
+                     <a href={`https://wa.me/${CONTACT.whatsapp}?text=Preciso lavar e passar minhas roupas. (Origem: Página Serviços - Roupas)`} className="inline-block bg-primary-blue text-white px-8 py-3 rounded-full font-bold hover:bg-blue-800 transition-colors btn-premium shadow-lg">
                         Agendar Coleta de Roupas
                      </a>
                   </div>
@@ -212,7 +212,7 @@ const Services: React.FC = () => {
                       </div>
                    </div>
                    <div className="mt-8">
-                     <a href={`https://wa.me/${CONTACT.whatsapp}?text=Orçamento para tapetes e cortinas`} className="inline-block bg-teal-600 text-white px-8 py-3 rounded-full font-bold hover:bg-teal-700 transition-colors btn-premium shadow-lg">
+                     <a href={`https://wa.me/${CONTACT.whatsapp}?text=Orçamento para tapetes e cortinas (Origem: Página Serviços - Tapetes)`} className="inline-block bg-teal-600 text-white px-8 py-3 rounded-full font-bold hover:bg-teal-700 transition-colors btn-premium shadow-lg">
                         Limpar Meus Tapetes
                      </a>
                   </div>
@@ -249,7 +249,7 @@ const Services: React.FC = () => {
                     </div>
                     
                     <div>
-                        <a href={`https://wa.me/${CONTACT.whatsapp}?text=Preciso higienizar o carrinho do bebê.`} className="inline-block bg-pink-500 text-white px-8 py-3 rounded-full font-bold hover:bg-pink-600 transition-colors btn-premium shadow-lg">
+                        <a href={`https://wa.me/${CONTACT.whatsapp}?text=Preciso higienizar o carrinho do bebê. (Origem: Página Serviços - Baby)`} className="inline-block bg-pink-500 text-white px-8 py-3 rounded-full font-bold hover:bg-pink-600 transition-colors btn-premium shadow-lg">
                            Higienizar Carrinho de Bebê
                         </a>
                     </div>
@@ -281,7 +281,7 @@ const Services: React.FC = () => {
           {/* CTA */}
           <div className="text-center mt-12">
             <a 
-              href={`https://wa.me/${CONTACT.whatsapp}?text=Gostaria de saber mais sobre os serviços de lavanderia.`} 
+              href={`https://wa.me/${CONTACT.whatsapp}?text=Gostaria de saber mais sobre os serviços de lavanderia. (Origem: CTA Final Serviços)`} 
               className="inline-block bg-primary-gold text-secondary-dark px-10 py-5 rounded-full font-bold text-xl shadow-xl hover:bg-secondary-dark hover:text-primary-gold transition-all transform hover:-translate-y-1 btn-premium"
             >
               Solicitar Orçamento Agora

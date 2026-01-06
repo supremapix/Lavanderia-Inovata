@@ -248,7 +248,7 @@ const Prices: React.FC = () => {
 
             <div className="text-center mt-12 fade-up in-view">
               <a 
-                href={`https://wa.me/${CONTACT.whatsapp}?text=Olá, gostaria de um orçamento para...`} 
+                href={`https://wa.me/${CONTACT.whatsapp}?text=Olá, gostaria de um orçamento para... (Origem: Página Preços)`} 
                 className="inline-block bg-primary-gold text-secondary-dark px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:shadow-lg transition-all btn-premium"
               >
                 Orçamento Personalizado no WhatsApp

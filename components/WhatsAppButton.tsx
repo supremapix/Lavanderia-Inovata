@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 const WhatsAppButton: React.FC = () => {
   const location = useLocation();
-  const message = "Olá! Gostaria de um orçamento de lavanderia.";
+  const message = "Olá! Gostaria de um orçamento de lavanderia. (Origem: Botão Flutuante)";
   const link = `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(message)}`;
 
   // Disable floating button on neighborhood pages (/lavanderia/...) 

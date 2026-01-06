@@ -143,7 +143,7 @@ const Header: React.FC = () => {
            )
         ))}
         <a 
-          href={`https://wa.me/${CONTACT.whatsapp}`}
+          href={`https://wa.me/${CONTACT.whatsapp}?text=Gostaria de um orçamento (Origem: Menu Mobile)`}
           className="mt-8 bg-primary-gold text-secondary-dark px-8 py-3 rounded-full font-bold text-lg btn-premium"
         >
           Pedir Orçamento

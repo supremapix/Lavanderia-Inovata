@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CONTACT } from '../constants';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import EnhancedSEO from '../components/EnhancedSEO';
 
 const Contact: React.FC = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    message: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const { name, phone, message } = formData;
+    
+    // Construct the WhatsApp message
+    const waMessage = `*Novo Contato via Site*\n\n*Nome:* ${name}\n*Telefone:* ${phone}\n*Mensagem:* ${message || "Gostaria de um orçamento."}\n\n_Enviado pelo Formulário de Contato_`;
+    
+    // Redirect to WhatsApp
+    const waLink = `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(waMessage)}`;
+    window.open(waLink, '_blank');
+  };
+
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
@@ -131,26 +153,47 @@ const Contact: React.FC = () => {
 
                <div className="p-10">
                 <h2 className="text-2xl font-bold mb-6 text-gray-800">Envie uma mensagem direta</h2>
-                <form className="space-y-4" onSubmit={(e) => {
-                   e.preventDefault();
-                   window.open(`https://wa.me/${CONTACT.whatsapp}?text=Mensagem do Site`, '_blank');
-                }}>
+                <form className="space-y-4" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">Nome</label>
-                      <input type="text" className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-blue focus:border-transparent outline-none" placeholder="Seu nome" required />
+                      <input 
+                        type="text" 
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-blue focus:border-transparent outline-none" 
+                        placeholder="Seu nome" 
+                        required 
+                      />
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">Telefone/WhatsApp</label>
-                      <input type="tel" className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-blue focus:border-transparent outline-none" placeholder="(11) 99999-9999" required />
+                      <input 
+                        type="tel" 
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-blue focus:border-transparent outline-none" 
+                        placeholder="(11) 99999-9999" 
+                        required 
+                      />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">Como podemos ajudar?</label>
-                    <textarea rows={3} className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-blue focus:border-transparent outline-none" placeholder="Digite sua mensagem..."></textarea>
+                    <textarea 
+                      rows={3} 
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-primary-blue focus:border-transparent outline-none" 
+                      placeholder="Descreva o que precisa lavar ou sua dúvida..."
+                    ></textarea>
                   </div>
-                  <button type="submit" className="w-full bg-primary-blue text-white font-bold py-3 rounded-lg hover:bg-blue-800 transition-colors">
-                    Iniciar Conversa no WhatsApp
+                  <button type="submit" className="w-full bg-[#25D366] text-white font-bold py-3 rounded-lg hover:bg-green-600 transition-colors flex items-center justify-center gap-2 shadow-md">
+                    <Phone size={20} />
+                    Enviar para WhatsApp
                   </button>
                 </form>
               </div>

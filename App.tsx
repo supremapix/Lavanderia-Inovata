@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
+import BackToTop from './components/BackToTop';
 import Home from './pages/Home';
 import NeighborhoodPage from './pages/NeighborhoodPage';
 import Contact from './pages/Contact';
@@ -30,6 +31,7 @@ const App: React.FC = () => {
           </Routes>
           <Footer />
           <WhatsAppButton />
+          <BackToTop />
         </div>
       </Router>
     </HelmetProvider>

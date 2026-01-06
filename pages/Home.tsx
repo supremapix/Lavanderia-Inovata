@@ -32,6 +32,9 @@ const Home: React.FC = () => {
 
   // Check Time of Day for Dynamic CTA
   useEffect(() => {
+    // Prevent time-based updates during prerender to match initial state
+    if (typeof navigator !== 'undefined' && /HeadlessChrome/.test(navigator.userAgent)) return;
+
     const updateCTA = () => {
       const now = new Date();
       const hour = now.getHours();
@@ -68,6 +71,10 @@ const Home: React.FC = () => {
 
   // Initialize bubbles with random properties
   useEffect(() => {
+    // Prevent random bubble generation during prerender to avoid hydration mismatch
+    // (Client initial state is [], Prerender state was [bubbles]. Mismatch.)
+    if (typeof navigator !== 'undefined' && /HeadlessChrome/.test(navigator.userAgent)) return;
+
     const bubbleCount = 18;
     const newBubbles = Array.from({ length: bubbleCount }).map((_, i) => ({
       id: i,
@@ -82,6 +89,9 @@ const Home: React.FC = () => {
 
   // Background Slider Logic
   useEffect(() => {
+    // Prevent slider updates in prerender
+    if (typeof navigator !== 'undefined' && /HeadlessChrome/.test(navigator.userAgent)) return;
+
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % HERO_IMAGES.length);
     }, 5000); // Change image every 5 seconds
@@ -99,6 +109,10 @@ const Home: React.FC = () => {
   }, [location]);
 
   useEffect(() => {
+    // CRITICAL FIX: Prevent IntersectionObserver from modifying DOM during prerender.
+    // Puppeteer would add 'in-view' class, but Client initial render wouldn't have it, causing Hydration Error #525.
+    if (typeof navigator !== 'undefined' && /HeadlessChrome/.test(navigator.userAgent)) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

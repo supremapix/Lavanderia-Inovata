@@ -70,6 +70,11 @@ async function prerender() {
     try {
       const page = await browser.newPage();
       
+      // CRITICAL FIX: Set User Agent to include "HeadlessChrome" explicitly.
+      // Modern Puppeteer headless mode masks this, causing React hydration guards 
+      // (bubbles, sliders, typewriters) to fail and generate mismatched HTML.
+      await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 HeadlessChrome');
+
       // Definir Viewport para Mobile/Desktop (Desktop padrão para SEO)
       await page.setViewport({ width: 1280, height: 800 });
 
@@ -111,12 +116,6 @@ async function prerender() {
   await browser.close();
   server.close();
   console.log('🎉 Pré-renderização concluída com sucesso!');
-  
-  // Opcional: Criar um arquivo 404.html copiando o index.html original (antes da hidratação)
-  // Isso ajuda em servidores estáticos que buscam 404.html por padrão
-  // Mas como sobrescrevemos o index.html principal com o conteúdo da Home, 
-  // o ideal seria ter guardado o 'template' original. 
-  // Para simplicidade, vamos deixar como está, pois a Home pré-renderizada servirá como shell se necessário.
 }
 
 prerender();

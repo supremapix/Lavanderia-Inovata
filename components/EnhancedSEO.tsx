@@ -20,7 +20,8 @@ const EnhancedSEO: React.FC<EnhancedSEOProps> = ({
   breadcrumbs
 }) => {
   const location = useLocation();
-  const canonicalUrl = `https://lavanderiainovata.vercel.app/#${location.pathname}`;
+  // Fixed: Remove hash from canonical URL for standard routing
+  const canonicalUrl = `https://lavanderiainovata.vercel.app${location.pathname}`;
 
   // Generate Breadcrumb Schema if provided
   const breadcrumbSchema = breadcrumbs ? {
@@ -30,7 +31,8 @@ const EnhancedSEO: React.FC<EnhancedSEOProps> = ({
       "@type": "ListItem",
       "position": index + 1,
       "name": crumb.name,
-      "item": `https://lavanderiainovata.vercel.app/#${crumb.item}`
+      // Fixed: Remove hash from breadcrumb items
+      "item": `https://lavanderiainovata.vercel.app${crumb.item.replace('/#', '')}`
     }))
   } : null;
 

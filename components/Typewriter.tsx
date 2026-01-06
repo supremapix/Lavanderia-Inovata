@@ -13,12 +13,17 @@ const Typewriter: React.FC<TypewriterProps> = ({
   pause = 3000, 
   className = '' 
 }) => {
-  const [displayedText, setDisplayedText] = useState('');
+  // Initialize with the first text to ensure server/client match on first render (SEO friendly)
+  const [displayedText, setDisplayedText] = useState(texts[0] || '');
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    // Use ReturnType<typeof setTimeout> to handle both browser (number) and Node (NodeJS.Timeout) environments without relying on NodeJS namespace
+    // Prevent animation in Headless browsers (Prerendering) to ensure snapshot matches initial state
+    if (typeof navigator !== 'undefined' && /HeadlessChrome/.test(navigator.userAgent)) {
+      return;
+    }
+
     let timer: ReturnType<typeof setTimeout>;
 
     const handleType = () => {
@@ -41,7 +46,13 @@ const Typewriter: React.FC<TypewriterProps> = ({
       }
     };
 
-    timer = setTimeout(handleType, 100);
+    // Start the animation loop
+    // Note: If we initialized with full text, we wait for pause before deleting
+    if (!isDeleting && displayedText === texts[currentTextIndex]) {
+       timer = setTimeout(() => setIsDeleting(true), pause);
+    } else {
+       timer = setTimeout(handleType, 100);
+    }
 
     return () => clearTimeout(timer);
   }, [displayedText, isDeleting, currentTextIndex, texts, speed, pause]);

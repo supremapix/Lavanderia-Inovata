@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
-import { DollarSign, Info, Search, X, Frown } from 'lucide-react';
+import { DollarSign, Info, Search, X, Frown, ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 import { CONTACT } from '../constants';
 import EnhancedSEO from '../components/EnhancedSEO';
 
 const Prices: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
+  };
 
   // Simple conceptual pricing structure
   const priceCategories = [
@@ -61,6 +66,33 @@ const Prices: React.FC = () => {
         { name: "Vestido de Festa", price: "Sob Consulta" },
         { name: "Casaco de Lã / Sobretudo", price: "R$ 50,00" },
       ]
+    }
+  ];
+
+  const faqs = [
+    {
+      question: "Quais são as formas de pagamento?",
+      answer: "Aceitamos diversas formas de pagamento para sua comodidade: PIX, Dinheiro, Cartão de Crédito e Débito. O pagamento pode ser realizado no momento da entrega das peças limpas."
+    },
+    {
+      question: "Como funciona a taxa de entrega (Delivery)?",
+      answer: "Oferecemos frete grátis para pedidos acima de R$ 250,00 dentro da nossa área de cobertura (15km). Para pedidos abaixo deste valor, cobramos uma pequena taxa fixa dependendo do seu bairro. Consulte-nos pelo WhatsApp para saber o valor exato."
+    },
+    {
+      question: "Qual o prazo de entrega das roupas?",
+      answer: "Para roupas do dia a dia, o prazo padrão é de 24 a 48 horas. Itens mais complexos como tapetes, cortinas e carrinhos de bebê geralmente necessitam de 5 a 7 dias para garantir a secagem completa e higienização profunda."
+    },
+    {
+      question: "Como é cobrada a lavagem de tapetes e cortinas?",
+      answer: "Estes itens são cobrados por metro quadrado (m²). Nossa equipe realiza a medição no momento da retirada ou você pode nos enviar as medidas aproximadas pelo WhatsApp para um pré-orçamento."
+    },
+    {
+      question: "Vocês removem qualquer tipo de mancha?",
+      answer: "Utilizamos as melhores técnicas e produtos do mercado para remoção de manchas. No entanto, o sucesso depende do tipo de tecido e do tempo que a mancha está lá. Faremos o melhor possível, mas algumas manchas antigas ou quimicamente alteradas podem não sair 100% sem danificar o tecido."
+    },
+    {
+      question: "Lavam vestidos de festa e roupas com pedraria?",
+      answer: "Sim! Somos especialistas em lavagem a seco (Dry Cleaning) e Wet Cleaning para roupas delicadas. Cada peça é avaliada individualmente e protegida para garantir que nenhum detalhe seja danificado."
     }
   ];
 
@@ -175,6 +207,44 @@ const Prices: React.FC = () => {
                 </div>
               </div>
             )}
+
+            {/* FAQ Section */}
+            <section className="mt-20 pt-10 border-t border-gray-200">
+              <div className="text-center mb-10 fade-up in-view">
+                <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm text-primary-blue mb-4">
+                  <HelpCircle size={20} />
+                  <span className="font-bold text-sm uppercase">Tire suas dúvidas</span>
+                </div>
+                <h2 className="text-3xl font-heading font-bold text-secondary-dark">Perguntas Frequentes</h2>
+              </div>
+
+              <div className="space-y-4 fade-up in-view">
+                {faqs.map((faq, index) => (
+                  <div key={index} className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <button
+                      onClick={() => toggleFaq(index)}
+                      className="w-full flex justify-between items-center p-5 text-left focus:outline-none bg-white hover:bg-gray-50 transition-colors"
+                    >
+                      <span className="font-bold text-gray-800 pr-4">{faq.question}</span>
+                      {openFaqIndex === index ? (
+                        <ChevronUp className="text-primary-gold shrink-0" size={20} />
+                      ) : (
+                        <ChevronDown className="text-gray-400 shrink-0" size={20} />
+                      )}
+                    </button>
+                    <div 
+                      className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                        openFaqIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                      }`}
+                    >
+                      <div className="p-5 pt-0 text-gray-600 leading-relaxed border-t border-gray-100 mt-2">
+                        {faq.answer}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
 
             <div className="text-center mt-12 fade-up in-view">
               <a 

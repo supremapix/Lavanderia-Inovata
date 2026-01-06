@@ -250,13 +250,13 @@ const Home: React.FC = () => {
             </p>
 
             <div className="flex flex-wrap justify-center gap-3 md:gap-4 text-sm md:text-base mb-10 text-gray-100 font-medium drop-shadow-md">
-              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">🧺</span> Roupas & Tênis</span>
-              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">🛋️</span> Sofás & Estofados</span>
-              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">⭐</span> Tapetes & Cortinas</span>
-              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">👶</span> Carrinhos & Ursinhos</span>
+              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">🧺</span>{' '}Roupas & Tênis</span>
+              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">🛋️</span>{' '}Sofás & Estofados</span>
+              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">⭐</span>{' '}Tapetes & Cortinas</span>
+              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">👶</span>{' '}Carrinhos & Ursinhos</span>
             </div>
 
-            {/* CTAs - Suppress hydration warning for dynamic href/text */}
+            {/* CTAs - Using standard <a> tag for dynamic secondary button to properly handle hydration suppression */}
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
               <a 
                 href={ctaState.primaryUrl}
@@ -268,13 +268,13 @@ const Home: React.FC = () => {
                 <span suppressHydrationWarning={true}>{ctaState.primaryText}</span>
               </a>
               
-              <Link
-                to={ctaState.secondaryLink}
+              <a
+                href={ctaState.secondaryLink}
                 className="w-full md:w-auto border-2 border-white/30 hover:border-white bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:bg-white/20 flex items-center justify-center gap-2"
                 suppressHydrationWarning={true}
               >
                 <span suppressHydrationWarning={true}>{ctaState.secondaryText}</span>
-              </Link>
+              </a>
             </div>
 
             {/* Floating Badges */}

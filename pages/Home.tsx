@@ -120,21 +120,23 @@ const Home: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Complete Local Business Schema with GeoCircle and Places
+  // Optimized LocalBusiness Schema for Laundry Service
   const schemaData = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService", // More specific than LaundryService
-    "additionalType": "https://schema.org/LaundryService",
+    "@type": "LaundryService",
+    "@id": "https://lavanderiainovata.vercel.app",
     "name": "Lavanderia Inovata",
     "image": [
       "https://lavanderiainovata.vercel.app/logo.png",
       ...HERO_IMAGES
     ],
-    "@id": "https://lavanderiainovata.vercel.app",
+    "logo": "https://lavanderiainovata.vercel.app/logo.png",
     "url": "https://lavanderiainovata.vercel.app",
     "telephone": CONTACT.phone,
     "email": CONTACT.email,
     "priceRange": "$$",
+    "paymentAccepted": "Cash, Credit Card, Debit Card, Pix",
+    "currenciesAccepted": "BRL",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Av. César Abraão, 209",
@@ -148,7 +150,6 @@ const Home: React.FC = () => {
       "latitude": -23.5329,
       "longitude": -46.7919
     },
-    // Combined AreaServed: 15km Radius AND specific neighborhoods
     "areaServed": [
       {
         "@type": "GeoCircle",
@@ -183,19 +184,34 @@ const Home: React.FC = () => {
         "closes": "13:00"
       }
     ],
-    "paymentAccepted": ["Cash", "Credit Card", "Debit Card", "Pix"],
-    "hasMap": "https://www.google.com/maps?cid=4611686018429747200", 
     "sameAs": [
       "https://www.instagram.com/lavanderiainovata",
       "https://www.facebook.com/lavanderiainovata"
-    ]
+    ],
+    "potentialAction": {
+      "@type": "OrderAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `https://wa.me/${CONTACT.whatsapp}?text=Gostaria de agendar uma coleta`,
+        "inLanguage": "pt-BR",
+        "actionPlatform": [
+          "http://schema.org/DesktopWebPlatform",
+          "http://schema.org/IOSPlatform",
+          "http://schema.org/AndroidPlatform"
+        ]
+      },
+      "result": {
+        "@type": "Service",
+        "name": "Lavanderia Delivery"
+      }
+    }
   };
 
   return (
     <>
       <EnhancedSEO 
-        title="Lavanderia em Osasco | Tênis, Tapetes, Sofás e Roupas | Delivery Rápido"
-        description="Lavanderia completa em Osasco: Roupas, Tênis, Tapetes, Cortinas, Estofados e Carrinhos de Bebê. Delivery rápido 15km. Qualidade Premium e preço justo!"
+        title="Lavanderia Inovata Osasco | Delivery de Tênis, Tapetes e Roupas"
+        description="Lavanderia Premium em Osasco e Região. Lavamos Tênis, Tapetes, Cortinas, Sofás e Roupas Finas. Delivery Grátis*. Agende sua coleta pelo WhatsApp agora!"
         structuredData={schemaData}
         type="business.business"
       />

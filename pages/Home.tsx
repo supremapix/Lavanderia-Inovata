@@ -263,15 +263,17 @@ const Home: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full md:w-auto bg-gradient-gold text-secondary-dark px-8 py-4 rounded-full font-bold text-lg shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] transform hover:scale-105 transition-all duration-300 animate-pulse-glow btn-premium flex items-center justify-center gap-2"
+                suppressHydrationWarning={true}
               >
-                <span suppressHydrationWarning>{ctaState.primaryText}</span>
+                <span suppressHydrationWarning={true}>{ctaState.primaryText}</span>
               </a>
               
               <Link
                 to={ctaState.secondaryLink}
                 className="w-full md:w-auto border-2 border-white/30 hover:border-white bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:bg-white/20 flex items-center justify-center gap-2"
+                suppressHydrationWarning={true}
               >
-                <span suppressHydrationWarning>{ctaState.secondaryText}</span>
+                <span suppressHydrationWarning={true}>{ctaState.secondaryText}</span>
               </Link>
             </div>
 

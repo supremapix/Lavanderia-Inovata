@@ -241,24 +241,40 @@ const Home: React.FC = () => {
             ))}
           </div>
 
-          <div className="container mx-auto px-4 z-20 text-center text-white mt-16 fade-up">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-heading font-black mb-6 leading-tight min-h-[120px] md:min-h-[160px] drop-shadow-lg">
+          <div className="container mx-auto px-4 z-20 text-center text-white mt-16 fade-up relative">
+            {/* Eyebrow Title */}
+            <div className="inline-block mb-4 animate-fade-in-down">
+               <span className="text-primary-gold font-bold tracking-[0.2em] uppercase text-xs md:text-sm bg-white/10 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
+                 Lavanderia Inovata & Delivery
+               </span>
+            </div>
+
+            {/* Main Typewriter Headline */}
+            <h1 className="text-3xl md:text-5xl lg:text-7xl font-heading font-black mb-6 leading-tight min-h-[100px] md:min-h-[140px] drop-shadow-2xl">
               <Typewriter texts={HOME_TYPEWRITER_TEXTS} />
             </h1>
             
-            <div className="flex flex-wrap justify-center gap-4 text-sm md:text-lg mb-10 text-gray-100 font-medium drop-shadow-md">
-              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20"><span className="text-primary-gold">🧺</span> Roupas & Tênis</span>
-              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20"><span className="text-primary-gold">🛋️</span> Sofás & Estofados</span>
-              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20"><span className="text-primary-gold">⭐</span> Tapetes & Cortinas</span>
-              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full border border-white/20"><span className="text-primary-gold">👶</span> Carrinhos & Ursinhos</span>
+            {/* Descriptive Subtext - Desktop focused */}
+            <p className="hidden md:block text-lg text-gray-200 mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+              A solução completa de limpeza para sua casa e família em Osasco. 
+              Tecnologia de ponta, produtos biodegradáveis e a conveniência de buscar e entregar na sua porta.
+            </p>
+
+            {/* Service Badges */}
+            <div className="flex flex-wrap justify-center gap-3 md:gap-4 text-sm md:text-base mb-10 text-gray-100 font-medium drop-shadow-md">
+              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">🧺</span> Roupas & Tênis</span>
+              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">🛋️</span> Sofás & Estofados</span>
+              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">⭐</span> Tapetes & Cortinas</span>
+              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">👶</span> Carrinhos & Ursinhos</span>
             </div>
 
-            <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+            {/* CTAs */}
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
               <a 
                 href={ctaState.primaryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full md:w-auto bg-gradient-gold text-secondary-dark px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-primary-gold/50 transform hover:scale-105 transition-all duration-300 animate-pulse-glow btn-premium flex items-center justify-center gap-2"
+                className="w-full md:w-auto bg-gradient-gold text-secondary-dark px-8 py-4 rounded-full font-bold text-lg shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] transform hover:scale-105 transition-all duration-300 animate-pulse-glow btn-premium flex items-center justify-center gap-2"
               >
                 {ctaState.primaryText}
               </a>
@@ -282,10 +298,10 @@ const Home: React.FC = () => {
               )}
             </div>
 
-            {/* Floating Badges */}
-            <div className="hidden lg:flex absolute bottom-10 left-0 right-0 justify-center gap-8">
+            {/* Floating Badges - Desktop Only */}
+            <div className="hidden lg:flex absolute -bottom-16 left-0 right-0 justify-center gap-6 pointer-events-none">
                {['✅ Delivery Grátis acima de R$250', '👟 Especialista em Tênis', '🛋️ Higienização de Estofados', '🏆 Qualidade Premium'].map((badge, idx) => (
-                 <div key={idx} className="bg-white/10 backdrop-blur-md px-6 py-2 rounded-full border border-white/20 text-sm font-medium animate-float shadow-lg" style={{ animationDelay: `${idx * 0.5}s` }}>
+                 <div key={idx} className="bg-secondary-dark/80 backdrop-blur-md px-5 py-2 rounded-full border border-white/10 text-xs font-bold text-gray-300 uppercase tracking-wide animate-float shadow-lg" style={{ animationDelay: `${idx * 0.5}s` }}>
                    {badge}
                  </div>
                ))}

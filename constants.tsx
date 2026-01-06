@@ -84,19 +84,15 @@ export const SERVICES_DATA: any[] = [
 ];
 
 export const HOME_TYPEWRITER_TEXTS = [
-  "Lavanderia Completa em Osasco",
-  "Delivery Grátis acima de R$250",
+  "Lavanderia Premium em Osasco",
   "Seus Tênis Novos de Novo",
-  "Higienização de Sofás e Estofados",
-  "Limpeza Profunda de Tapetes",
-  "Cortinas Limpas e Sem Ácaros",
-  "Cuidado Especial com Roupas Finas",
+  "Roupas Lavadas e Passadas",
+  "Tapetes e Cortinas Higienizados",
+  "Edredons Limpos e Cheirosos",
+  "Limpeza de Sofás e Estofados",
   "Higienização de Carrinhos de Bebê",
-  "Lavagem de Ursinhos de Pelúcia",
-  "Edredons e Cobertores Cheirosos",
-  "Ternos e Vestidos de Festa",
+  "Delivery Grátis acima de R$250",
+  "Cuidado Especial com Roupas Finas",
   "Remoção de Manchas Difíceis",
-  "Secagem e Passadoria Impecável",
-  "Buscamos e Entregamos na Sua Casa",
-  "Qualidade Premium que Você Merece"
+  "Qualidade Inovata"
 ];

@@ -19,8 +19,16 @@ const Typewriter: React.FC<TypewriterProps> = ({
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    // Prevent animation in Headless browsers (Prerendering) to ensure snapshot matches initial state
-    if (typeof window !== 'undefined' && ((window as any).__PRERENDER__ === true || /HeadlessChrome/.test(navigator.userAgent))) {
+    // Robust Prerender check:
+    // 1. window exists
+    // 2. __PRERENDER__ flag is present (set by prerender.js)
+    // 3. UserAgent is HeadlessChrome (fallback)
+    const isPrerender = typeof window !== 'undefined' && (
+      (window as any).__PRERENDER__ === true || 
+      /HeadlessChrome/.test(navigator.userAgent)
+    );
+
+    if (isPrerender) {
       return;
     }
 

@@ -17,26 +17,32 @@ const Home: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [bubbles, setBubbles] = useState<Array<{ id: number; left: string; size: string; duration: string; sway: string; delay: string }>>([]);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
   
-  // Dynamic CTA State
-  const [ctaState, setCtaState] = useState({
-    primaryText: "💬 ORÇAMENTO RÁPIDO",
-    primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de um orçamento para lavanderia. (Origem: Home Hero)`,
-    secondaryText: "📍 VER ÁREA DE ATENDIMENTO",
-    showPrices: false
-  });
-
   // Centralized Prerender Check
   const isPrerender = typeof window !== 'undefined' && (
     (window as any).__PRERENDER__ === true || 
     /HeadlessChrome/.test(navigator.userAgent)
   );
+  
+  // Dynamic CTA State - Initial state must act as default to match server render
+  const [ctaState, setCtaState] = useState({
+    primaryText: "💬 ORÇAMENTO RÁPIDO",
+    primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de um orçamento para lavanderia. (Origem: Home Hero)`,
+    secondaryText: "📍 VER ÁREA DE ATENDIMENTO",
+    secondaryLink: "/#bairros"
+  });
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
-  // Check Time of Day for Dynamic CTA
+  // Mount effect to handle client-side only updates
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Check Time of Day for Dynamic CTA - Only runs on client
   useEffect(() => {
     if (isPrerender) return;
 
@@ -56,7 +62,7 @@ const Home: React.FC = () => {
           primaryText: "⚡ ORÇAMENTO EM 2 MIN",
           primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de um orçamento agora (Atendimento Online). (Origem: Home Hero - Horário Comercial)`,
           secondaryText: "📍 ATENDEMOS SEU BAIRRO?",
-          showPrices: false
+          secondaryLink: "/#bairros"
         });
       } else {
         // Retention/Research Mode (Night/Sunday)
@@ -64,7 +70,7 @@ const Home: React.FC = () => {
           primaryText: "🌙 AGENDAR PARA AMANHÃ",
           primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de deixar agendada uma coleta para o próximo horário disponível. (Origem: Home Hero - Fora de Horário)`,
           secondaryText: "💲 VER TABELA DE PREÇOS",
-          showPrices: true
+          secondaryLink: "/precos"
         });
       }
     };
@@ -74,10 +80,8 @@ const Home: React.FC = () => {
     return () => clearInterval(interval);
   }, [isPrerender]);
 
-  // Initialize bubbles with random properties
+  // Initialize bubbles with random properties only on client
   useEffect(() => {
-    // CRITICAL: Prevent random bubble generation during prerender.
-    // This ensures the server HTML matches the client's initial empty state.
     if (isPrerender) return;
 
     const bubbleCount = 18;
@@ -98,22 +102,21 @@ const Home: React.FC = () => {
 
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % HERO_IMAGES.length);
-    }, 5000); // Change image every 5 seconds
+    }, 5000); 
 
     return () => clearInterval(interval);
   }, [isPrerender]);
 
   useEffect(() => {
-    // Handle scrolling to hash if present in URL
     if (location.hash === '#bairros') {
        setTimeout(() => {
-         document.getElementById('bairros')?.scrollIntoView({ behavior: 'smooth' });
-       }, 100);
+         const el = document.getElementById('bairros');
+         if (el) el.scrollIntoView({ behavior: 'smooth' });
+       }, 300);
     }
   }, [location]);
 
   useEffect(() => {
-    // CRITICAL: Prevent IntersectionObserver from modifying DOM during prerender.
     if (isPrerender) return;
 
     const observer = new IntersectionObserver(
@@ -137,7 +140,6 @@ const Home: React.FC = () => {
     return () => observer.disconnect();
   }, [isPrerender]);
 
-  // Optimized LocalBusiness Schema for Laundry Service
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "LaundryService",
@@ -152,8 +154,6 @@ const Home: React.FC = () => {
     "telephone": CONTACT.phone,
     "email": CONTACT.email,
     "priceRange": "$$",
-    "paymentAccepted": "Cash, Credit Card, Debit Card, Pix",
-    "currenciesAccepted": "BRL",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Av. César Abraão, 209",
@@ -167,17 +167,7 @@ const Home: React.FC = () => {
       "latitude": -23.5329,
       "longitude": -46.7919
     },
-    "areaServed": [
-      {
-        "@type": "GeoCircle",
-        "geoMidpoint": {
-          "@type": "GeoCoordinates",
-          "latitude": -23.5329,
-          "longitude": -46.7919
-        },
-        "geoRadius": "15000"
-      },
-      ...NEIGHBORHOODS.map(n => ({
+    "areaServed": NEIGHBORHOODS.map(n => ({
           "@type": "Place",
           "name": n.name,
           "address": {
@@ -185,43 +175,7 @@ const Home: React.FC = () => {
               "addressLocality": n.city,
               "addressRegion": "SP"
           }
-      }))
-    ],
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "08:00",
-        "closes": "18:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Saturday",
-        "opens": "09:00",
-        "closes": "13:00"
-      }
-    ],
-    "sameAs": [
-      "https://www.instagram.com/lavanderiainovata",
-      "https://www.facebook.com/lavanderiainovata"
-    ],
-    "potentialAction": {
-      "@type": "OrderAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": `https://wa.me/${CONTACT.whatsapp}?text=Gostaria de agendar uma coleta`,
-        "inLanguage": "pt-BR",
-        "actionPlatform": [
-          "http://schema.org/DesktopWebPlatform",
-          "http://schema.org/IOSPlatform",
-          "http://schema.org/AndroidPlatform"
-        ]
-      },
-      "result": {
-        "@type": "Service",
-        "name": "Lavanderia Delivery"
-      }
-    }
+    }))
   };
 
   return (
@@ -234,7 +188,7 @@ const Home: React.FC = () => {
       />
 
       <main className="overflow-x-hidden">
-        {/* HERO SECTION WITH PREMIUM SLIDER & BUBBLES */}
+        {/* HERO SECTION */}
         <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
           
           {/* Background Slider */}
@@ -251,55 +205,50 @@ const Home: React.FC = () => {
                   alt={`Lavanderia Inovata - Serviço Profissional ${index + 1}`} 
                   className="w-full h-full object-cover transform scale-105 animate-pulse-slow" 
                   style={{ animationDuration: '10s' }}
+                  // Ensure no hydration mismatch on src attribute
                   suppressHydrationWarning={true}
-                  onError={isPrerender ? undefined : (e) => {
-                    (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1521656693072-a8333f629688?q=80&w=2070&auto=format&fit=crop";
-                  }}
                 />
               </div>
             ))}
-            {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-hero z-10"></div>
           </div>
           
-          {/* REALISTIC SOAP BUBBLES */}
-          <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
-            {bubbles.map((bubble) => (
-              <div
-                key={bubble.id}
-                className="soap-bubble"
-                style={{
-                  left: bubble.left,
-                  width: bubble.size,
-                  height: bubble.size,
-                  animationDelay: bubble.delay, // Use random delay for natural distribution
-                  '--bubble-duration': bubble.duration,
-                  '--sway': bubble.sway,
-                } as React.CSSProperties}
-              />
-            ))}
-          </div>
+          {/* BUBBLES - ONLY RENDER IF MOUNTED TO PREVENT HYDRATION MISMATCH */}
+          {isMounted && (
+            <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
+              {bubbles.map((bubble) => (
+                <div
+                  key={bubble.id}
+                  className="soap-bubble"
+                  style={{
+                    left: bubble.left,
+                    width: bubble.size,
+                    height: bubble.size,
+                    animationDelay: bubble.delay,
+                    '--bubble-duration': bubble.duration,
+                    '--sway': bubble.sway,
+                  } as React.CSSProperties}
+                />
+              ))}
+            </div>
+          )}
 
           <div className="container mx-auto px-4 z-20 text-center text-white mt-16 fade-up relative">
-            {/* Eyebrow Title */}
             <div className="inline-block mb-4 animate-fade-in-down">
                <span className="text-primary-gold font-bold tracking-[0.2em] uppercase text-xs md:text-sm bg-white/10 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
                  Lavanderia Inovata & Delivery
                </span>
             </div>
 
-            {/* Main Typewriter Headline */}
             <h1 className="text-3xl md:text-5xl lg:text-7xl font-heading font-black mb-6 leading-tight min-h-[100px] md:min-h-[140px] drop-shadow-2xl">
               <Typewriter texts={HOME_TYPEWRITER_TEXTS} />
             </h1>
             
-            {/* Descriptive Subtext - Desktop focused */}
             <p className="hidden md:block text-lg text-gray-200 mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
               A solução completa de limpeza para sua casa e família em Osasco. 
               Tecnologia de ponta, produtos biodegradáveis e a conveniência de buscar e entregar na sua porta.
             </p>
 
-            {/* Service Badges */}
             <div className="flex flex-wrap justify-center gap-3 md:gap-4 text-sm md:text-base mb-10 text-gray-100 font-medium drop-shadow-md">
               <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">🧺</span> Roupas & Tênis</span>
               <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">🛋️</span> Sofás & Estofados</span>
@@ -307,37 +256,27 @@ const Home: React.FC = () => {
               <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">👶</span> Carrinhos & Ursinhos</span>
             </div>
 
-            {/* CTAs */}
+            {/* CTAs - Suppress hydration warning for dynamic href/text */}
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
               <a 
                 href={ctaState.primaryUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full md:w-auto bg-gradient-gold text-secondary-dark px-8 py-4 rounded-full font-bold text-lg shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] transform hover:scale-105 transition-all duration-300 animate-pulse-glow btn-premium flex items-center justify-center gap-2"
+                suppressHydrationWarning={true}
               >
                 {ctaState.primaryText}
               </a>
               
-              {ctaState.showPrices ? (
-                <Link
-                  to="/precos"
-                  className="w-full md:w-auto border-2 border-white/30 hover:border-white bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:bg-white/20 flex items-center justify-center gap-2"
-                >
-                  {ctaState.secondaryText}
-                </Link>
-              ) : (
-                <button
-                  onClick={() => {
-                     document.getElementById('bairros')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="w-full md:w-auto border-2 border-white/30 hover:border-white bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:bg-white/20 flex items-center justify-center gap-2"
-                >
-                  {ctaState.secondaryText}
-                </button>
-              )}
+              <Link
+                to={ctaState.secondaryLink}
+                className="w-full md:w-auto border-2 border-white/30 hover:border-white bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:bg-white/20 flex items-center justify-center gap-2"
+              >
+                {ctaState.secondaryText}
+              </Link>
             </div>
 
-            {/* Floating Badges - Desktop Only */}
+            {/* Floating Badges */}
             <div className="hidden lg:flex absolute -bottom-16 left-0 right-0 justify-center gap-6 pointer-events-none">
                {['✅ Delivery Grátis acima de R$250', '👟 Especialista em Tênis', '🛋️ Higienização de Estofados', '🏆 Qualidade Premium'].map((badge, idx) => (
                  <div key={idx} className="bg-secondary-dark/80 backdrop-blur-md px-5 py-2 rounded-full border border-white/10 text-xs font-bold text-gray-300 uppercase tracking-wide animate-float shadow-lg" style={{ animationDelay: `${idx * 0.5}s` }}>
@@ -442,7 +381,7 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* FAQ SECTION (NEW) */}
+        {/* FAQ SECTION */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4 max-w-4xl">
             <div className="text-center mb-12 fade-up">

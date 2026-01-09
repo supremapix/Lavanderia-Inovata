@@ -454,6 +454,91 @@ const Home: React.FC = () => {
           </div>
         </section>
 
+        {/* IMAGE CTA SECTION */}
+        <section className="py-20 bg-white relative overflow-hidden">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+
+                {/* Image Side */}
+                <div className="relative group order-2 md:order-1">
+                  <div className="absolute -inset-4 bg-gradient-to-br from-primary-gold/20 via-primary-blue/20 to-purple-500/20 rounded-3xl blur-2xl opacity-60 group-hover:opacity-80 transition-opacity"></div>
+                  <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white transform hover:scale-[1.02] transition-all duration-500">
+                    <img
+                      src="/lavanderia-inovata-osasco-sp-sp.png"
+                      alt="Lavanderia Inovata - Serviços Profissionais em Osasco"
+                      className="w-full h-auto"
+                    />
+                  </div>
+
+                  {/* Floating Badge */}
+                  <div className="absolute -bottom-6 -right-6 bg-primary-gold text-secondary-dark px-6 py-4 rounded-2xl shadow-xl font-bold text-center border-4 border-white animate-float">
+                    <div className="text-2xl leading-none mb-1">✨</div>
+                    <div className="text-sm whitespace-nowrap">Qualidade Premium</div>
+                  </div>
+                </div>
+
+                {/* CTA Side */}
+                <div className="order-1 md:order-2 text-center md:text-left">
+                  <div className="inline-flex items-center gap-2 bg-gradient-gold text-secondary-dark px-4 py-2 rounded-full text-sm font-bold mb-6 shadow-lg">
+                    ⚡ OFERTA ESPECIAL
+                  </div>
+
+                  <h2 className="text-3xl md:text-5xl font-heading font-black text-secondary-dark mb-6 leading-tight">
+                    Transforme Suas <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-blue to-primary-gold">Roupas e Tênis</span> Hoje Mesmo!
+                  </h2>
+
+                  <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                    Não perca tempo com lavanderia! Coletamos, lavamos e entregamos tudo impecável na sua porta. Delivery grátis acima de R$250.
+                  </p>
+
+                  <div className="space-y-4 mb-8">
+                    <div className="flex items-center gap-3 text-gray-700">
+                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <CheckCircle size={18} className="text-green-600" />
+                      </div>
+                      <span className="font-semibold">Coleta e entrega em até 48h</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-gray-700">
+                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <CheckCircle size={18} className="text-green-600" />
+                      </div>
+                      <span className="font-semibold">Produtos biodegradáveis premium</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-gray-700">
+                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <CheckCircle size={18} className="text-green-600" />
+                      </div>
+                      <span className="font-semibold">Garantia de satisfação 100%</span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <a
+                      href={`https://wa.me/${CONTACT.whatsapp}?text=Olá! Quero aproveitar a oferta e solicitar coleta agora! (Origem: CTA Imagem Home)`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-gradient-gold text-secondary-dark px-8 py-5 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 btn-premium"
+                    >
+                      🚀 Solicitar Coleta Agora
+                    </a>
+                    <a
+                      href="/precos"
+                      className="border-2 border-primary-blue text-primary-blue px-8 py-5 rounded-2xl font-bold text-lg hover:bg-primary-blue hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
+                    >
+                      💰 Ver Preços
+                    </a>
+                  </div>
+
+                  <p className="text-sm text-gray-500 mt-6">
+                    * Delivery grátis para pedidos acima de R$250 em Osasco e região
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* CTA FINAL */}
         <section className="py-24 bg-gradient-primary relative overflow-hidden">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
@@ -465,15 +550,15 @@ const Home: React.FC = () => {
               Seus tênis, tapetes, cortinas e roupas em boas mãos. Aproveite nosso delivery grátis* e ganhe tempo livre.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <a 
-                href="https://wa.me/5511921691307?text=Quero lavar meus tênis e roupas! (Origem: CTA Final Home)" 
+              <a
+                href="https://wa.me/5511921691307?text=Quero lavar meus tênis e roupas! (Origem: CTA Final Home)"
                 className="bg-white text-primary-blue px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-gray-100 transition-colors flex items-center justify-center gap-2 btn-premium"
               >
                 Solicitar Coleta Agora
                 <ArrowRight size={20} />
               </a>
-               <a 
-                href="tel:1136831307" 
+               <a
+                href="tel:1136831307"
                 className="bg-transparent border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-colors"
               >
                 Ligar (11) 3683-1307

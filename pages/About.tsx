@@ -159,9 +159,9 @@ const About: React.FC = () => {
                     </div>
                  </div>
 
-                 <img
-                   src="/lavanderia_inovata-osasco-sp.jpeg"
-                   alt="Fachada Moderna da Lavanderia Inovata em Osasco com Veículo de Entrega"
+                 <img 
+                   src="/fachada-loja.jpg" 
+                   alt="Fachada Moderna da Lavanderia Inovata em Osasco com Veículo de Entrega" 
                    className="w-full h-full object-cover relative z-10"
                    onError={(e) => {
                      e.currentTarget.style.display = 'none';

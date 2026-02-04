@@ -5,10 +5,9 @@ import { NEIGHBORHOODS, SERVICES_DATA, HOME_TYPEWRITER_TEXTS, CONTACT, HOME_FAQ 
 import { ArrowRight, CheckCircle, MapPin, ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 import EnhancedSEO from '../components/EnhancedSEO';
 
-// High-quality images for the slider
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?q=80&w=2070&auto=format&fit=crop", // Professional Ironing/Steam
-  "https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?q=80&w=2070&auto=format&fit=crop", // Modern Washing Machine Detail
+  "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?q=80&w=2070&auto=format&fit=crop", 
+  "https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?q=80&w=2070&auto=format&fit=crop", 
 ];
 
 const Home: React.FC = () => {
@@ -19,56 +18,49 @@ const Home: React.FC = () => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const [isMounted, setIsMounted] = useState(false);
   
-  // Centralized Prerender Check
   const isPrerender = typeof window !== 'undefined' && (
     (window as any).__PRERENDER__ === true || 
     /HeadlessChrome/.test(navigator.userAgent)
   );
   
-  // Dynamic CTA State - Initial state must act as default to match server render
   const [ctaState, setCtaState] = useState({
     primaryText: "💬 ORÇAMENTO RÁPIDO",
     primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de um orçamento para lavanderia. (Origem: Home Hero)`,
-    secondaryText: "📍 VER ÁREA DE ATENDIMENTO",
-    secondaryLink: "/#bairros"
+    secondaryText: "📍 VER PREÇOS",
+    secondaryLink: "/precos"
   });
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
-  // Mount effect to handle client-side only updates
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // Check Time of Day for Dynamic CTA - Only runs on client
   useEffect(() => {
     if (isPrerender) return;
 
     const updateCTA = () => {
       const now = new Date();
       const hour = now.getHours();
-      const day = now.getDay(); // 0 = Sunday, 6 = Saturday
+      const day = now.getDay(); 
       
-      // Business Logic: Mon-Fri 8-18, Sat 9-13
       const isWeekDay = day >= 1 && day <= 5;
       const isSaturday = day === 6;
       const isWorkingHours = (isWeekDay && hour >= 8 && hour < 18) || (isSaturday && hour >= 9 && hour < 13);
 
       if (isWorkingHours) {
-        // High Urgency Mode
         setCtaState({
           primaryText: "⚡ ORÇAMENTO EM 2 MIN",
-          primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de um orçamento agora (Atendimento Online). (Origem: Home Hero - Horário Comercial)`,
-          secondaryText: "📍 ATENDEMOS SEU BAIRRO?",
-          secondaryLink: "/#bairros"
+          primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de um orçamento agora (Atendimento Online). (Origem: Home Hero - Comercial)`,
+          secondaryText: "📍 VER TABELA DE PREÇOS",
+          secondaryLink: "/precos"
         });
       } else {
-        // Retention/Research Mode (Night/Sunday)
         setCtaState({
           primaryText: "🌙 AGENDAR PARA AMANHÃ",
-          primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de deixar agendada uma coleta para o próximo horário disponível. (Origem: Home Hero - Fora de Horário)`,
+          primaryUrl: `https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de agendar uma coleta para amanhã. (Origem: Home Hero - Fora de Horário)`,
           secondaryText: "💲 VER TABELA DE PREÇOS",
           secondaryLink: "/precos"
         });
@@ -76,11 +68,10 @@ const Home: React.FC = () => {
     };
 
     updateCTA();
-    const interval = setInterval(updateCTA, 60000); // Update every minute
+    const interval = setInterval(updateCTA, 60000); 
     return () => clearInterval(interval);
   }, [isPrerender]);
 
-  // Initialize bubbles with random properties only on client
   useEffect(() => {
     if (isPrerender) return;
 
@@ -89,21 +80,18 @@ const Home: React.FC = () => {
       id: i,
       left: `${Math.random() * 100}%`,
       size: `${Math.random() * 50 + 20}px`,
-      duration: `${Math.random() * 6 + 10}s`, // Slower, more floaty
+      duration: `${Math.random() * 6 + 10}s`, 
       sway: `${Math.random() * 150 - 75}px`,
-      delay: `${Math.random() * 10}s` // Random delay to stagger appearance
+      delay: `${Math.random() * 10}s` 
     }));
     setBubbles(newBubbles);
   }, [isPrerender]);
 
-  // Background Slider Logic
   useEffect(() => {
     if (isPrerender) return;
-
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % HERO_IMAGES.length);
     }, 5000); 
-
     return () => clearInterval(interval);
   }, [isPrerender]);
 
@@ -118,7 +106,6 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     if (isPrerender) return;
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -128,15 +115,10 @@ const Home: React.FC = () => {
           }
         });
       },
-      { 
-        threshold: 0.1,
-        rootMargin: '50px'
-      }
+      { threshold: 0.1, rootMargin: '50px' }
     );
-
     const elements = document.querySelectorAll('.fade-up');
     elements.forEach((el) => observer.observe(el));
-
     return () => observer.disconnect();
   }, [isPrerender]);
 
@@ -145,15 +127,8 @@ const Home: React.FC = () => {
     "@type": "LaundryService",
     "@id": "https://www.lavanderiainovata.com.br",
     "name": "Lavanderia Inovata",
-    "image": [
-      "https://www.lavanderiainovata.com.br/logo.png",
-      ...HERO_IMAGES
-    ],
-    "logo": "https://www.lavanderiainovata.com.br/logo.png",
-    "url": "https://www.lavanderiainovata.com.br",
+    "image": HERO_IMAGES,
     "telephone": CONTACT.phone,
-    "email": CONTACT.email,
-    "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Av. César Abraão, 209",
@@ -166,32 +141,20 @@ const Home: React.FC = () => {
       "@type": "GeoCoordinates",
       "latitude": -23.5329,
       "longitude": -46.7919
-    },
-    "areaServed": NEIGHBORHOODS.map(n => ({
-          "@type": "Place",
-          "name": n.name,
-          "address": {
-              "@type": "PostalAddress",
-              "addressLocality": n.city,
-              "addressRegion": "SP"
-          }
-    }))
+    }
   };
 
   return (
     <>
       <EnhancedSEO 
         title="Lavanderia Inovata Osasco | Delivery de Tênis, Tapetes e Roupas"
-        description="Lavanderia Premium em Osasco e Região. Lavamos Tênis, Tapetes, Cortinas, Sofás e Roupas Finas. Delivery Grátis*. Agende sua coleta pelo WhatsApp agora!"
+        description="Lavanderia Premium em Osasco e Região. Lavamos Tênis, Tapetes, Cortinas, Sofás e Roupas Finas. Delivery Grátis*. Agende sua coleta agora!"
         structuredData={schemaData}
         type="business.business"
       />
 
       <main className="overflow-x-hidden">
-        {/* HERO SECTION */}
         <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-          
-          {/* Background Slider */}
           <div className="absolute inset-0 z-0 bg-secondary-dark">
             {HERO_IMAGES.map((img, index) => (
               <div 
@@ -200,252 +163,88 @@ const Home: React.FC = () => {
                   index === currentImageIndex ? 'opacity-100' : 'opacity-0'
                 }`}
               >
-                <img 
-                  src={img} 
-                  alt={`Lavanderia Inovata - Serviço Profissional ${index + 1}`} 
-                  className="w-full h-full object-cover transform scale-105 animate-pulse-slow" 
-                  style={{ animationDuration: '10s' }}
-                  // Ensure no hydration mismatch on src attribute
-                  suppressHydrationWarning={true}
-                />
+                <img src={img} alt={`Lavanderia Inovata - Slide ${index + 1}`} className="w-full h-full object-cover transform scale-105" suppressHydrationWarning />
               </div>
             ))}
             <div className="absolute inset-0 bg-gradient-hero z-10"></div>
           </div>
           
-          {/* BUBBLES - ONLY RENDER IF MOUNTED TO PREVENT HYDRATION MISMATCH */}
           {isMounted && (
             <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
               {bubbles.map((bubble) => (
-                <div
-                  key={bubble.id}
-                  className="soap-bubble"
-                  style={{
-                    left: bubble.left,
-                    width: bubble.size,
-                    height: bubble.size,
-                    animationDelay: bubble.delay,
-                    '--bubble-duration': bubble.duration,
-                    '--sway': bubble.sway,
-                  } as React.CSSProperties}
-                />
+                <div key={bubble.id} className="soap-bubble" style={{ left: bubble.left, width: bubble.size, height: bubble.size, animationDelay: bubble.delay, '--bubble-duration': bubble.duration, '--sway': bubble.sway } as any} />
               ))}
             </div>
           )}
 
           <div className="container mx-auto px-4 z-20 text-center text-white mt-16 fade-up relative">
-            <div className="inline-block mb-4 animate-fade-in-down">
+            <div className="inline-block mb-4">
                <span className="text-primary-gold font-bold tracking-[0.2em] uppercase text-xs md:text-sm bg-white/10 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
                  Lavanderia Inovata & Delivery
                </span>
             </div>
-
             <h1 className="text-3xl md:text-5xl lg:text-7xl font-heading font-black mb-6 leading-tight min-h-[100px] md:min-h-[140px] drop-shadow-2xl">
               <Typewriter texts={HOME_TYPEWRITER_TEXTS} />
             </h1>
-            
             <p className="hidden md:block text-lg text-gray-200 mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
-              A solução completa de limpeza para sua casa e família em Osasco. 
-              Tecnologia de ponta, produtos biodegradáveis e a conveniência de buscar e entregar na sua porta.
+              A solução completa de limpeza para sua casa em Osasco. Tecnologia, produtos biodegradáveis e delivery na sua porta.
             </p>
-
-            <div className="flex flex-wrap justify-center gap-3 md:gap-4 text-sm md:text-base mb-10 text-gray-100 font-medium drop-shadow-md">
-              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">🧺</span>{' '}Roupas & Tênis</span>
-              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">🛋️</span>{' '}Sofás & Estofados</span>
-              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">⭐</span>{' '}Tapetes & Cortinas</span>
-              <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 hover:bg-white/20 transition-colors cursor-default"><span className="text-primary-gold">👶</span>{' '}Carrinhos & Ursinhos</span>
-            </div>
-
-            {/* CTAs - Using standard <a> tag for dynamic secondary button to properly handle hydration suppression */}
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
-              <a 
-                href={ctaState.primaryUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full md:w-auto bg-gradient-gold text-secondary-dark px-8 py-4 rounded-full font-bold text-lg shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] transform hover:scale-105 transition-all duration-300 animate-pulse-glow btn-premium flex items-center justify-center gap-2"
-                suppressHydrationWarning={true}
-              >
-                <span suppressHydrationWarning={true}>{ctaState.primaryText}</span>
+              <a href={ctaState.primaryUrl} target="_blank" rel="noopener noreferrer" className="w-full md:w-auto bg-gradient-gold text-secondary-dark px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:scale-105 transition-all animate-pulse-glow btn-premium flex items-center justify-center gap-2">
+                <span suppressHydrationWarning>{ctaState.primaryText}</span>
               </a>
-              
-              <a
-                href={ctaState.secondaryLink}
-                className="w-full md:w-auto border-2 border-white/30 hover:border-white bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 hover:bg-white/20 flex items-center justify-center gap-2"
-                suppressHydrationWarning={true}
-              >
-                <span suppressHydrationWarning={true}>{ctaState.secondaryText}</span>
-              </a>
-            </div>
-
-            {/* Floating Badges */}
-            <div className="hidden lg:flex absolute -bottom-16 left-0 right-0 justify-center gap-6 pointer-events-none">
-               {['✅ Delivery Grátis acima de R$250', '👟 Especialista em Tênis', '🛋️ Higienização de Estofados', '🏆 Qualidade Premium'].map((badge, idx) => (
-                 <div key={idx} className="bg-secondary-dark/80 backdrop-blur-md px-5 py-2 rounded-full border border-white/10 text-xs font-bold text-gray-300 uppercase tracking-wide animate-float shadow-lg" style={{ animationDelay: `${idx * 0.5}s` }}>
-                   {badge}
-                 </div>
-               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* SERVICES SECTION */}
-        <section id="servicos" className="py-20 bg-secondary-dark relative">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16 fade-up">
-              <h2 className="text-primary-gold text-lg font-bold uppercase tracking-wider mb-2">Nossos Serviços</h2>
-              <h3 className="text-3xl md:text-4xl font-heading font-bold text-white">Muito Mais Que Só Roupas</h3>
-              <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-                Oferecemos soluções completas de limpeza e higienização. De tênis a estofados, cuidamos de tudo para você.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-              {SERVICES_DATA.map((service, idx) => (
-                <div 
-                  key={service.id} 
-                  className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500 hover:-translate-y-3 group fade-up"
-                  style={{ transitionDelay: `${idx * 150}ms` }}
-                >
-                  <div className="mb-6 transform group-hover:rotate-[360deg] transition-transform duration-700 ease-in-out inline-block">
-                    {service.icon}
-                  </div>
-                  <h4 className="text-xl font-bold text-white mb-3 font-heading">{service.title}</h4>
-                  <p className="text-gray-400 mb-6 text-sm leading-relaxed">{service.description}</p>
-                  <ul className="space-y-2 mb-8">
-                    {service.features.map((feature: string, fIdx: number) => (
-                      <li key={fIdx} className="flex items-center gap-2 text-sm text-gray-300">
-                        <CheckCircle size={14} className="text-primary-gold" /> {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <a href={`https://wa.me/5511921691307?text=Olá, tenho interesse no serviço de ${service.title}. (Origem: Cards de Serviço Home)`} className="inline-block w-full text-center py-3 border border-primary-gold/30 text-primary-gold rounded-xl font-semibold hover:bg-primary-gold hover:text-secondary-dark transition-colors duration-300">
-                    Solicitar
-                  </a>
-                </div>
-              ))}
-            </div>
-            
-            <div className="text-center fade-up" style={{ transitionDelay: '600ms' }}>
-              <Link to="/servicos" className="inline-flex items-center gap-2 text-white hover:text-primary-gold font-bold transition-colors">
-                Ver todos os serviços e detalhes <ArrowRight size={20} />
+              <Link to={ctaState.secondaryLink} className="w-full md:w-auto border-2 border-white/30 hover:border-white bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg transition-all hover:bg-white/20 flex items-center justify-center gap-2">
+                <span suppressHydrationWarning>{ctaState.secondaryText}</span>
               </Link>
             </div>
           </div>
         </section>
 
-        {/* HOW IT WORKS */}
-        <section className="py-20 bg-gray-50 overflow-hidden">
-          <div className="container mx-auto px-4">
-             <div className="text-center mb-16 fade-up">
-              <h2 className="text-primary-blue text-lg font-bold uppercase tracking-wider mb-2">Como Funciona</h2>
-              <h3 className="text-3xl md:text-4xl font-heading font-bold text-secondary-dark">Lavanderia sem sair de casa</h3>
-            </div>
-
-            <div className="relative">
-              {/* Line Connector (Desktop) */}
-              <div className="hidden md:block absolute top-12 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-gold to-transparent opacity-30 fade-up"></div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
-                {[
-                  { 
-                    step: 1, 
-                    title: 'SOLICITE', 
-                    desc: 'Entre em contato pelo nosso WhatsApp ou telefone. Nossa equipe fará um orçamento personalizado na hora e agendará a retirada no melhor horário para sua rotina.', 
-                    icon: '📱' 
-                  },
-                  { 
-                    step: 2, 
-                    title: 'COLETAMOS', 
-                    desc: 'Buscamos suas peças em casa com total segurança. Fazemos o check-in detalhado dos itens e, para estofados, nossa equipe especializada vai até você com equipamentos de ponta.', 
-                    icon: '🚚' 
-                  },
-                  { 
-                    step: 3, 
-                    title: 'ENTREGAMOS', 
-                    desc: 'Receba tudo limpo, passado e embalado em até 48 horas*. Suas roupas voltam macias, cheirosas e prontas para uso, com a qualidade que só a Inovata oferece.', 
-                    icon: '✨' 
-                  },
-                ].map((item, idx) => (
-                   <div key={item.step} className="text-center fade-up" style={{ transitionDelay: `${idx * 250}ms` }}>
-                      <div className="w-24 h-24 mx-auto bg-gradient-primary rounded-full flex items-center justify-center text-4xl shadow-xl mb-6 relative group">
-                        <span className="group-hover:scale-110 transition-transform duration-300 block">{item.icon}</span>
-                        <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary-gold rounded-full flex items-center justify-center text-secondary-dark font-bold text-sm">
-                          {item.step}
-                        </div>
-                      </div>
-                      <h4 className="text-xl font-bold text-secondary-dark mb-2 font-heading">{item.title}</h4>
-                      <p className="text-gray-600 max-w-sm mx-auto leading-relaxed">{item.desc}</p>
-                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ SECTION */}
+        {/* RECENT BLOGS SECTION */}
         <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <div className="text-center mb-12 fade-up">
-              <div className="inline-flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-full shadow-sm text-primary-blue mb-4">
-                <HelpCircle size={20} />
-                <span className="font-bold text-sm uppercase">Dúvidas Frequentes</span>
+           <div className="container mx-auto px-4">
+              <div className="text-center mb-16 fade-up">
+                <h2 className="text-primary-blue text-lg font-bold uppercase tracking-wider mb-2">Dicas & Novidades</h2>
+                <h3 className="text-3xl md:text-4xl font-heading font-bold text-secondary-dark">Nosso Blog</h3>
               </div>
-              <h2 className="text-3xl md:text-4xl font-heading font-bold text-secondary-dark">Tudo sobre a Lavanderia Inovata</h2>
-            </div>
-
-            <div className="space-y-4 fade-up">
-              {HOME_FAQ.map((faq, index) => (
-                <div key={index} className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
-                  <button
-                    onClick={() => toggleFaq(index)}
-                    className="w-full flex justify-between items-center p-6 text-left focus:outline-none bg-white hover:bg-gray-50 transition-colors group"
-                  >
-                    <span className="font-bold text-lg text-gray-800 group-hover:text-primary-blue transition-colors">{faq.question}</span>
-                    <div className={`p-2 rounded-full transition-colors ${openFaqIndex === index ? 'bg-primary-gold text-white' : 'bg-gray-100 text-gray-500'}`}>
-                      {openFaqIndex === index ? (
-                        <ChevronUp size={20} />
-                      ) : (
-                        <ChevronDown size={20} />
-                      )}
-                    </div>
-                  </button>
-                  <div 
-                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                      openFaqIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                    }`}
-                  >
-                    <div className="p-6 pt-0 text-gray-600 leading-relaxed border-t border-gray-100 bg-gray-50/50">
-                      {faq.answer}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                 {[
+                   { slug: 'guia-limpeza-tenis-osasco-barueri', title: 'Guia de Tênis em Osasco', cat: 'Calçados', img: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=400&fit=crop' },
+                   { slug: 'higiene-edredons-tapetes-carapicuiba', title: 'Saúde em Carapicuíba', cat: 'Dicas de Casa', img: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=400&fit=crop' },
+                   { slug: 'delivery-lavanderia-lapa-vila-leopoldina', title: 'Delivery na Lapa', cat: 'Lifestyle', img: 'https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?q=80&w=400&fit=crop' }
+                 ].map((p, i) => (
+                   <Link key={i} to={`/blog/${p.slug}`} className="group bg-gray-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all fade-up" style={{ transitionDelay: `${i*100}ms` }}>
+                      <div className="h-48 overflow-hidden">
+                        <img src={p.img} alt={p.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                      </div>
+                      <div className="p-6">
+                        <span className="text-primary-blue text-[10px] font-bold uppercase tracking-widest">{p.cat}</span>
+                        <h4 className="text-lg font-bold text-secondary-dark mt-2 group-hover:text-primary-blue transition-colors">{p.title}</h4>
+                      </div>
+                   </Link>
+                 ))}
+              </div>
+              <div className="text-center fade-up">
+                <Link to="/blog" className="font-bold text-primary-gold flex items-center justify-center gap-2 hover:translate-x-1 transition-transform">Ver Blog Completo <ArrowRight size={18}/></Link>
+              </div>
+           </div>
         </section>
 
-        {/* NEIGHBORHOODS */}
+        {/* NEIGHBORHOODS grounding */}
         <section id="bairros" className="py-20 bg-gray-50" ref={scrollRef}>
           <div className="container mx-auto px-4">
              <div className="text-center mb-16 fade-up">
               <h2 className="text-primary-blue text-lg font-bold uppercase tracking-wider mb-2">Área de Atendimento</h2>
-              <h3 className="text-3xl md:text-4xl font-heading font-bold text-secondary-dark">Atendemos Osasco e Região (Raio 15km)</h3>
-              <p className="mt-4 text-gray-500">Confira se atendemos sua região na lista abaixo:</p>
+              <h3 className="text-3xl md:text-4xl font-heading font-bold text-secondary-dark">Atendemos Osasco, Barueri, SP e Região</h3>
             </div>
-
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {NEIGHBORHOODS.map((hood, idx) => (
-                <Link 
-                  to={`/lavanderia/${hood.slug}`}
-                  key={hood.id} 
-                  className="group flex items-center gap-3 p-3 rounded-xl border border-gray-200 bg-white hover:border-primary-blue hover:shadow-lg hover:-translate-y-1 hover:scale-105 transition-all duration-300 cursor-pointer fade-up"
-                  style={{ transitionDelay: `${(idx % 10) * 50}ms` }}
-                >
+                <Link to={`/lavanderia/${hood.slug}`} key={hood.id} className="group flex items-center gap-3 p-3 rounded-xl border border-gray-200 bg-white hover:border-primary-blue hover:shadow-lg hover:-translate-y-1 transition-all fade-up" style={{ transitionDelay: `${(idx % 10) * 50}ms` }}>
                   <div className="p-2 rounded-full bg-blue-50 group-hover:bg-primary-blue transition-colors duration-300">
-                    <MapPin size={18} className="text-primary-blue group-hover:text-white transition-colors duration-300" />
+                    <MapPin size={18} className="text-primary-blue group-hover:text-white" />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-sm font-bold text-gray-700 group-hover:text-primary-blue transition-colors">{hood.name}</span>
+                    <span className="text-sm font-bold text-gray-700 group-hover:text-primary-blue">{hood.name}</span>
                     <span className="text-[10px] uppercase text-gray-400 font-bold">{hood.city}</span>
                   </div>
                 </Link>
@@ -454,115 +253,11 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        {/* IMAGE CTA SECTION */}
-        <section className="py-20 bg-white relative overflow-hidden">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <div className="grid md:grid-cols-2 gap-12 items-center">
-
-                {/* Image Side */}
-                <div className="relative group order-2 md:order-1">
-                  <div className="absolute -inset-4 bg-gradient-to-br from-primary-gold/20 via-primary-blue/20 to-purple-500/20 rounded-3xl blur-2xl opacity-60 group-hover:opacity-80 transition-opacity"></div>
-                  <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white transform hover:scale-[1.02] transition-all duration-500">
-                    <img
-                      src="/lavanderia-inovata-osasco-sp-sp.png"
-                      alt="Lavanderia Inovata - Serviços Profissionais em Osasco"
-                      className="w-full h-auto"
-                    />
-                  </div>
-
-                  {/* Floating Badge */}
-                  <div className="absolute -bottom-6 -right-6 bg-primary-gold text-secondary-dark px-6 py-4 rounded-2xl shadow-xl font-bold text-center border-4 border-white animate-float">
-                    <div className="text-2xl leading-none mb-1">✨</div>
-                    <div className="text-sm whitespace-nowrap">Qualidade Premium</div>
-                  </div>
-                </div>
-
-                {/* CTA Side */}
-                <div className="order-1 md:order-2 text-center md:text-left">
-                  <div className="inline-flex items-center gap-2 bg-gradient-gold text-secondary-dark px-4 py-2 rounded-full text-sm font-bold mb-6 shadow-lg">
-                    ⚡ OFERTA ESPECIAL
-                  </div>
-
-                  <h2 className="text-3xl md:text-5xl font-heading font-black text-secondary-dark mb-6 leading-tight">
-                    Transforme Suas <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-blue to-primary-gold">Roupas e Tênis</span> Hoje Mesmo!
-                  </h2>
-
-                  <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                    Não perca tempo com lavanderia! Coletamos, lavamos e entregamos tudo impecável na sua porta. Delivery grátis acima de R$250.
-                  </p>
-
-                  <div className="space-y-4 mb-8">
-                    <div className="flex items-center gap-3 text-gray-700">
-                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <CheckCircle size={18} className="text-green-600" />
-                      </div>
-                      <span className="font-semibold">Coleta e entrega em até 48h</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-gray-700">
-                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <CheckCircle size={18} className="text-green-600" />
-                      </div>
-                      <span className="font-semibold">Produtos biodegradáveis premium</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-gray-700">
-                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <CheckCircle size={18} className="text-green-600" />
-                      </div>
-                      <span className="font-semibold">Garantia de satisfação 100%</span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <a
-                      href={`https://wa.me/${CONTACT.whatsapp}?text=Olá! Quero aproveitar a oferta e solicitar coleta agora! (Origem: CTA Imagem Home)`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-gradient-gold text-secondary-dark px-8 py-5 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 btn-premium"
-                    >
-                      🚀 Solicitar Coleta Agora
-                    </a>
-                    <a
-                      href="/precos"
-                      className="border-2 border-primary-blue text-primary-blue px-8 py-5 rounded-2xl font-bold text-lg hover:bg-primary-blue hover:text-white transition-all duration-300 flex items-center justify-center gap-2"
-                    >
-                      💰 Ver Preços
-                    </a>
-                  </div>
-
-                  <p className="text-sm text-gray-500 mt-6">
-                    * Delivery grátis para pedidos acima de R$250 em Osasco e região
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* CTA FINAL */}
         <section className="py-24 bg-gradient-primary relative overflow-hidden">
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
           <div className="container mx-auto px-4 relative z-10 text-center fade-up">
-            <h2 className="text-3xl md:text-5xl font-heading font-black text-white mb-8">
-              Deixe o trabalho pesado com a gente!
-            </h2>
-            <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
-              Seus tênis, tapetes, cortinas e roupas em boas mãos. Aproveite nosso delivery grátis* e ganhe tempo livre.
-            </p>
+            <h2 className="text-3xl md:text-5xl font-heading font-black text-white mb-8">Trabalho pesado com a gente!</h2>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <a
-                href="https://wa.me/5511921691307?text=Quero lavar meus tênis e roupas! (Origem: CTA Final Home)"
-                className="bg-white text-primary-blue px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-gray-100 transition-colors flex items-center justify-center gap-2 btn-premium"
-              >
-                Solicitar Coleta Agora
-                <ArrowRight size={20} />
-              </a>
-               <a
-                href="tel:1136831307"
-                className="bg-transparent border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-colors"
-              >
-                Ligar (11) 3683-1307
-              </a>
+              <a href={`https://wa.me/${CONTACT.whatsapp}`} className="bg-white text-primary-blue px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:bg-gray-100 transition-colors flex items-center justify-center gap-2 btn-premium">Solicitar Coleta Agora <ArrowRight size={20}/></a>
             </div>
           </div>
         </section>

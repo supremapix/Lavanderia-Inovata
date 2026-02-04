@@ -23,14 +23,12 @@ const EnhancedSEO: React.FC<EnhancedSEOProps> = ({
 }) => {
   const location = useLocation();
   
-  // Clean pathname to avoid trailing slash inconsistencies
   const cleanPath = location.pathname.endsWith('/') && location.pathname !== '/' 
     ? location.pathname.slice(0, -1) 
     : location.pathname;
 
   const canonicalUrl = `${DOMAIN}${cleanPath}`;
 
-  // Generate Breadcrumb Schema if provided
   const breadcrumbSchema = breadcrumbs ? {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -42,21 +40,22 @@ const EnhancedSEO: React.FC<EnhancedSEOProps> = ({
     }))
   } : null;
 
-  // Handle relative image paths for Open Graph
   const ogImage = image.startsWith('http') ? image : `${DOMAIN}${image}`;
 
   return (
     <Helmet>
-      {/* Google Site Verification */}
       <meta name="google-site-verification" content="SrpI35v8t6X4DPizTXl20wgLcomCIbf4ObMKVVTcoPY" />
-
-      {/* Basic Meta Tags */}
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonicalUrl} />
       <meta name="robots" content="index, follow" />
 
-      {/* Open Graph */}
+      {/* Geolocation Meta Tags for Local SEO */}
+      <meta name="geo.region" content="BR-SP" />
+      <meta name="geo.placename" content="Osasco" />
+      <meta name="geo.position" content="-23.5329;-46.7919" />
+      <meta name="ICBM" content="-23.5329, -46.7919" />
+
       <meta property="og:type" content={type} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
@@ -65,24 +64,20 @@ const EnhancedSEO: React.FC<EnhancedSEOProps> = ({
       <meta property="og:site_name" content="Lavanderia Inovata" />
       <meta property="og:locale" content="pt_BR" />
 
-      {/* Twitter Cards */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
 
-      {/* Resource Hints */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
-      {/* Structured Data (JSON-LD) */}
       {structuredData && (
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>
       )}
       
-      {/* Breadcrumb Structured Data */}
       {breadcrumbSchema && (
         <script type="application/ld+json">
           {JSON.stringify(breadcrumbSchema)}

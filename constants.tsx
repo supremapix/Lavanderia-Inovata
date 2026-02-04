@@ -83,6 +83,39 @@ export const SERVICES_DATA: any[] = [
   }
 ];
 
+export const BLOG_POSTS = [
+  {
+    id: 'guia-limpeza-tenis',
+    slug: 'guia-limpeza-tenis-osasco-barueri',
+    title: 'Guia de Limpeza de Tênis em Osasco e Barueri',
+    excerpt: 'Descubra como manter seus sneakers novos por muito mais tempo com técnicas profissionais.',
+    content: `Cuidar de calçados premium exige mais do que apenas água e sabão. Em cidades como Osasco e Barueri, onde a rotina é agitada, seus tênis sofrem com a poluição e o desgaste natural. Na Lavanderia Inovata, utilizamos produtos biodegradáveis que limpam profundamente sem agredir materiais delicados como camurça e mesh. Atendemos regiões como Alphaville, Tamboré e o Centro de Osasco com nosso delivery especializado.`,
+    image: 'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop',
+    date: '10 de Junho, 2024',
+    category: 'Cuidado com Calçados'
+  },
+  {
+    id: 'higiene-edredons',
+    slug: 'higiene-edredons-tapetes-carapicuiba',
+    title: 'Higiene de Edredons e Tapetes: Saúde em Carapicuíba',
+    excerpt: 'Saiba por que a higienização profunda é vital para prevenir alergias na sua família.',
+    content: `Com as mudanças de estação, edredons e tapetes acumulam ácaros e poeira. Moradores de Carapicuíba, Vila Dirce e redondezas agora contam com a tecnologia da Inovata para uma limpeza bactericida completa. Nossa secagem em estufa garante que nenhuma umidade permaneça, evitando mofo e odores desagradáveis.`,
+    image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&auto=format&fit=crop',
+    date: '15 de Junho, 2024',
+    category: 'Dicas de Casa'
+  },
+  {
+    id: 'praticidade-delivery',
+    slug: 'delivery-lavanderia-lapa-vila-leopoldina',
+    title: 'Delivery de Lavanderia na Lapa e Vila Leopoldina',
+    excerpt: 'A solução de tempo que os paulistanos da Zona Oeste precisavam.',
+    content: `O tempo é o nosso bem mais precioso. Se você vive na Lapa, Vila Leopoldina ou Jaguaré, sabe como o trânsito pode ser desafiador. Nosso serviço de "Leva e Traz" foi desenhado para eliminar a preocupação com a roupa suja da sua agenda. Buscamos suas peças e entregamos em até 48 horas, prontas para o uso.`,
+    image: 'https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?q=80&w=800&auto=format&fit=crop',
+    date: '20 de Junho, 2024',
+    category: 'Logística & Estilo de Vida'
+  }
+];
+
 export const HOME_TYPEWRITER_TEXTS = [
   "Lavanderia Premium em Osasco",
   "Seus Tênis Novos de Novo",

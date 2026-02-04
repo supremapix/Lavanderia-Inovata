@@ -1,10 +1,12 @@
+
 import React from 'react';
+// Fixed: Added Link import from react-router-dom
+import { Link } from 'react-router-dom';
 import { Shirt, Snowflake, Droplets, Truck, CheckCircle, HelpCircle, Footprints, Armchair, Baby, Sparkles, ShieldCheck, Clock, Sun } from 'lucide-react';
 import { CONTACT } from '../constants';
 import EnhancedSEO from '../components/EnhancedSEO';
 
 const Services: React.FC = () => {
-  // Centralized Prerender Check
   const isPrerender = typeof window !== 'undefined' && (
     (window as any).__PRERENDER__ === true || 
     /HeadlessChrome/.test(navigator.userAgent)
@@ -13,36 +15,24 @@ const Services: React.FC = () => {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "serviceType": "Laundry Service",
+    "serviceType": "Laundry and Cleaning",
     "provider": {
       "@type": "LocalBusiness",
       "name": "Lavanderia Inovata",
-      "telephone": CONTACT.phone,
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": CONTACT.address,
-        "addressLocality": "Osasco",
-        "addressRegion": "SP"
+        "streetAddress": "Av. César Abraão, 209",
+        "addressLocality": "Osasco"
       }
-    },
-    "areaServed": {
-      "@type": "GeoCircle",
-      "geoMidpoint": {
-        "@type": "GeoCoordinates",
-        "latitude": -23.5329,
-        "longitude": -46.7919
-      },
-      "geoRadius": "15000"
     },
     "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "Serviços Inovata",
+        "name": "Catálogo de Serviços Inovata",
         "itemListElement": [
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lavagem de Tênis" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lavagem de Roupas Sociais" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Higienização de Estofados" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Limpeza de Tapetes" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Higienização de Carrinho de Bebê" } }
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lavagem de Edredons" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lavagem de Cortinas" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Passadoria Profissional" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lavagem de Tênis Osasco" } }
         ]
     }
   };
@@ -50,8 +40,8 @@ const Services: React.FC = () => {
   return (
     <>
       <EnhancedSEO 
-        title="Serviços Premium de Lavanderia | Tênis, Roupas, Tapetes e Baby | Inovata"
-        description="Conheça nossos processos detalhados de lavagem. Especialistas em clareamento de tênis, higienização de carrinhos de bebê, tapetes persas e roupas finas."
+        title="Lavagem de Edredons, Cortinas e Passadoria em Osasco | Inovata"
+        description="Serviços de lavanderia profissional em Osasco. Especialistas em lavagem de cortinas, edredons, tapetes e passadoria de roupas. Delivery rápido!"
         structuredData={schemaData}
         breadcrumbs={[
           { name: 'Home', item: '/' },
@@ -62,252 +52,129 @@ const Services: React.FC = () => {
       <main className="pt-24 pb-20 bg-gray-50 min-h-screen">
         <div className="container mx-auto px-4">
           
-          {/* Header */}
-          <div className="text-center mb-20 max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-heading font-black text-secondary-dark mb-6">Excelência em Cada Detalhe</h1>
+          <div className="text-center mb-24 max-w-4xl mx-auto fade-up">
+            <h1 className="text-4xl md:text-6xl font-heading font-black text-secondary-dark mb-8">Nossos Serviços Profissionais</h1>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Na Lavanderia Inovata, não apenas limpamos; nós restauramos, higienizamos e prolongamos a vida útil dos seus itens mais queridos com tecnologia e processos artesanais.
+              Cuidamos de cada peça com tecnologia de ponta. Sua busca por <strong>lavanderia profissional</strong> e <strong>passadoria profissional</strong> em Osasco termina aqui.
             </p>
           </div>
 
-          {/* SECTION 1: TÊNIS E CALÇADOS */}
-          <section className="mb-24 bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
-            <div className="grid grid-cols-1 lg:grid-cols-2">
-              <div className="p-8 md:p-12 flex flex-col justify-center">
-                <div className="inline-flex items-center gap-2 text-orange-600 font-bold mb-4 bg-orange-50 px-4 py-2 rounded-full w-fit">
-                  <Footprints size={20} /> SPA de Calçados
+          {/* Service 1: Clothes & Ironing */}
+          <section className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center fade-up">
+             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl h-[500px]">
+                <img src="https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?q=80&w=1000&auto=format&fit=crop" alt="Passadoria de roupas perto de mim" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-10 left-10">
+                   <span className="bg-primary-gold text-secondary-dark px-4 py-2 rounded-full font-bold text-sm">QUALIDADE PREMIUM</span>
                 </div>
-                <h2 className="text-3xl md:text-4xl font-heading font-bold text-secondary-dark mb-6">Renovação Total para Seus Tênis</h2>
-                <p className="text-gray-600 mb-6 text-lg leading-relaxed">
-                  Seus calçados merecem um tratamento VIP. Nosso processo de lavagem de tênis combina técnicas manuais com produtos específicos para cada material, garantindo limpeza profunda sem danos.
+             </div>
+             <div>
+                <div className="inline-flex items-center gap-2 text-primary-blue font-bold mb-4 uppercase tracking-widest text-sm">
+                   <Shirt size={20} /> Lavagem e Passadoria
+                </div>
+                <h2 className="text-3xl md:text-5xl font-heading font-black text-secondary-dark mb-8 leading-tight">Passadoria Profissional de Roupas</h2>
+                <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                  Oferecemos o serviço de <strong>passadoria de roupas perto de mim</strong> com o acabamento impecável que só uma <strong>lavanderia profissional</strong> pode proporcionar. Suas peças são higienizadas e passadas with vapor controlado, preservando as fibras e a forma.
                 </p>
+                <ul className="space-y-4 mb-10">
+                  <li className="flex items-center gap-3 text-gray-700 font-medium">
+                    <CheckCircle className="text-green-500" /> Passadoria artesanal para camisas sociais
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-700 font-medium">
+                    <CheckCircle className="text-green-500" /> Lavagem de roupas delicadas a seco
+                  </li>
+                  <li className="flex items-center gap-3 text-gray-700 font-medium">
+                    <CheckCircle className="text-green-500" /> Lavanderia delivery: Leva e Traz em Osasco
+                  </li>
+                </ul>
+                <a href={`https://wa.me/${CONTACT.whatsapp}`} className="bg-primary-blue text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-secondary-dark transition-all shadow-xl">
+                   Agendar Minha Passadoria
+                </a>
+             </div>
+          </section>
+
+          {/* Service 2: Heavy Items */}
+          <section className="mb-24 bg-white rounded-[3rem] p-10 md:p-20 shadow-xl border border-gray-100 fade-up">
+             <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-5xl font-heading font-black text-secondary-dark mb-6">Lavagem de Edredons e Cortinas</h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                   Higienização profunda para <strong>cortinas</strong>, <strong>edredons</strong> e <strong>tapetes</strong>. Saúde e bem-estar para sua casa.
+                </p>
+             </div>
+             
+             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div className="bg-gray-50 p-8 rounded-3xl hover:bg-blue-50 transition-colors">
+                   <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-primary-blue shadow-sm mb-6">
+                      <Droplets size={28} />
+                   </div>
+                   <h4 className="text-xl font-bold mb-4">Lavagem de Edredons</h4>
+                   <p className="text-gray-600 text-sm leading-relaxed mb-6">Secagem em estufa que garante maciez extrema e eliminação de 99.9% dos ácaros e fungos.</p>
+                   <Link to="/precos" className="text-primary-blue font-bold text-xs underline">VER PREÇOS EDREDOM</Link>
+                </div>
                 
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="font-bold text-xl text-gray-800 mb-3">Materiais que Tratamos:</h3>
-                    <div className="flex flex-wrap gap-3">
-                      {['Couro Liso', 'Camurça & Nobuck', 'Tecido & Mesh', 'Sintético', 'Lona'].map(tag => (
-                        <span key={tag} className="bg-gray-100 text-gray-700 px-3 py-1 rounded-md text-sm font-medium border border-gray-200">{tag}</span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <h3 className="font-bold text-xl text-gray-800 mb-3">O Processo Inclui:</h3>
-                    <ul className="space-y-3">
-                      <li className="flex items-start gap-3">
-                        <CheckCircle className="text-green-500 mt-1 shrink-0" size={20} />
-                        <div>
-                          <strong className="block text-gray-800">Limpeza Artesanal:</strong>
-                          <span className="text-gray-600 text-sm">Escovação manual específica para preservar texturas delicadas como camurça.</span>
-                        </div>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle className="text-green-500 mt-1 shrink-0" size={20} />
-                        <div>
-                          <strong className="block text-gray-800">Clareamento de Solados:</strong>
-                          <span className="text-gray-600 text-sm">Remoção da oxidação (amarelado) das bordas de borracha.</span>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                  
-                  <div className="mt-6">
-                    <a href={`https://wa.me/${CONTACT.whatsapp}?text=Quero lavar meus tênis! (Origem: Página Serviços - Tênis)`} className="inline-block bg-orange-500 text-white px-8 py-3 rounded-full font-bold hover:bg-orange-600 transition-colors btn-premium shadow-lg">
-                       Renovar Meus Tênis Agora
-                    </a>
-                  </div>
+                <div className="bg-gray-50 p-8 rounded-3xl hover:bg-blue-50 transition-colors">
+                   <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-primary-blue shadow-sm mb-6">
+                      <Sun size={28} />
+                   </div>
+                   <h4 className="text-xl font-bold mb-4">Lavagem de Cortinas</h4>
+                   <p className="text-gray-600 text-sm leading-relaxed mb-6">Higienização completa para cortinas de todos os tamanhos, com sistema de retirada e recolocação opcional.</p>
+                   <Link to="/precos" className="text-primary-blue font-bold text-xs underline">ORÇAMENTO CORTINAS</Link>
                 </div>
-              </div>
-              <div className="relative h-96 lg:h-auto bg-gray-100">
-                {/* Image: Close up of sneakers being cleaned or clean sneakers */}
-                <img 
-                  src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=1974&auto=format&fit=crop" 
-                  alt="Tênis limpos e renovados - Lavanderia de Tênis" 
-                  className="absolute inset-0 w-full h-full object-cover"
-                  onError={isPrerender ? undefined : (e) => {
-                     e.currentTarget.src = "https://placehold.co/800x600/orange/white?text=Tênis+Limpos";
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent flex items-end p-8">
-                  <p className="text-white font-bold text-xl">Deixe seus sneakers novos de novo.</p>
-                </div>
-              </div>
-            </div>
-          </section>
 
-          {/* SECTION 2: ROUPAS E TÊXTEIS */}
-          <section className="mb-24">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-               <div className="order-2 lg:order-1 relative rounded-3xl overflow-hidden shadow-2xl h-[500px]">
-                 {/* Image: Ironing or stack of folded shirts */}
-                 <img 
-                   src="https://images.unsplash.com/photo-1582735689369-4fe89db7114c?q=80&w=2070&auto=format&fit=crop" 
-                   alt="Roupas sendo passadas a ferro com perfeição" 
-                   className="absolute inset-0 w-full h-full object-cover"
-                   onError={isPrerender ? undefined : (e) => {
-                     e.currentTarget.src = "https://placehold.co/800x600/1E3A8A/white?text=Passadoria";
-                   }}
-                 />
-                 <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-lg max-w-xs">
-                   <div className="flex items-center gap-3 mb-2">
-                     <Clock className="text-primary-gold" />
-                     <span className="font-bold text-secondary-dark">Economize Tempo</span>
+                <div className="bg-gray-50 p-8 rounded-3xl hover:bg-blue-50 transition-colors">
+                   <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-primary-blue shadow-sm mb-6">
+                      <Sparkles size={28} />
                    </div>
-                   <p className="text-xs text-gray-600">O brasileiro gasta em média 4h por semana lavando e passando. Deixe isso com a gente!</p>
-                 </div>
-               </div>
-
-               <div className="order-1 lg:order-2">
-                 <div className="inline-flex items-center gap-2 text-primary-blue font-bold mb-4 bg-blue-50 px-4 py-2 rounded-full w-fit">
-                    <Shirt size={20} /> Vestuário Premium
-                 </div>
-                 <h2 className="text-3xl md:text-4xl font-heading font-bold text-secondary-dark mb-6">Cuidado Têxtil Completo</h2>
-                 <p className="text-gray-600 mb-6 text-lg leading-relaxed">
-                   Mais do que apenas lavar, nós cuidamos das fibras do tecido. Utilizamos processos que evitam o desbotamento, encolhimento e desgaste precoce das suas peças favoritas.
-                 </p>
-
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                   <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:border-primary-blue transition-colors">
-                     <h4 className="font-bold text-secondary-dark mb-2 flex items-center gap-2">
-                       <Droplets size={18} className="text-blue-500"/> Lavagem Wet & Dry
-                     </h4>
-                     <p className="text-sm text-gray-600">Tecnologia Wet Cleaning para peças delicadas e Lavagem a Seco para ternos e vestidos de festa.</p>
-                   </div>
-                   <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:border-primary-blue transition-colors">
-                     <h4 className="font-bold text-secondary-dark mb-2 flex items-center gap-2">
-                       <Sparkles size={18} className="text-yellow-500"/> Tira-Manchas
-                     </h4>
-                     <p className="text-sm text-gray-600">Pré-tratamento artesanal de colarinhos, punhos e manchas específicas.</p>
-                   </div>
-                 </div>
-
-                 <div className="mt-8">
-                     <a href={`https://wa.me/${CONTACT.whatsapp}?text=Preciso lavar e passar minhas roupas. (Origem: Página Serviços - Roupas)`} className="inline-block bg-primary-blue text-white px-8 py-3 rounded-full font-bold hover:bg-blue-800 transition-colors btn-premium shadow-lg">
-                        Agendar Coleta de Roupas
-                     </a>
-                  </div>
-               </div>
-            </div>
-          </section>
-
-          {/* SECTION 3: TAPETES E CORTINAS */}
-          <section className="mb-24 bg-secondary-dark rounded-3xl overflow-hidden text-white relative">
-             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
-             <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div className="p-8 md:p-12">
-                   <div className="inline-flex items-center gap-2 text-teal-300 font-bold mb-4 bg-white/10 px-4 py-2 rounded-full w-fit backdrop-blur-md">
-                      <Armchair size={20} /> Casa & Decor
-                   </div>
-                   <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">Tapetes e Cortinas: Higiene Profunda</h2>
-                   <p className="text-gray-300 mb-8 text-lg leading-relaxed">
-                     Itens de decoração acumulam poeira e ácaros invisíveis. Nossa lavagem especializada recupera as cores vivas e elimina agentes alergênicos, melhorando a qualidade do ar da sua casa.
-                   </p>
-
-                   <div className="space-y-8">
-                      <div>
-                        <h3 className="text-2xl font-bold text-primary-gold mb-4">Tapetes (Processo 5 Etapas)</h3>
-                        <ul className="space-y-3 text-gray-300">
-                          <li className="flex items-start gap-3">
-                            <span className="bg-white/10 p-1 rounded mt-1"><CheckCircle size={14}/></span>
-                            <span><strong>1. Remoção de Poeira:</strong> Batimento mecânico para remover terra profunda.</span>
-                          </li>
-                          <li className="flex items-start gap-3">
-                            <span className="bg-white/10 p-1 rounded mt-1"><CheckCircle size={14}/></span>
-                            <span><strong>2. Lavagem Bactericida:</strong> Imersão e escovação rotativa.</span>
-                          </li>
-                          <li className="flex items-start gap-3">
-                            <span className="bg-white/10 p-1 rounded mt-1"><CheckCircle size={14}/></span>
-                            <span><strong>3. Secagem em Estufa:</strong> Previne odores e preserva as fibras.</span>
-                          </li>
-                        </ul>
-                      </div>
-                   </div>
-                   <div className="mt-8">
-                     <a href={`https://wa.me/${CONTACT.whatsapp}?text=Orçamento para tapetes e cortinas (Origem: Página Serviços - Tapetes)`} className="inline-block bg-teal-600 text-white px-8 py-3 rounded-full font-bold hover:bg-teal-700 transition-colors btn-premium shadow-lg">
-                        Limpar Meus Tapetes
-                     </a>
-                  </div>
-                </div>
-                <div className="relative h-96 lg:h-auto">
-                   {/* Image: Living room with clean rug or curtain */}
-                   <img 
-                    src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?q=80&w=2070&auto=format&fit=crop" 
-                    alt="Sala de estar limpa com tapete higienizado" 
-                    className="absolute inset-0 w-full h-full object-cover opacity-90"
-                    onError={isPrerender ? undefined : (e) => {
-                      e.currentTarget.src = "https://placehold.co/800x600/teal/white?text=Tapetes";
-                    }}
-                   />
+                   <h4 className="text-xl font-bold mb-4">Lava Tapete</h4>
+                   <p className="text-gray-600 text-sm leading-relaxed mb-6">Serviço de <strong>lava tapete perto de mim</strong> com produtos biodegradáveis e resultados surpreendentes.</p>
+                   <Link to="/precos" className="text-primary-blue font-bold text-xs underline">TABELA TAPETES</Link>
                 </div>
              </div>
           </section>
 
-          {/* SECTION 4: BABY E INFANTIL */}
-          <section className="mb-20">
-            <div className="bg-gradient-to-br from-pink-50 to-white rounded-3xl p-8 md:p-12 border border-pink-100 shadow-lg">
-               <div className="flex flex-col md:flex-row gap-12">
-                  <div className="md:w-1/2">
-                    <div className="inline-flex items-center gap-2 text-pink-600 font-bold mb-4 bg-white px-4 py-2 rounded-full w-fit shadow-sm">
-                        <Baby size={20} /> Linha Baby & Kids
-                    </div>
-                    <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-800 mb-6">Segurança e Carinho para seu Bebê</h2>
-                    <p className="text-gray-600 mb-6 text-lg">
-                      Sabemos que a pele do bebê é sensível. Por isso, nossa linha infantil utiliza exclusivamente <strong>produtos hipoalergênicos e testados dermatologicamente</strong>.
-                    </p>
-                    
-                    <div className="bg-white p-6 rounded-2xl shadow-sm mb-6">
-                      <h3 className="font-bold text-lg text-pink-600 mb-3">Carrinhos e Bebê Conforto</h3>
-                      <p className="text-gray-600 text-sm mb-4">
-                        Desmontamos todas as partes removíveis para higienização completa. Realizamos lavagem por extração no estofado fixo para remover restos de leite, comida e sujeira.
-                      </p>
-                    </div>
-                    
-                    <div>
-                        <a href={`https://wa.me/${CONTACT.whatsapp}?text=Preciso higienizar o carrinho do bebê. (Origem: Página Serviços - Baby)`} className="inline-block bg-pink-500 text-white px-8 py-3 rounded-full font-bold hover:bg-pink-600 transition-colors btn-premium shadow-lg">
-                           Higienizar Carrinho de Bebê
-                        </a>
-                    </div>
-                  </div>
-
-                  <div className="md:w-1/2 flex flex-col justify-center items-center">
-                     <div className="grid grid-cols-2 gap-4 w-full">
-                        {/* Image: Baby Stroller */}
-                        <img 
-                           src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=1770&auto=format&fit=crop" 
-                           className="rounded-2xl shadow-md hover:scale-105 transition-transform duration-500 w-full h-48 object-cover" 
-                           alt="Carrinho de Bebê Higienizado"
-                           onError={isPrerender ? undefined : (e) => {
-                             e.currentTarget.src = "https://placehold.co/600x400/pink/white?text=Carrinho";
-                           }}
-                        />
-                        {/* Image: Plush Toy - Fixed Broken Link */}
-                        <img 
-                           src="https://images.unsplash.com/photo-1559454403-b8fb9a187a6d?q=80&w=800&auto=format&fit=crop" 
-                           className="rounded-2xl shadow-md hover:scale-105 transition-transform duration-500 translate-y-8 w-full h-48 object-cover" 
-                           alt="Ursinho de Pelúcia Limpo"
-                           onError={isPrerender ? undefined : (e) => {
-                             e.currentTarget.src = "https://placehold.co/600x400/pink/white?text=Ursinho";
-                           }}
-                        />
-                     </div>
-                     <div className="mt-12 text-center">
-                        <p className="font-heading font-bold text-2xl text-pink-400">"Cuidado de mãe,<br/>profissionalismo Inovata."</p>
-                     </div>
-                  </div>
-               </div>
-            </div>
+          {/* Service 3: Sneakers */}
+          <section className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center fade-up mb-24">
+             <div className="order-2 lg:order-1">
+                <div className="inline-flex items-center gap-2 text-orange-600 font-bold mb-4 uppercase tracking-widest text-sm">
+                   <Footprints size={20} /> SPA de Calçados
+                </div>
+                <h2 className="text-3xl md:text-5xl font-heading font-black text-secondary-dark mb-8 leading-tight">Lavagem de Tênis em Osasco</h2>
+                <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                  Seus tênis brancos voltando a ser brancos! Somos a <strong>lavanderia de tenis osasco</strong> referência em clareamento de solados e higienização interna de sneakers premium.
+                </p>
+                <div className="grid grid-cols-2 gap-6 mb-10">
+                   <div className="flex items-center gap-3 font-bold text-gray-800">
+                      <CheckCircle className="text-orange-500" size={18}/> Limpeza de Sola
+                   </div>
+                   <div className="flex items-center gap-3 font-bold text-gray-800">
+                      <CheckCircle className="text-orange-500" size={18}/> Clareamento
+                   </div>
+                   <div className="flex items-center gap-3 font-bold text-gray-800">
+                      <CheckCircle className="text-orange-500" size={18}/> Higiene Interna
+                   </div>
+                   <div className="flex items-center gap-3 font-bold text-gray-800">
+                      <CheckCircle className="text-orange-500" size={18}/> Fragrância Inovata
+                   </div>
+                </div>
+                <a href={`https://wa.me/${CONTACT.whatsapp}`} className="bg-orange-500 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-orange-600 transition-all shadow-xl">
+                   Renovar Meus Tênis
+                </a>
+             </div>
+             <div className="order-1 lg:order-2 relative rounded-[2.5rem] overflow-hidden shadow-2xl h-[500px]">
+                <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=1000&auto=format&fit=crop" alt="Lavagem de tênis osasco" className="w-full h-full object-cover" />
+             </div>
           </section>
 
-          {/* CTA */}
-          <div className="text-center mt-12">
-            <a 
-              href={`https://wa.me/${CONTACT.whatsapp}?text=Gostaria de saber mais sobre os serviços de lavanderia. (Origem: CTA Final Serviços)`} 
-              className="inline-block bg-primary-gold text-secondary-dark px-10 py-5 rounded-full font-bold text-xl shadow-xl hover:bg-secondary-dark hover:text-primary-gold transition-all transform hover:-translate-y-1 btn-premium"
-            >
-              Solicitar Orçamento Agora
-            </a>
-          </div>
+          {/* Final CTA */}
+          <section className="bg-primary-gold rounded-[3rem] p-10 md:p-20 text-center fade-up">
+             <h2 className="text-3xl md:text-5xl font-heading font-black text-secondary-dark mb-8">Experimente a Qualidade Inovata</h2>
+             <p className="text-xl text-secondary-dark/80 mb-12 max-w-2xl mx-auto">
+                Não somos apenas mais uma <strong>lavanderia em Osasco</strong>. Somos o parceiro que cuida da sua rotina e da saúde da sua família.
+             </p>
+             <a href={`https://wa.me/${CONTACT.whatsapp}`} className="bg-secondary-dark text-white px-12 py-5 rounded-full font-bold text-xl hover:scale-105 transition-all shadow-2xl">
+                PEDIR COLETA AGORA
+             </a>
+          </section>
 
         </div>
       </main>

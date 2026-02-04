@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
@@ -36,6 +37,8 @@ const AnimatedRoutes = () => {
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/contato" element={<Contact />} />
           <Route path="/lavanderia/:slug" element={<NeighborhoodPage />} />
+          {/* Fallback para evitar 404 no lado do cliente */}
+          <Route path="*" element={<Home />} />
         </Routes>
       </motion.div>
     </AnimatePresence>

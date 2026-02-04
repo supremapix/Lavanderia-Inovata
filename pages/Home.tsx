@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Typewriter from '../components/Typewriter';
-// Fixed: Added BLOG_POSTS to the constants import
 import { NEIGHBORHOODS, SERVICES_DATA, HOME_TYPEWRITER_TEXTS, CONTACT, HOME_FAQ, BLOG_POSTS } from '../constants';
 import { ArrowRight, CheckCircle, MapPin, ChevronDown, ChevronUp, HelpCircle, Star, Truck, Clock } from 'lucide-react';
 import EnhancedSEO from '../components/EnhancedSEO';
@@ -45,6 +44,7 @@ const Home: React.FC = () => {
     const updateCTA = () => {
       const now = new Date();
       const hour = now.getHours();
+      // Horário comercial simplificado para o CTA
       const isWorkingHours = hour >= 8 && hour < 18;
       if (isWorkingHours) {
         setCtaState({
@@ -153,149 +153,93 @@ const Home: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-hero z-10"></div>
           </div>
           
+          {/* Main Hero Content */}
           {isMounted && (
-            <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
-              {bubbles.map((bubble) => (
-                <div key={bubble.id} className="soap-bubble" style={{ left: bubble.left, width: bubble.size, height: bubble.size, animationDelay: bubble.delay, '--bubble-duration': bubble.duration, '--sway': bubble.sway } as any} />
-              ))}
+            <div className="container mx-auto px-4 relative z-20 text-center">
+              <h1 className="text-4xl md:text-7xl font-heading font-black text-white mb-6 leading-tight">
+                <Typewriter texts={HOME_TYPEWRITER_TEXTS} />
+              </h1>
+              <p className="text-xl text-gray-200 mb-10 max-w-2xl mx-auto">
+                Cuidamos das suas roupas com a qualidade e o carinho que elas merecem. Delivery em Osasco e região.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a 
+                  href={ctaState.primaryUrl}
+                  className="bg-primary-gold text-secondary-dark px-10 py-4 rounded-full font-bold text-lg hover:bg-white transition-all btn-premium shadow-xl"
+                >
+                  {ctaState.primaryText}
+                </a>
+                <Link 
+                  to={ctaState.secondaryLink}
+                  className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-10 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all shadow-xl"
+                >
+                  {ctaState.secondaryText}
+                </Link>
+              </div>
             </div>
           )}
-
-          <div className="container mx-auto px-4 z-20 text-center text-white fade-up">
-            <h1 className="text-3xl md:text-5xl lg:text-7xl font-heading font-black mb-6 leading-tight min-h-[140px]">
-              <Typewriter texts={HOME_TYPEWRITER_TEXTS} />
-            </h1>
-            <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
-              Sua <strong>lavanderia em Osasco</strong> com quality 5 estrelas. <br className="hidden md:block" /> 
-              Especialistas em <strong>lavagem de edredons</strong>, <strong>passadoria profissional</strong> e <strong>lavanderia delivery</strong>.
-            </p>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-              <a href={ctaState.primaryUrl} target="_blank" rel="noopener noreferrer" className="w-full md:w-auto bg-primary-gold text-secondary-dark px-10 py-4 rounded-full font-bold text-lg shadow-xl hover:scale-105 transition-all btn-premium">
-                {ctaState.primaryText}
-              </a>
-              <Link to="/precos" className="w-full md:w-auto border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-secondary-dark transition-all">
-                TABELA DE PREÇOS
-              </Link>
-            </div>
-          </div>
+          
+          {/* Decorative Bubbles */}
+          {!isPrerender && bubbles.map((bubble) => (
+            <div 
+              key={bubble.id}
+              className="absolute bg-white/10 rounded-full blur-[2px] pointer-events-none animate-bubble"
+              style={{
+                left: bubble.left,
+                width: bubble.size,
+                height: bubble.size,
+                bottom: '-50px',
+                '--duration': bubble.duration,
+                '--sway': bubble.sway,
+                animationDelay: bubble.delay
+              } as React.CSSProperties}
+            ></div>
+          ))}
         </section>
 
-        {/* Benefits Section - SEO Focused */}
-        <section className="py-24 bg-white">
+        {/* Areas section with ID for anchor scroll */}
+        <section id="bairros" className="py-20 bg-gray-50">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16 fade-up">
-              <h2 className="text-primary-blue text-sm font-bold uppercase tracking-widest mb-4">Por que a Inovata?</h2>
-              <h3 className="text-3xl md:text-5xl font-heading font-black text-secondary-dark">A Melhor Lavanderia de Osasco</h3>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-5xl font-heading font-black text-secondary-dark mb-4">Áreas de Atendimento</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Confira os bairros onde oferecemos nosso serviço de delivery leva e traz.
+              </p>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-              <div className="p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:shadow-2xl transition-all group fade-up">
-                <div className="w-16 h-16 bg-blue-100 text-primary-blue rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <Star size={32} />
-                </div>
-                <h4 className="text-2xl font-bold text-secondary-dark mb-4">Lavanderia Perto de Mim</h4>
-                <p className="text-gray-600 leading-relaxed">
-                  Localizada no coração de Osasco, a Inovata é a <strong>lavanderia perto de mim bem avaliada</strong> que você procura. Atendimento rápido em toda a região.
-                </p>
-              </div>
-
-              <div className="p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:shadow-2xl transition-all group fade-up" style={{ transitionDelay: '100ms' }}>
-                <div className="w-16 h-16 bg-gold-100 text-primary-gold rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <Truck size={32} />
-                </div>
-                <h4 className="text-2xl font-bold text-secondary-dark mb-4">Lavanderia Osasco Leva e Traz</h4>
-                <p className="text-gray-600 leading-relaxed">
-                  Não perca tempo em <strong>lavanderia self service osasco</strong>. Nosso sistema de <strong>lavanderia delivery</strong> busca e entrega suas roupas limpas e passadas.
-                </p>
-              </div>
-
-              <div className="p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:shadow-2xl transition-all group fade-up" style={{ transitionDelay: '200ms' }}>
-                <div className="w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <CheckCircle size={32} />
-                </div>
-                <h4 className="text-2xl font-bold text-secondary-dark mb-4">Passadoria Profissional</h4>
-                <p className="text-gray-600 leading-relaxed">
-                  Oferecemos <strong>passadoria de roupas perto de mim</strong> com finalização artesanal. Suas camisas e vestidos com caimento de loja.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Dynamic Blog Grid */}
-        <section className="py-24 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row items-end justify-between mb-12 fade-up">
-              <div>
-                <h2 className="text-primary-blue text-sm font-bold uppercase tracking-widest mb-4">Conteúdo Especializado</h2>
-                <h3 className="text-3xl md:text-4xl font-heading font-bold text-secondary-dark">Dicas de Lavanderia Profissional</h3>
-              </div>
-              <Link to="/blog" className="text-primary-gold font-bold flex items-center gap-2 hover:gap-4 transition-all mt-4 md:mt-0">
-                VER TODOS OS ARTIGOS <ArrowRight size={20} />
-              </Link>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {BLOG_POSTS.slice(0, 3).map((post, i) => (
-                <Link to={`/blog/${post.slug}`} key={post.id} className="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all fade-up" style={{ transitionDelay: `${i*100}ms` }}>
-                  <img src={post.image} alt={post.title} className="w-full h-56 object-cover" />
-                  <div className="p-8">
-                    <span className="text-[10px] font-bold text-primary-gold uppercase tracking-widest mb-2 block">{post.category}</span>
-                    <h4 className="text-xl font-bold text-secondary-dark mb-4">{post.title}</h4>
-                    <p className="text-gray-600 text-sm line-clamp-2">{post.excerpt}</p>
-                  </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              {NEIGHBORHOODS.map((n) => (
+                <Link 
+                  key={n.id} 
+                  to={`/lavanderia/${n.slug}`}
+                  className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 text-center hover:border-primary-gold transition-colors font-medium text-gray-700"
+                >
+                  {n.name}
                 </Link>
               ))}
             </div>
           </div>
         </section>
-
-        {/* FAQ with Semantic Keywords */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <div className="text-center mb-16 fade-up">
-              <h2 className="text-primary-blue text-sm font-bold uppercase tracking-widest mb-4">FAQ Osasco</h2>
-              <h3 className="text-3xl md:text-4xl font-heading font-bold text-secondary-dark">Dúvidas sobre Lavanderia e Passadoria</h3>
-            </div>
-            <div className="space-y-4">
-              {HOME_FAQ.map((faq, i) => (
-                <div key={i} className="border border-gray-100 rounded-2xl overflow-hidden fade-up" style={{ transitionDelay: `${i*50}ms` }}>
-                  <button 
-                    onClick={() => toggleFaq(i)}
-                    className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors font-bold text-gray-800"
-                  >
-                    {faq.question}
-                    {openFaqIndex === i ? <ChevronUp className="text-primary-gold" /> : <ChevronDown className="text-gray-400" />}
-                  </button>
-                  {openFaqIndex === i && (
-                    <div className="p-6 pt-0 text-gray-600 leading-relaxed border-t border-gray-50">
-                      {faq.answer}
+        
+        {/* Simple FAQ Section */}
+        <section className="py-20 bg-white">
+           <div className="container mx-auto px-4">
+              <div className="text-center mb-16">
+                 <h2 className="text-3xl md:text-5xl font-heading font-black text-secondary-dark mb-4">Dúvidas Frequentes</h2>
+              </div>
+              <div className="max-w-3xl mx-auto space-y-4">
+                 {HOME_FAQ.map((faq, index) => (
+                    <div key={index} className="border border-gray-100 rounded-2xl p-6 shadow-sm">
+                       <h3 className="text-lg font-bold text-secondary-dark mb-2">{faq.question}</h3>
+                       <p className="text-gray-600">{faq.answer}</p>
                     </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Geo Grounding Footer CTA */}
-        <section className="py-24 bg-secondary-dark text-white text-center relative overflow-hidden">
-          <div className="container mx-auto px-4 relative z-10">
-            <h2 className="text-3xl md:text-5xl font-heading font-black mb-8">Precisa de uma Lavagem Profissional?</h2>
-            <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-              Atendemos todo o <strong>Centro de Osasco</strong>, <strong>Km 18</strong>, <strong>Alphaville</strong> e região. <br />
-              Sua busca por "lavanderia perto de mim" termina aqui na Inovata.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <a href={`https://wa.me/${CONTACT.whatsapp}`} className="bg-primary-gold text-secondary-dark px-12 py-5 rounded-full font-bold text-xl shadow-2xl hover:bg-white transition-all btn-premium">
-                PEDIR COLETA AGORA
-              </a>
-            </div>
-          </div>
+                 ))}
+              </div>
+           </div>
         </section>
       </main>
     </>
   );
 };
 
+// Fix: Added default export for Home component to resolve import errors in App.tsx
 export default Home;

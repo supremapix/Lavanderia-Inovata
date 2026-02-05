@@ -236,6 +236,96 @@ const Home: React.FC = () => {
               </div>
            </div>
         </section>
+        
+        {/* CTA Section with Image */}
+        <section className="relative py-20 overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="/lavanderia-inovata-cta.png" 
+              alt="Lavanderia Inovata - Transforme suas roupas e tênis" 
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary-dark/90 via-secondary-dark/70 to-transparent"></div>
+          </div>
+          
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="max-w-2xl">
+              <div className="inline-block bg-primary-gold/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+                <p className="text-primary-gold font-bold text-sm flex items-center gap-2">
+                  <span className="text-xl">⚡</span> OFERTA ESPECIAL
+                </p>
+              </div>
+              
+              <h2 className="text-3xl md:text-5xl font-heading font-black text-white mb-6 leading-tight">
+                Transforme Suas <span className="text-primary-gold">Roupas</span> e <span className="text-primary-gold">Tênis</span> Hoje Mesmo!
+              </h2>
+              
+              <p className="text-xl text-gray-200 mb-8">
+                Não perca tempo com lavanderia! Coletamos, lavamos e entregamos tudo impecável na sua porta. Delivery grátis acima de R$250.
+              </p>
+              
+              <div className="space-y-3 mb-10">
+                <div className="flex items-center gap-3 text-white">
+                  <CheckCircle className="text-primary-gold shrink-0" size={24} />
+                  <span className="text-lg">Coleta e entrega em até 48h</span>
+                </div>
+                <div className="flex items-center gap-3 text-white">
+                  <CheckCircle className="text-primary-gold shrink-0" size={24} />
+                  <span className="text-lg">Produtos biodegradáveis premium</span>
+                </div>
+                <div className="flex items-center gap-3 text-white">
+                  <CheckCircle className="text-primary-gold shrink-0" size={24} />
+                  <span className="text-lg">Garantia de satisfação 100%</span>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a 
+                  href={`https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de solicitar uma coleta. (Origem: CTA Final)`}
+                  className="bg-primary-gold text-secondary-dark px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-all shadow-xl inline-flex items-center justify-center gap-2"
+                >
+                  🚀 Solicitar Coleta Agora
+                </a>
+                <Link 
+                  to="/precos"
+                  className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all shadow-xl inline-flex items-center justify-center gap-2"
+                >
+                  💰 Ver Preços
+                </Link>
+              </div>
+              
+              <p className="text-sm text-gray-300 mt-6">
+                * Delivery grátis para pedidos acima de R$250 em Osasco e região
+              </p>
+            </div>
+          </div>
+        </section>
+        
+        {/* Final CTA Banner */}
+        <section className="bg-gradient-to-r from-primary-gold to-yellow-500 py-12">
+          <div className="container mx-auto px-4 text-center">
+            <h3 className="text-2xl md:text-3xl font-heading font-black text-secondary-dark mb-4">
+              Deixe o trabalho pesado com a gente!
+            </h3>
+            <p className="text-secondary-dark/80 mb-6 max-w-2xl mx-auto">
+              Seus tênis, tapetes, cortinas e roupas em boas mãos. Aproveite nosso delivery grátis* e ganhe tempo livre.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href={`https://wa.me/${CONTACT.whatsapp}?text=Olá! Gostaria de solicitar uma coleta. (Origem: Banner Final)`}
+                className="bg-secondary-dark text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-secondary-dark/90 transition-all shadow-xl inline-flex items-center justify-center gap-2"
+              >
+                Solicitar Coleta Agora
+              </a>
+              <a 
+                href={`tel:${CONTACT.phone.replace(/\D/g, '')}`}
+                className="bg-white text-secondary-dark border-2 border-secondary-dark px-8 py-4 rounded-full font-bold text-lg hover:bg-secondary-dark hover:text-white transition-all shadow-xl inline-flex items-center justify-center gap-2"
+              >
+                Ligar {CONTACT.phone}
+              </a>
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );

@@ -241,7 +241,7 @@ const Home: React.FC = () => {
         <section className="relative py-20 overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img 
-              src="/lavanderia-inovata-cta-v2.png" 
+              src="/lavanderia-inovata-osasco-sp-sp.png"
               alt="Lavanderia Inovata - Transforme suas roupas e tênis" 
               className="w-full h-full object-cover"
             />

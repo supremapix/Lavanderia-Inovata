@@ -2,8 +2,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Typewriter from '../components/Typewriter';
+import BeforeAfterSection from '../components/BeforeAfterSection';
 import { NEIGHBORHOODS, SERVICES_DATA, HOME_TYPEWRITER_TEXTS, CONTACT, HOME_FAQ, BLOG_POSTS } from '../constants';
-import { ArrowRight, CheckCircle, MapPin, ChevronDown, ChevronUp, HelpCircle, Star, Truck, Clock } from 'lucide-react';
+import { ArrowRight, CircleCheck as CheckCircle, MapPin, ChevronDown, ChevronUp, CircleHelp as HelpCircle, Star, Truck, Clock } from 'lucide-react';
 import EnhancedSEO from '../components/EnhancedSEO';
 
 const HERO_IMAGES = [
@@ -220,6 +221,9 @@ const Home: React.FC = () => {
           </div>
         </section>
         
+        {/* Before & After Section */}
+        <BeforeAfterSection />
+
         {/* Simple FAQ Section */}
         <section className="py-20 bg-white">
            <div className="container mx-auto px-4">

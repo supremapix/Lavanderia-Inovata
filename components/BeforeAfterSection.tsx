@@ -194,20 +194,59 @@ const BeforeAfterSection: React.FC = () => {
             </div>
           </div>
 
-          {/* YouTube Video Section */}
-          <div className="mt-20 rounded-[2.5rem] overflow-hidden shadow-2xl bg-black/5">
-            <div className="relative pt-[56.25%] bg-secondary-dark">
-              <iframe
-                className="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/_MoxZWLhh_M?feature=share"
-                title="Transformação de Tênis - Lavanderia Inovata"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+          {/* Vertical Video Section (9:16) com Mockup Premium */}
+          <div className="mt-24 relative">
+            {/* Glow / brilho de fundo premium */}
+            <div className="absolute inset-0 flex items-center justify-center -z-10">
+              <div className="w-[420px] h-[420px] bg-gradient-to-tr from-primary-gold/30 to-yellow-500/10 rounded-full blur-[100px]"></div>
             </div>
-            <div className="bg-gradient-to-r from-secondary-dark to-secondary-dark/95 p-8 text-center text-white">
-              <p className="text-sm font-bold text-primary-gold uppercase tracking-widest mb-2">Veja em Ação</p>
-              <h3 className="text-xl md:text-2xl font-bold">Processo Completo de Higienização Premium</h3>
+
+            <div className="text-center mb-12 max-w-2xl mx-auto">
+              <p className="text-sm font-bold text-primary-gold uppercase tracking-[0.2em] mb-3">Veja em Ação</p>
+              <h3 className="text-3xl md:text-4xl font-heading font-black text-secondary-dark leading-tight">
+                Processo Completo de <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-gold to-yellow-500">Higienização Premium</span>
+              </h3>
+            </div>
+
+            {/* Smartphone Mockup */}
+            <div className="flex justify-center">
+              <div className="relative">
+                {/* Botões laterais */}
+                <div className="absolute -left-[3px] top-28 w-[3px] h-8 bg-secondary-dark/80 rounded-l-lg"></div>
+                <div className="absolute -left-[3px] top-40 w-[3px] h-14 bg-secondary-dark/80 rounded-l-lg"></div>
+                <div className="absolute -right-[3px] top-36 w-[3px] h-20 bg-secondary-dark/80 rounded-r-lg"></div>
+
+                {/* Moldura externa do celular */}
+                <div className="relative w-[300px] sm:w-[340px] rounded-[3rem] bg-gradient-to-b from-secondary-dark to-black p-3 shadow-[0_30px_80px_-15px_rgba(0,0,0,0.6)] ring-1 ring-white/10">
+                  {/* Borda metálica dourada sutil */}
+                  <div className="rounded-[2.4rem] p-[2px] bg-gradient-to-b from-primary-gold/60 via-secondary-dark to-primary-gold/40">
+                    {/* Tela */}
+                    <div className="relative rounded-[2.3rem] overflow-hidden bg-black">
+                      {/* Notch / Dynamic Island */}
+                      <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 w-24 h-6 bg-black rounded-full flex items-center justify-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-secondary-dark ring-1 ring-white/10"></div>
+                        <div className="w-8 h-1.5 rounded-full bg-secondary-dark/80"></div>
+                      </div>
+
+                      {/* Vídeo 9:16 */}
+                      <div className="relative aspect-[9/16] w-full bg-secondary-dark">
+                        <iframe
+                          className="absolute inset-0 w-full h-full"
+                          src="https://www.youtube.com/embed/_MoxZWLhh_M?feature=share&rel=0&modestbranding=1&playsinline=1"
+                          title="Transformação de Tênis - Lavanderia Inovata"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        ></iframe>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Selo premium flutuante */}
+                <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 bg-gradient-gold text-secondary-dark px-6 py-2.5 rounded-full font-bold text-sm shadow-xl flex items-center gap-2 whitespace-nowrap">
+                  <Star size={16} /> Resultado Premium
+                </div>
+              </div>
             </div>
           </div>
 

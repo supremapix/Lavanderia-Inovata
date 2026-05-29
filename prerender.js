@@ -47,14 +47,22 @@ async function prerender() {
   const server = app.listen(PORT);
   console.log(`📡 Build server running at http://localhost:${PORT}`);
 
-  const browser = await puppeteer.launch({
-    headless: "new",
-    args: [
-      '--no-sandbox', 
-      '--disable-setuid-sandbox',
-      '--disable-blink-features=AutomationControlled'
-    ]
-  });
+  let browser;
+  try {
+    browser = await puppeteer.launch({
+      headless: "new",
+      args: [
+        '--no-sandbox', 
+        '--disable-setuid-sandbox',
+        '--disable-blink-features=AutomationControlled'
+      ]
+    });
+  } catch (err) {
+    console.warn('⚠️ Chrome/Puppeteer indisponível neste ambiente. Pulando prerender (SSG) e mantendo o build como SPA.');
+    console.warn(`   Motivo: ${err.message?.split('\n')[0]}`);
+    server.close();
+    return;
+  }
 
   const routes = getRoutesFromSitemap();
   console.log(`📄 Routes found: ${routes.length}`);

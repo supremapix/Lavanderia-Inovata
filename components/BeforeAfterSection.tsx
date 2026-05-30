@@ -66,6 +66,31 @@ const BeforeAfterSection: React.FC = () => {
         'Cadarços limpos e organizados',
         'Aspecto de novo'
       ]
+    },
+    {
+      id: 'tenis-colecao',
+      before: '/antes-tres.png',
+      after: '/depois-tres.png',
+      title: 'Coleção Restaurada por Completo',
+      description: 'Vários pares, um resultado impecável! Recuperamos tênis encardidos, solados acinzentados e detalhes desgastados, devolvendo o branco original e o aspecto de loja a toda a coleção.',
+      benefits: [
+        'Recuperação do branco original',
+        'Limpeza de solados e entressolas',
+        'Tratamento de manchas profundas',
+        'Acabamento uniforme em todos os pares'
+      ],
+      beforePoints: [
+        'Sujo e com manchas',
+        'Cor desbotada',
+        'Cadarços desgastados',
+        'Aspecto de uso'
+      ],
+      afterPoints: [
+        'Limpo e sem manchas',
+        'Cor renovada e vibrante',
+        'Cadarços limpos e organizados',
+        'Aspecto de novo'
+      ]
     }
   ];
 

@@ -8,6 +8,7 @@ import { ArrowRight, CircleCheck as CheckCircle, MapPin, ChevronDown, ChevronUp,
 import EnhancedSEO from '../components/EnhancedSEO';
 
 const HERO_IMAGES = [
+  "/fachada-loja.jpg",
   "https://images.unsplash.com/photo-1582735689369-4fe89db7114c?q=80&w=2070&auto=format&fit=crop", 
   "https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?q=80&w=2070&auto=format&fit=crop", 
 ];
@@ -139,43 +140,85 @@ const Home: React.FC = () => {
 
       <main className="overflow-x-hidden">
         {/* Hero Section */}
-        <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+        <section className="relative h-[100svh] min-h-[600px] flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 z-0 bg-secondary-dark">
             {HERO_IMAGES.map((img, index) => (
               <div 
                 key={index}
-                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                  index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                className={`absolute inset-0 transition-all duration-[1400ms] ease-out ${
+                  index === currentImageIndex 
+                    ? 'opacity-100 scale-100 blur-0' 
+                    : 'opacity-0 scale-110 blur-sm'
                 }`}
               >
-                <img src={img} alt="Lavanderia Profissional em Osasco" className="w-full h-full object-cover opacity-60" />
+                <img 
+                  src={img} 
+                  alt="Lavanderia Profissional em Osasco" 
+                  className={`w-full h-full object-cover opacity-90 transition-transform duration-[7000ms] ease-out ${
+                    index === currentImageIndex ? 'scale-105' : 'scale-100'
+                  }`}
+                />
               </div>
             ))}
-            <div className="absolute inset-0 bg-gradient-hero z-10"></div>
+            {/* Readability overlays (kept lighter so the photos stay visible) */}
+            <div className="absolute inset-0 z-10 bg-gradient-to-t from-secondary-dark via-secondary-dark/50 to-secondary-dark/30"></div>
+            <div className="absolute inset-0 z-10 bg-secondary-dark/25"></div>
+          </div>
+
+          {/* Slide indicators */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2">
+            {HERO_IMAGES.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                aria-label={`Ir para imagem ${index + 1}`}
+                onClick={() => setCurrentImageIndex(index)}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  index === currentImageIndex ? 'w-10 bg-primary-gold' : 'w-4 bg-white/50 hover:bg-white/80'
+                }`}
+              />
+            ))}
           </div>
           
           {/* Main Hero Content */}
           {isMounted && (
-            <div className="container mx-auto px-4 relative z-20 text-center">
-              <h1 className="text-4xl md:text-7xl font-heading font-black text-white mb-6 leading-tight">
+            <div className="container mx-auto px-4 relative z-20 text-center animate-fade-in-up">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-semibold mb-6">
+                <Star size={14} className="text-primary-gold fill-primary-gold" />
+                Nota 4.9 • +127 clientes satisfeitos em Osasco
+              </div>
+              <h1 className="text-[2.5rem] leading-[1.1] sm:text-5xl md:text-7xl font-heading font-black text-white mb-6 drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]">
                 <Typewriter texts={HOME_TYPEWRITER_TEXTS} />
               </h1>
-              <p className="text-xl text-gray-200 mb-10 max-w-2xl mx-auto">
+              <p className="text-base sm:text-xl text-gray-100 mb-10 max-w-2xl mx-auto leading-relaxed">
                 Cuidamos das suas roupas com a qualidade e o carinho que elas merecem. Delivery em Osasco e região.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto">
                 <a 
                   href={ctaState.primaryUrl}
-                  className="bg-primary-gold text-secondary-dark px-10 py-4 rounded-full font-bold text-lg hover:bg-white transition-all btn-premium shadow-xl"
+                  className="bg-primary-gold text-secondary-dark px-8 sm:px-10 py-4 rounded-full font-bold text-base sm:text-lg hover:bg-white transition-all btn-premium shadow-xl"
                 >
                   {ctaState.primaryText}
                 </a>
                 <Link 
                   to={ctaState.secondaryLink}
-                  className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-10 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all shadow-xl"
+                  className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 sm:px-10 py-4 rounded-full font-bold text-base sm:text-lg hover:bg-white/20 transition-all shadow-xl"
                 >
                   {ctaState.secondaryText}
                 </Link>
+              </div>
+
+              {/* Trust badges */}
+              <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-white/90 text-sm">
+                <span className="inline-flex items-center gap-2">
+                  <Truck size={18} className="text-primary-gold" /> Delivery leva e traz
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <Clock size={18} className="text-primary-gold" /> Pronto em até 48h
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <CheckCircle size={18} className="text-primary-gold" /> Produtos biodegradáveis
+                </span>
               </div>
             </div>
           )}

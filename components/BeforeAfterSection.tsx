@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Star, Zap } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Star, Zap, X, Check } from 'lucide-react';
 
 interface BeforeAfterItem {
   id: string;
@@ -8,6 +8,8 @@ interface BeforeAfterItem {
   title: string;
   description: string;
   benefits: string[];
+  beforePoints: string[];
+  afterPoints: string[];
 }
 
 const BeforeAfterSection: React.FC = () => {
@@ -17,8 +19,8 @@ const BeforeAfterSection: React.FC = () => {
   const items: BeforeAfterItem[] = [
     {
       id: 'tenis-vans',
-      before: '/limpesa_tenis-antes-e-depois-osascosp_(1).jpeg',
-      after: '/limpesa_tenis-antes-e-depois-osascosp_(1).jpeg',
+      before: '/antes-um.png',
+      after: '/depois-um.png',
       title: 'Transformação Completa de Tênis',
       description: 'Seus tênis favoritos voltam a brilhar! Removemos sujeira profunda, solados amarelados e cadarços desgastados, devolvendo o aspecto de novo ao seu calçado premium.',
       benefits: [
@@ -26,12 +28,24 @@ const BeforeAfterSection: React.FC = () => {
         'Clareamento de solados e tecidos',
         'Higienização interna contra odores',
         'Restauração do brilho original'
+      ],
+      beforePoints: [
+        'Sujo e com manchas',
+        'Cor desbotada',
+        'Cadarços desgastados',
+        'Aspecto de uso'
+      ],
+      afterPoints: [
+        'Limpo e sem manchas',
+        'Cor renovada e vibrante',
+        'Cadarços limpos e organizados',
+        'Aspecto de novo'
       ]
     },
     {
       id: 'tenis-orange',
-      before: '/limpesa_tenis-antes-e-depois-osascosp_(2).jpeg',
-      after: '/limpesa_tenis-antes-e-depois-osascosp_(2).jpeg',
+      before: '/antes-dois.png',
+      after: '/depois-dois.png',
       title: 'Renovação de Cores e Detalhes',
       description: 'Mesmo os tênis mais desgastados ganham uma segunda vida! Nossa técnica especializada preserva cores vibrantes, remove manchas rebeldes e deixa os cadarços impecáveis.',
       benefits: [
@@ -39,6 +53,43 @@ const BeforeAfterSection: React.FC = () => {
         'Cores restauradas e vibrantes',
         'Cadarços limpos e organizados',
         'Embalagem premium inclusa'
+      ],
+      beforePoints: [
+        'Sujo e com manchas',
+        'Cor desbotada',
+        'Cadarços desgastados',
+        'Aspecto de uso'
+      ],
+      afterPoints: [
+        'Limpo e sem manchas',
+        'Cor renovada e vibrante',
+        'Cadarços limpos e organizados',
+        'Aspecto de novo'
+      ]
+    },
+    {
+      id: 'tenis-colecao',
+      before: '/antes-tres.png',
+      after: '/depois-tres.png',
+      title: 'Coleção Restaurada por Completo',
+      description: 'Vários pares, um resultado impecável! Recuperamos tênis encardidos, solados acinzentados e detalhes desgastados, devolvendo o branco original e o aspecto de loja a toda a coleção.',
+      benefits: [
+        'Recuperação do branco original',
+        'Limpeza de solados e entressolas',
+        'Tratamento de manchas profundas',
+        'Acabamento uniforme em todos os pares'
+      ],
+      beforePoints: [
+        'Sujo e com manchas',
+        'Cor desbotada',
+        'Cadarços desgastados',
+        'Aspecto de uso'
+      ],
+      afterPoints: [
+        'Limpo e sem manchas',
+        'Cor renovada e vibrante',
+        'Cadarços limpos e organizados',
+        'Aspecto de novo'
       ]
     }
   ];
@@ -95,7 +146,7 @@ const BeforeAfterSection: React.FC = () => {
                 <div className="relative rounded-2xl overflow-hidden h-80 md:h-96 bg-gradient-to-br from-gray-100 to-gray-200 shadow-lg transform transition-transform duration-500 hover:scale-105">
                   <img
                     src={current.before}
-                    alt="Antes"
+                    alt="Antes da higienização"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -105,6 +156,18 @@ const BeforeAfterSection: React.FC = () => {
                     ANTES
                   </div>
                 </div>
+
+                {/* Before Points */}
+                <ul className="mt-4 rounded-2xl border border-red-100 bg-red-50/60 p-4 space-y-2">
+                  {current.beforePoints.map((point, idx) => (
+                    <li key={idx} className="flex items-center gap-3 text-gray-700 font-medium">
+                      <span className="w-5 h-5 rounded-full bg-red-500 flex items-center justify-center shrink-0">
+                        <X size={12} className="text-white" strokeWidth={3} />
+                      </span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               {/* After Image */}
@@ -112,7 +175,7 @@ const BeforeAfterSection: React.FC = () => {
                 <div className="relative rounded-2xl overflow-hidden h-80 md:h-96 bg-gradient-to-br from-green-50 to-green-100 shadow-lg transform transition-transform duration-500 hover:scale-105">
                   <img
                     src={current.after}
-                    alt="Depois"
+                    alt="Depois da higienização"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -122,6 +185,18 @@ const BeforeAfterSection: React.FC = () => {
                     <Star size={16} /> DEPOIS
                   </div>
                 </div>
+
+                {/* After Points */}
+                <ul className="mt-4 rounded-2xl border border-green-100 bg-green-50/60 p-4 space-y-2">
+                  {current.afterPoints.map((point, idx) => (
+                    <li key={idx} className="flex items-center gap-3 text-gray-700 font-medium">
+                      <span className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center shrink-0">
+                        <Check size={12} className="text-white" strokeWidth={3} />
+                      </span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 
@@ -232,7 +307,7 @@ const BeforeAfterSection: React.FC = () => {
                       <div className="relative aspect-[9/16] w-full bg-secondary-dark">
                         <iframe
                           className="absolute inset-0 w-full h-full"
-                          src="https://www.youtube.com/embed/_MoxZWLhh_M?feature=share&rel=0&modestbranding=1&playsinline=1"
+                          src="https://www.youtube.com/embed/t4Sbb8b2xz0?feature=share&rel=0&modestbranding=1&playsinline=1"
                           title="Transformação de Tênis - Lavanderia Inovata"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen

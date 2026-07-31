@@ -36,7 +36,7 @@ const Header: React.FC = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Serviços', path: '/servicos' },
-    { name: 'Preços', path: '/precos' },
+    { name: 'Orçamento', path: '/precos' },
     { name: 'Sobre', path: '/sobre' },
     // Special case for Bairros
     { name: 'Bairros', path: '/#bairros', isHash: true },

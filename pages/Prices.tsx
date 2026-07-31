@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { DollarSign, Info, Search, X, Frown, ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
+import { Sparkles, Info, Search, X, Frown, ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 import { CONTACT } from '../constants';
 import EnhancedSEO from '../components/EnhancedSEO';
 
@@ -11,60 +11,60 @@ const Prices: React.FC = () => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
-  // Simple conceptual pricing structure
+  // Catálogo de serviços — valores sob consulta
   const priceCategories = [
     {
       title: "Roupas Dia a Dia (Lavar e Passar)",
       items: [
-        { name: "Camisa Social", price: "R$ 18,00" },
-        { name: "Camiseta / Polo", price: "R$ 12,00" },
-        { name: "Calça Jeans / Sarja", price: "R$ 20,00" },
-        { name: "Bermuda / Shorts", price: "R$ 15,00" },
+        { name: "Camisa Social", price: "Sob Consulta" },
+        { name: "Camiseta / Polo", price: "Sob Consulta" },
+        { name: "Calça Jeans / Sarja", price: "Sob Consulta" },
+        { name: "Bermuda / Shorts", price: "Sob Consulta" },
       ]
     },
     {
       title: "Cama, Mesa e Banho",
       items: [
-        { name: "Edredom Solteiro", price: "R$ 45,00" },
-        { name: "Edredom Casal", price: "R$ 55,00" },
-        { name: "Edredom Queen/King", price: "R$ 65,00" },
-        { name: "Cobertor", price: "A partir de R$ 40,00" },
-        { name: "Jogo de Lençol", price: "R$ 25,00" },
+        { name: "Edredom Solteiro", price: "Sob Consulta" },
+        { name: "Edredom Casal", price: "Sob Consulta" },
+        { name: "Edredom Queen/King", price: "Sob Consulta" },
+        { name: "Cobertor", price: "Sob Consulta" },
+        { name: "Jogo de Lençol", price: "Sob Consulta" },
       ]
     },
     {
       title: "Tênis e Calçados",
       items: [
-        { name: "Tênis Esportivo / Casual", price: "R$ 35,00" },
-        { name: "Tênis Branco / Tecido", price: "R$ 40,00" },
-        { name: "Sapatos Sociais", price: "R$ 30,00" },
-        { name: "Botas", price: "A partir de R$ 45,00" },
+        { name: "Tênis Esportivo / Casual", price: "Sob Consulta" },
+        { name: "Tênis Branco / Tecido", price: "Sob Consulta" },
+        { name: "Sapatos Sociais", price: "Sob Consulta" },
+        { name: "Botas", price: "Sob Consulta" },
       ]
     },
     {
       title: "Infantil e Bebê",
       items: [
-        { name: "Carrinho de Bebê (Simples)", price: "R$ 120,00" },
-        { name: "Carrinho de Bebê (Travel System)", price: "R$ 180,00" },
-        { name: "Bebê Conforto / Cadeirinha", price: "R$ 80,00" },
-        { name: "Ursinhos de Pelúcia (P/M)", price: "A partir de R$ 25,00" },
+        { name: "Carrinho de Bebê (Simples)", price: "Sob Consulta" },
+        { name: "Carrinho de Bebê (Travel System)", price: "Sob Consulta" },
+        { name: "Bebê Conforto / Cadeirinha", price: "Sob Consulta" },
+        { name: "Ursinhos de Pelúcia (P/M)", price: "Sob Consulta" },
       ]
     },
     {
       title: "Tapetes e Cortinas",
       items: [
-        { name: "Tapete (m²)", price: "R$ 35,00 / m²" },
-        { name: "Cortina Tecido Leve (m²)", price: "R$ 25,00 / m²" },
-        { name: "Cortina com Blackout (m²)", price: "R$ 35,00 / m²" },
+        { name: "Tapete (m²)", price: "Sob Consulta" },
+        { name: "Cortina Tecido Leve (m²)", price: "Sob Consulta" },
+        { name: "Cortina com Blackout (m²)", price: "Sob Consulta" },
       ]
     },
     {
       title: "Peças Delicadas (Seco)",
       items: [
-        { name: "Terno Completo", price: "R$ 60,00" },
-        { name: "Paletó / Blazer", price: "R$ 35,00" },
+        { name: "Terno Completo", price: "Sob Consulta" },
+        { name: "Paletó / Blazer", price: "Sob Consulta" },
         { name: "Vestido de Festa", price: "Sob Consulta" },
-        { name: "Casaco de Lã / Sobretudo", price: "R$ 50,00" },
+        { name: "Casaco de Lã / Sobretudo", price: "Sob Consulta" },
       ]
     }
   ];
@@ -76,7 +76,7 @@ const Prices: React.FC = () => {
     },
     {
       question: "Como funciona a taxa de entrega (Delivery)?",
-      answer: "Oferecemos frete grátis para pedidos acima de R$ 250,00 dentro da nossa área de cobertura (15km). Para pedidos abaixo deste valor, cobramos uma pequena taxa fixa dependendo do seu bairro. Consulte-nos pelo WhatsApp para saber o valor exato."
+      answer: "Atendemos com coleta e entrega em toda a nossa área de cobertura (15km). Dependendo do volume do pedido e do seu bairro, o delivery pode sair por nossa conta. Fale com a gente pelo WhatsApp e confirmamos as condições para o seu endereço."
     },
     {
       question: "Qual o prazo de entrega das roupas?",
@@ -109,20 +109,20 @@ const Prices: React.FC = () => {
   return (
     <>
       <EnhancedSEO 
-        title="Tabela de Preços | Lavanderia Inovata Osasco"
-        description="Preços de lavanderia em Osasco: Lavar Roupas, Tênis, Tapetes, Sofás e Carrinhos de Bebê. Confira nossa tabela completa!"
+        title="Serviços e Orçamento | Lavanderia Inovata Osasco"
+        description="Serviços de lavanderia em Osasco: Lavar Roupas, Tênis, Tapetes, Sofás e Carrinhos de Bebê. Solicite seu orçamento sem compromisso!"
         breadcrumbs={[
           { name: 'Home', item: '/' },
-          { name: 'Preços', item: '/precos' }
+          { name: 'Serviços e Orçamento', item: '/precos' }
         ]}
       />
 
       <main className="pt-24 pb-20 bg-gray-50 min-h-screen">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-heading font-black text-secondary-dark mb-4">Tabela de Preços</h1>
+            <h1 className="text-4xl font-heading font-black text-secondary-dark mb-4">Nossos Serviços</h1>
             <p className="text-gray-600 max-w-2xl mx-auto mb-8">
-              Valores transparentes para todos os nossos serviços. Qualidade premium que cabe no seu bolso.
+              Cuidamos de cada peça com atenção individual. Encontre o serviço que você precisa e solicite seu orçamento sem compromisso pelo WhatsApp.
             </p>
 
             {/* Search Bar */}
@@ -154,7 +154,7 @@ const Prices: React.FC = () => {
               filteredCategories.map((category, idx) => (
                 <div key={idx} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden fade-up in-view transition-all duration-300 hover:shadow-md">
                   <div className="bg-secondary-dark text-white p-4 px-6 flex items-center gap-3">
-                    <DollarSign size={20} className="text-primary-gold" />
+                    <Sparkles size={20} className="text-primary-gold" />
                     <h3 className="font-bold text-lg">{category.title}</h3>
                   </div>
                   <div className="p-6">
@@ -162,7 +162,9 @@ const Prices: React.FC = () => {
                       {category.items.map((item, i) => (
                         <li key={i} className="py-4 flex justify-between items-center hover:bg-gray-50 px-2 rounded-lg transition-colors">
                           <span className="font-medium text-gray-700">{item.name}</span>
-                          <span className="font-bold text-primary-blue whitespace-nowrap ml-4">{item.price}</span>
+                          <span className="text-xs font-bold uppercase tracking-wide text-primary-blue bg-blue-50 border border-blue-100 px-3 py-1.5 rounded-full whitespace-nowrap ml-4">
+                            {item.price}
+                          </span>
                         </li>
                       ))}
                     </ul>
@@ -196,13 +198,13 @@ const Prices: React.FC = () => {
                 <div>
                   <h4 className="font-bold text-primary-blue mb-2">Observações Importantes</h4>
                   <p className="text-sm text-gray-600 mb-2">
-                    * Os preços podem variar dependendo do tecido, complexidade da mancha, tamanho exato ou detalhes da peça.
+                    * Cada peça é orçada individualmente, pois o valor depende do tecido, da complexidade da mancha, do tamanho exato e dos detalhes do item.
                   </p>
                   <p className="text-sm text-gray-600 mb-2">
                     * Lavagem de Estofados (Sofás, Poltronas) é feita sob orçamento via foto no WhatsApp.
                   </p>
                   <p className="text-sm text-gray-600">
-                    * Frete grátis para coleta e entrega em pedidos acima de R$ 250,00. Abaixo deste valor, consulte a taxa para sua região.
+                    * Consulte as condições de coleta e entrega para o seu bairro pelo WhatsApp.
                   </p>
                 </div>
               </div>

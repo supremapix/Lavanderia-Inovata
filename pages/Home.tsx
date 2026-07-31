@@ -131,7 +131,7 @@ const Home: React.FC = () => {
     <>
       <EnhancedSEO 
         title="Lavanderia em Osasco | Lavagem de Edredons e Passadoria Leva e Traz"
-        description="Buscando lavanderia osasco perto de mim? A Inovata oferece lavanderia profissional, passadoria, lavagem de tênis e delivery grátis*. Confira preços!"
+        description="Buscando lavanderia osasco perto de mim? A Inovata oferece lavanderia profissional, passadoria, lavagem de tênis e delivery. Solicite seu orçamento!"
         structuredData={schemaData}
         type="business.business"
       />
@@ -261,7 +261,7 @@ const Home: React.FC = () => {
               </h2>
               
               <p className="text-xl text-gray-200 mb-8">
-                Não perca tempo com lavanderia! Coletamos, lavamos e entregamos tudo impecável na sua porta. Delivery grátis acima de R$250.
+                Não perca tempo com lavanderia! Coletamos, lavamos e entregamos tudo impecável na sua porta, com delivery em Osasco e região.
               </p>
               
               <div className="space-y-3 mb-10">
@@ -290,12 +290,12 @@ const Home: React.FC = () => {
                   to="/precos"
                   className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition-all shadow-xl inline-flex items-center justify-center gap-2"
                 >
-                  💰 Ver Preços
+                  Ver Serviços
                 </Link>
               </div>
               
               <p className="text-sm text-gray-300 mt-6">
-                * Delivery grátis para pedidos acima de R$250 em Osasco e região
+                * Consulte as condições de coleta e entrega para o seu bairro em Osasco e região
               </p>
             </div>
           </div>

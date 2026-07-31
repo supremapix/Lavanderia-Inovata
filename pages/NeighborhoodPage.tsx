@@ -291,11 +291,11 @@ const NeighborhoodPage: React.FC = () => {
                   <Truck size={150} />
                 </div>
                 <div className="relative z-10">
-                  <h3 className="text-2xl font-bold mb-4">Delivery Gratuito no {neighborhood.name}*</h3>
+                  <h3 className="text-2xl font-bold mb-4">Coleta e Entrega no {neighborhood.name}*</h3>
                   <p className="text-blue-100 mb-6 max-w-lg">
-                    Para pedidos acima de R$ 250,00, a coleta e entrega são por nossa conta. Abaixo deste valor, consulte a taxa para sua região.
+                    Buscamos e devolvemos suas peças na porta de casa. Fale com a gente e confirmamos as condições de delivery para a sua região.
                   </p>
-                  <a href={`https://wa.me/5511921691307?text=Quero aproveitar o delivery grátis (acima de R$250) no ${neighborhood.name}. (Origem: Card Delivery Página ${neighborhood.name})`} className="inline-block bg-white text-primary-blue px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors btn-premium">
+                  <a href={`https://wa.me/5511921691307?text=Quero solicitar a coleta e entrega no ${neighborhood.name}. (Origem: Card Delivery Página ${neighborhood.name})`} className="inline-block bg-white text-primary-blue px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors btn-premium">
                     Solicitar Delivery Agora
                   </a>
                 </div>

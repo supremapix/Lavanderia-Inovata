@@ -14,3 +14,23 @@ document.querySelector('#quote-form')?.addEventListener('submit',e=>{e.preventDe
 document.querySelector('#quote-form button[type=submit]')?.removeAttribute('disabled');
 document.querySelectorAll('[data-share]').forEach(button=>button.addEventListener('click',async()=>{const url=document.querySelector('link[rel=canonical]')?.href||location.href;const statuses=document.querySelectorAll('.share-status');const report=text=>statuses.forEach(s=>s.textContent=text);try{if(navigator.share){await navigator.share({title:document.title,url});report('Compartilhamento concluído.')}else if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);report('Link copiado.');button.textContent='Link copiado ✓';setTimeout(()=>button.textContent='Compartilhar esta página ↗',2500)}else{report('Copie o endereço desta página na barra do navegador.');button.textContent='Copie o endereço no navegador'}}catch(error){if(error.name!=='AbortError'){report('Não foi possível compartilhar. Copie o endereço na barra do navegador.')}}}));
 const progress=document.querySelector('.reading-progress');if(progress){let waiting=false;const update=()=>{const available=document.documentElement.scrollHeight-innerHeight;progress.style.width=`${available>0?Math.min(100,scrollY/available*100):0}%`;waiting=false};addEventListener('scroll',()=>{if(!waiting){waiting=true;requestAnimationFrame(update)}},{passive:true});addEventListener('resize',update);update()}
+
+// Native semantic dialogs keep background content inert and trap focus.
+document.querySelectorAll('[data-comparison-open]').forEach(trigger=>{
+ const dialog=document.querySelector('#'+trigger.dataset.comparisonOpen);
+ if(!dialog||typeof dialog.showModal!=='function')return;
+ trigger.setAttribute('role','button');trigger.setAttribute('aria-haspopup','dialog');trigger.setAttribute('aria-controls',dialog.id);
+ trigger.addEventListener('click',event=>{
+  event.preventDefault();dialog.returnFocus=trigger;
+  dialog.querySelectorAll('[data-srcset]').forEach(source=>{source.srcset=source.dataset.srcset});
+  dialog.querySelectorAll('[data-src]').forEach(img=>{img.src=img.dataset.src});
+  dialog.showModal();dialog.scrollTop=0;document.documentElement.classList.add('has-image-dialog');dialog.querySelector('[data-dialog-close]').focus({preventScroll:true});
+ });
+ trigger.addEventListener('keydown',event=>{if(event.key===' '){event.preventDefault();trigger.click()}});
+});
+document.querySelectorAll('.comparison-dialog').forEach(dialog=>{
+ dialog.querySelector('[data-dialog-close]').addEventListener('click',()=>dialog.close());
+ dialog.addEventListener('keydown',event=>{if(event.key!=='Tab')return;const controls=[...dialog.querySelectorAll('button:not([disabled]),a[href]')],first=controls[0],last=controls[controls.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}});
+ dialog.addEventListener('click',event=>{const r=dialog.getBoundingClientRect();if(event.target===dialog&&(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom))dialog.close()});
+ dialog.addEventListener('close',()=>{document.documentElement.classList.remove('has-image-dialog');if(dialog.returnFocus?.isConnected)dialog.returnFocus.focus({preventScroll:true})});
+});
